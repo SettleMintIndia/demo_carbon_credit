@@ -1,0 +1,105 @@
+query getAllUsers {
+  z_users {
+    id
+    address
+    pvtKey
+    password
+    username
+    document_cid
+  }
+}
+
+mutation createUser(
+  $role: String
+  $pvtKey: String
+  $document_cid: String
+  $address: String
+  $username: String
+  $segment: String
+  $password: String
+  $casa: String
+  $cif: String
+) {
+  insert_z_users(
+    objects: {
+      address: $address
+      pvtKey: $pvtKey
+      document_cid: $document_cid
+      role: $role
+      username: $username
+      segment: $segment
+      password: $password
+      casa: $casa
+      cif: $cif
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+mutation approveUser($id: uuid!, $txHash: String) {
+  update_z_users_by_pk(
+    pk_columns: { id: $id }
+    _set: { is_approved: true, txHash: $txHash }
+  ) {
+    id
+  }
+}
+mutation disapproveUser($id: uuid!) {
+  delete_z_users_by_pk(id: $id) {
+    id
+  }
+}
+
+query getUserByApprovedStatus($is_approved: Boolean) {
+  z_users(where: { is_approved: { _eq: $is_approved } }) {
+    address
+    casa
+    cif
+    created_at
+    document_cid
+    id
+    is_approved
+    password
+    pvtKey
+    role
+    segment
+    txHash
+    username
+  }
+}
+
+query getUserByUsername($username: String) {
+  z_users(where: { username: { _eq: $username } }) {
+    id
+    address
+    pvtKey
+    username
+    password
+  }
+}
+query getLoggedInUser($username: String) {
+  z_users(where: { username: { _eq: $username }, is_approved: { _eq: true } }) {
+    username
+    password
+  }
+}
+
+query getAdminInfo {
+  z_users(where: { username: { _eq: "admin" } }) {
+    id
+    address
+    pvtKey
+    username
+  }
+}
+query getUsersInfo {
+  z_users(where: { username: { _neq: "admin" } }) {
+    id
+    pvtKey
+    address
+    username
+  }
+}

@@ -1,0 +1,12 @@
+mutation UpdateSettings($companyName: String!, $cid: String!, $id: Int!) {
+  update_user_setting(where: {id: {_eq: $id}}, _set: {companyName: $companyName, cid: $cid}) {
+    affected_rows
+  }
+}
+
+query getData {
+  user_setting {
+    cid
+    companyName
+  }
+}

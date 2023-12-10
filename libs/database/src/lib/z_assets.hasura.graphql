@@ -1,0 +1,195 @@
+mutation createAssetToken(
+  $totalCapital: String
+  $managementFee: String
+  $hurdleRate: String
+  $document_cid: String
+  $currency: String
+  $assetName: String
+  $txHash: String
+) {
+  insert_z_assets(
+    objects: {
+      assetName: $assetName
+      currency: $currency
+      document_cid: $document_cid
+      hurdleRate: $hurdleRate
+      managementFee: $managementFee
+      totalCapital: $totalCapital
+      txHash: $txHash
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+query getAllAssets {
+  z_assets {
+    assetId
+    assetName
+    burned
+    buyPrice
+    created_at
+    currency
+    document_cid
+    hurdleRate
+    id
+    is_fractionalized
+    last_traded_price
+    managementFee
+    sellPrice
+    totalCapital
+    totalMinted
+    totalSupply
+    txHash
+    adminBalance
+  }
+}
+mutation fractionalizeAsset(
+  $id: uuid!
+  $buyPrice: String
+  $sellPrice: String
+  $totalSupply: String
+  $last_traded_price: String
+  $assetId: String
+) {
+  update_z_assets_by_pk(
+    pk_columns: { id: $id }
+    _set: {
+      is_fractionalized: true
+      buyPrice: $buyPrice
+      sellPrice: $sellPrice
+      totalSupply: $totalSupply
+      last_traded_price: $last_traded_price
+      assetId: $assetId
+    }
+  ) {
+    is_fractionalized
+  }
+}
+
+mutation updateTotalMinted($totalMinted: String = "", $id: uuid = "") {
+  update_z_assets_by_pk(
+    pk_columns: { id: $id }
+    _set: { totalMinted: $totalMinted }
+  ) {
+    totalMinted
+    id
+  }
+}
+
+# Mint asset
+mutation mintAsset(
+  $totalMinted: String = ""
+  $id: uuid = ""
+  $adminBalance: String = ""
+) {
+  update_z_assets_by_pk(
+    pk_columns: { id: $id }
+    _set: { totalMinted: $totalMinted, adminBalance: $adminBalance }
+  ) {
+    totalMinted
+    id
+    adminBalance
+  }
+}
+
+# Update admin balance while direct transfer
+mutation updateAdminBalance($id: uuid = "", $adminBalance: String = "") {
+  update_z_assets_by_pk(
+    pk_columns: { id: $id }
+    _set: { adminBalance: $adminBalance }
+  ) {
+    id
+    adminBalance
+  }
+}
+
+# Get Data for tokenized funds
+query getMintedTokenData {
+  z_assets(
+    where: { is_fractionalized: { _eq: true }, totalMinted: { _neq: "0" } }
+    order_by: { created_at: desc }
+  ) {
+    assetId
+    assetName
+    burned
+    buyPrice
+    created_at
+    currency
+    document_cid
+    hurdleRate
+    id
+    is_fractionalized
+    last_traded_price
+    managementFee
+    sellPrice
+    totalCapital
+    totalMinted
+    totalSupply
+    txHash
+    adminBalance
+  }
+}
+
+# Get required burned data
+query getRequiredDataForBurn {
+  z_assets(
+    where: {
+      is_fractionalized: { _eq: true }
+      totalMinted: { _neq: "0" }
+      adminBalance: { _neq: "0" }
+    }
+  ) {
+    id
+    assetId
+    assetName
+    burned
+    totalSupply
+    totalMinted
+    adminBalance
+  }
+}
+
+# Burn asset
+mutation burnAsset(
+  $id: uuid = ""
+  $totalSupply: String = ""
+  $burned: String = ""
+  $adminBalance: String = ""
+) {
+  update_z_assets_by_pk(
+    pk_columns: { id: $id }
+    _set: {
+      totalSupply: $totalSupply
+      burned: $burned
+      adminBalance: $adminBalance
+    }
+  ) {
+    burned
+    id
+  }
+}
+
+# Get assets for `my token` by user prospective
+query getMyTokenPageAssets {
+  z_assets {
+    id
+    assetId
+    assetName
+  }
+}
+
+mutation updateLastTreadedPrice(
+  $id: uuid = ""
+  $last_traded_price: String = ""
+) {
+  update_z_assets_by_pk(
+    pk_columns: { id: $id }
+    _set: { last_traded_price: $last_traded_price }
+  ) {
+    id
+    last_traded_price
+  }
+}

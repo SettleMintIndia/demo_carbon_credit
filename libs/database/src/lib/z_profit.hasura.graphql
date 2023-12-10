@@ -1,0 +1,115 @@
+mutation createProfit(
+  $assetId: uuid = ""
+  $totalHolders: String = ""
+  $totalProfit: String = ""
+  $txHash: String = ""
+) {
+  insert_z_profit(
+    objects: {
+      assetId: $assetId
+      totalHolders: $totalHolders
+      totalProfit: $totalProfit
+      txHash: $txHash
+    }
+  ) {
+    returning {
+      id
+      txHash
+    }
+  }
+}
+
+mutation createProfitDistribution(
+  $share_in_profit: String = ""
+  $tokenHeld: String = ""
+  $profitId: uuid = ""
+  $name: String = ""
+  $userId: uuid = ""
+) {
+  insert_z_profit_distribution(
+    objects: {
+      share_in_profit: $share_in_profit
+      tokenHeld: $tokenHeld
+      profitId: $profitId
+      name: $name
+      userId: $userId
+    }
+  ) {
+    returning {
+      id
+      name
+    }
+  }
+}
+
+query getProfitByAssetId($assetId: uuid = "") {
+  z_profit(
+    where: { assetId: { _eq: $assetId } }
+    order_by: { created_at: desc }
+  ) {
+    id
+    created_at
+    txHash
+    totalProfit
+    totalHolders
+    z_asset {
+      id
+      assetName
+      assetId
+    }
+    z_profit_distributions {
+      id
+      created_at
+      name
+      profitId
+      share_in_profit
+      tokenHeld
+      userId
+      z_user {
+        id
+        username
+        address
+      }
+    }
+  }
+}
+
+query getProfitDistributionByUsername($name: String = "") {
+  z_profit_distribution(where: { name: { _eq: $name } }) {
+    id
+    created_at
+    name
+    profitId
+    share_in_profit
+    tokenHeld
+    z_profit {
+      assetId
+      id
+      created_at
+      txHash
+      z_asset {
+        assetId
+        assetName
+        id
+      }
+    }
+  }
+}
+
+query filterAssetByUserAndAsset($profitId: uuid = "", $userId: uuid = "") {
+  z_profit_distribution(
+    where: { profitId: { _eq: $profitId }, userId: { _eq: $userId } }
+  ) {
+    created_at
+    id
+    name
+    share_in_profit
+    tokenHeld
+    profitId
+    userId
+    z_user {
+      id
+      username
+    }
+  }
+}

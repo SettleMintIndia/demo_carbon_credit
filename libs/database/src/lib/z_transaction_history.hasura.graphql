@@ -1,0 +1,217 @@
+query getAllTransaction {
+  z_transaction_history {
+    id
+    amount
+    blockNumber
+    created_at
+    price
+    settlement_date
+    txHash
+    type
+    z_asset {
+      id
+      assetId
+      assetName
+    }
+    z_user_by_receiver {
+      id
+      address
+      username
+    }
+    z_user_by_sender {
+      id
+      address
+      username
+    }
+  }
+}
+
+# Create direct transfer for admin
+
+mutation createDirectTransfer(
+  $amount: String = ""
+  $assetId: uuid = ""
+  $sender: uuid = ""
+  $receiver: uuid = ""
+  $price: String = ""
+) {
+  insert_z_transaction_history(
+    objects: {
+      amount: $amount
+      assetId: $assetId
+      type: "direct"
+      sender: $sender
+      receiver: $receiver
+      price: $price
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+# Create secondary marketplace transfer for user
+mutation createSecondaryMarketplaceTransfer(
+  $amount: String = ""
+  $assetId: uuid = ""
+  $sender: uuid = ""
+  $receiver: uuid = ""
+  $price: String = ""
+  $settlement_date: String = ""
+  $txHash: String = ""
+  $blockNumber: String = ""
+  $type: String = "secondary_marketplace"
+) {
+  insert_z_transaction_history(
+    objects: {
+      amount: $amount
+      assetId: $assetId
+      type: $type
+      sender: $sender
+      receiver: $receiver
+      price: $price
+      is_approved: true
+      settlement_date: $settlement_date
+      txHash: $txHash
+      blockNumber: $blockNumber
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+# Get transaction information by is_approve (true or false) and type == direct
+query getDirectTransactionByIsApproved($is_approved: Boolean) {
+  z_transaction_history(
+    where: { type: { _eq: "direct" }, is_approved: { _eq: $is_approved } }
+    order_by: { settlement_date: desc }
+  ) {
+    amount
+    created_at
+    id
+    is_approved
+    price
+    txHash
+    type
+    settlement_date
+    blockNumber
+    z_user_by_receiver {
+      address
+      pvtKey
+      id
+      username
+    }
+    z_user_by_sender {
+      address
+      pvtKey
+      username
+      id
+    }
+    z_asset {
+      assetId
+      assetName
+      id
+      adminBalance
+    }
+  }
+}
+
+# Approve Transaction
+
+mutation approveDirectTransfer(
+  $id: uuid = ""
+  $settlement_date: String = ""
+  $txHash: String = ""
+  $blockNumber: String = ""
+) {
+  update_z_transaction_history_by_pk(
+    pk_columns: { id: $id }
+    _set: {
+      is_approved: true
+      settlement_date: $settlement_date
+      txHash: $txHash
+      blockNumber: $blockNumber
+    }
+  ) {
+    is_approved
+    id
+  }
+}
+
+# Delete/reject direct transaction
+mutation deleteDirectTransaction($id: uuid = "") {
+  delete_z_transaction_history_by_pk(id: $id) {
+    id
+  }
+}
+
+query getTransactionHistoryByReceiver($username: String = "") {
+  z_transaction_history(
+    where: { z_user_by_receiver: { username: { _eq: $username } } }
+  ) {
+    id
+    price
+    assetId
+    amount
+    z_asset {
+      id
+      assetId
+      assetName
+      last_traded_price
+      sellPrice
+    }
+    z_user_by_receiver {
+      id
+      address
+      username
+    }
+    z_user_by_sender {
+      id
+      address
+      username
+    }
+  }
+}
+
+query getTransactionHistoryBySender($username: String = "") {
+  z_transaction_history(
+    where: { z_user_by_sender: { username: { _eq: $username } } }
+  ) {
+    id
+    price
+    amount
+    z_asset {
+      id
+      assetId
+      assetName
+      last_traded_price
+      sellPrice
+    }
+    z_user_by_receiver {
+      id
+      address
+      username
+    }
+    z_user_by_sender {
+      id
+      address
+      username
+    }
+  }
+}
+
+query GetTransactionHistoryByReciever($username: String!) {
+  z_transaction_history(where: { z_user_by_receiver: { username: { _eq: $username } } }) {
+    amount
+    price
+    z_user_by_receiver {
+      username
+    }
+    z_asset {
+      assetName
+    }
+  }
+}

@@ -1,0 +1,122 @@
+# Get all poll by assetId
+query getPollByAssetUUID($id: uuid = "") {
+  z_poll(where: { assetId: { _eq: $id }, z_asset: { z_token_holders: {} } }) {
+    id
+    created_at
+    assetId
+    poll_end_date
+    poll_start_date
+    poll_title
+    txHash
+    z_asset {
+      assetId
+      assetName
+      id
+      z_token_holders {
+        id
+        amount
+        assetId
+        userId
+        z_asset {
+          id
+          assetName
+        }
+        z_user {
+          id
+          username
+          address
+        }
+      }
+    }
+    z_poll_options {
+      id
+      value
+      created_at
+    }
+    z_poll_responses {
+      id
+      value
+      created_at
+      z_user {
+        id
+        username
+        address
+      }
+    }
+    z_user_created_by {
+      id
+      address
+      username
+    }
+  }
+}
+
+# Create poll
+mutation addPoll(
+  $txHash: String = ""
+  $poll_title: String = ""
+  $poll_start_date: String = ""
+  $poll_end_date: String = ""
+  $created_by: uuid = ""
+  $assetId: uuid = ""
+) {
+  insert_z_poll(
+    objects: {
+      assetId: $assetId
+      created_by: $created_by
+      poll_end_date: $poll_end_date
+      poll_start_date: $poll_start_date
+      poll_title: $poll_title
+      txHash: $txHash
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+# Create poll option
+mutation createPollOption($pollId: uuid = "", $value: String = "") {
+  insert_z_poll_options(objects: { pollId: $pollId, value: $value }) {
+    returning {
+      id
+    }
+  }
+}
+
+# Create poll response
+
+mutation createPollResponse(
+  $pollId: uuid = ""
+  $response_by: uuid = ""
+  $value: String = ""
+) {
+  insert_z_poll_response(
+    objects: { pollId: $pollId, response_by: $response_by, value: $value }
+  ) {
+    returning {
+      id
+      response_by
+    }
+  }
+}
+
+query getResponseOfTokenHolder {
+  z_poll_response {
+    id
+    pollId
+    response_by
+    created_at
+    value
+    z_poll {
+      id
+      assetId
+    }
+    z_user {
+      id
+      address
+      username
+    }
+  }
+}

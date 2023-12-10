@@ -1,0 +1,52 @@
+mutation createSecondaryMarketPlace(
+  $amount: String = ""
+  $assetId: uuid = ""
+  $per_token_value: String = ""
+  $price: String = ""
+  $publisher: uuid = ""
+) {
+  insert_z_secondary_marketplace(
+    objects: {
+      amount: $amount
+      assetId: $assetId
+      per_token_value: $per_token_value
+      price: $price
+      publisher: $publisher
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+mutation updateSecondaryMarketPlace($id: uuid = "", $amount: String = "") {
+  update_z_secondary_marketplace_by_pk(
+    pk_columns: { id: $id }
+    _set: { amount: $amount }
+  ) {
+    id
+    amount
+  }
+}
+
+query getAllSecondaryMarketPlace($publisher: uuid = "") {
+  z_secondary_marketplace(where: { amount: { _neq: "0" } }) {
+    id
+    created_at
+    amount
+    per_token_value
+    price
+    z_asset {
+      id
+      assetId
+      assetName
+    }
+    z_user_publisher {
+      id
+      address
+      pvtKey
+      username
+    }
+  }
+}

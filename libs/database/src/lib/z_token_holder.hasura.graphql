@@ -1,0 +1,83 @@
+query getTokenHolderDetails($assetId: uuid = "") {
+  z_token_holder(where: { assetId: { _eq: $assetId } }) {
+    id
+    created_at
+    updated_at
+    userId
+    assetId
+    amount
+    z_asset {
+      id
+      assetId
+      assetName
+    }
+    z_user {
+      id
+      address
+      username
+    }
+  }
+}
+
+query checkRecordExist($assetId: uuid = "", $userId: uuid = "") {
+  z_token_holder(
+    where: { assetId: { _eq: $assetId }, userId: { _eq: $userId } }
+  ) {
+    id
+    userId
+    assetId
+    amount
+  }
+}
+
+mutation updateTokenHolder($id: uuid = "", $amount: String = "") {
+  update_z_token_holder_by_pk(
+    pk_columns: { id: $id }
+    _set: { amount: $amount }
+  ) {
+    amount
+    id
+  }
+}
+
+mutation createTokenHolder(
+  $amount: String = ""
+  $assetId: uuid = ""
+  $userId: uuid = ""
+) {
+  insert_z_token_holder(
+    objects: { amount: $amount, assetId: $assetId, userId: $userId }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+query getTokenHoldersByUsername($username: String = "") {
+  z_token_holder(where: { z_user: { username: { _eq: $username } } }) {
+    amount
+    created_at
+    id
+    updated_at
+    userId
+    z_asset {
+      assetId
+      assetName
+      currency
+      id
+      managementFee
+    }
+  }
+}
+
+query getAllTokenHolderDetails {
+  z_token_holder {
+    id
+    z_asset {
+      id
+      assetId
+      assetName
+    }
+  }
+}
