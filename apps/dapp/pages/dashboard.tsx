@@ -1,34 +1,27 @@
-import {
-    useGetAllAssetsLazyQuery,
-  } from '@demo-carbon-credit/database';
-  import { NextPageWithLayout } from './_app';
-  import { useEffect, useState } from 'react';
-  import { useModalContext } from '@demo-carbon-credit/providers';
-  import Router from 'next/router';
-  import React from 'react';
-  const Page: NextPageWithLayout = () => {
-    // Fetch assets data
+import { useGetAllAssetsLazyQuery } from '@demo-carbon-credit/database';
+import { NextPageWithLayout } from './_app';
+import { useEffect, useState } from 'react';
+import { useModalContext } from '@demo-carbon-credit/providers';
+import Router from 'next/router';
+import React from 'react';
+const Page: NextPageWithLayout = () => {
+  // Fetch assets data
 
-  
-   
-  
-    // Initial call
-    return (
-      <>
-        <div className="header-area">
-          <h2>Dashboard</h2>
-          <div className="add-btn">
-            <button
-              onClick={() => Router.push('/minttoken')}
-              className="create-btn"
-            >
-              Mint Token
-            </button>
-          </div>
+  // Initial call
+  return (
+    <>
+      <div className="header-area">
+        <h2>Dashboard</h2>
+        <div className="add-btn">
+          <button
+            onClick={() => Router.push('/minttoken')}
+            className="create-btn"
+          >
+            Mint Token
+          </button>
         </div>
-       
-      </>
-    );
-  };
-  export default Page;
-  
+      </div>
+    </>
+  );
+};
+export default Page;
