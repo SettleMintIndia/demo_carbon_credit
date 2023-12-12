@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import {
   useCreateUserMutation,
-  useGetDataLazyQuery,
   useGetLoggedInUserQuery,
 } from '@demo-carbon-credit/database';
 import toast from 'react-hot-toast';
@@ -32,7 +31,7 @@ const Page: NextPageWithLayout = () => {
   const [passwordType, setPasswordType] = useState('password');
 
   // const [createUser] = useInsertUsersMutation();
-  const [createUserMutation] = useCreateUserMutation({});
+  const [createUserMutation] = useCreateUserMutation();
   const [userDetailSignUp, setuserDetailSignUp] = useState<IUser | undefined>(
     undefined
   );
@@ -40,6 +39,7 @@ const Page: NextPageWithLayout = () => {
   const handleChangeSignUp = (name: keyof IUser, value: IUser[keyof IUser]) => {
     setuserDetailSignUp({ ...userDetailSignUp, [name]: value });
   };
+
 
   const handleSubmitSignUp = async () => {
     event.preventDefault();
@@ -52,11 +52,7 @@ const Page: NextPageWithLayout = () => {
         pvtKey: await response.walletKey,
         username: userDetailSignUp.username,
         password: userDetailSignUp.password,
-        cif: null,
-        casa: null,
-        role: null,
-        segment: null,
-        document_cid: null,
+
       },
     });
   };
@@ -67,13 +63,10 @@ const Page: NextPageWithLayout = () => {
     },
     fetchPolicy: 'network-only',
   });
+  
   // User Setting data
-  const [getDataLazyQuery, { data: settingData, loading, error }] =
-    useGetDataLazyQuery({
-      fetchPolicy: 'network-only',
-    });
+ 
   React.useEffect(() => {
-    getDataLazyQuery();
   }, []);
 
   console.log('user data: ', data);
@@ -145,7 +138,6 @@ const Page: NextPageWithLayout = () => {
     }
   };
 
-  console.log(settingData);
 
   return (
     <>
