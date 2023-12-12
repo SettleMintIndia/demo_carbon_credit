@@ -66,7 +66,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                   <div className="logo-name">Carbon Credit</div>
                   <ul className="dashboard-list">
                     <a href="/dashboard" className="link">
-                      <li className="active-left-nav">
+                      <li>
                         <div
                           className="link-item
               "
