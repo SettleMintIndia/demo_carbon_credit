@@ -1998,7 +1998,7 @@ ul.dashboard-notes li:nth-child(3) {
   align-items: center;
 }
 .mint-token .form-group label {
-  width: 23%;
+  width: 30%;
   font-size: 20px;
   font-weight: 500;
 }
@@ -2008,8 +2008,8 @@ ul.dashboard-notes li:nth-child(3) {
   background: #cdcdcd;
   height: 60px;
   padding-left: 20px !important;
-  width: 60%;
-}
+  width: 110%;
+} 
 .react-tabs__tab-panel {
   margin-top: 50px !important;
 }
@@ -2035,3 +2035,113 @@ ul.dashboard-notes li:nth-child(3) {
   width: 300px;
   margin-top: 10px;
 }
+/* kavya css */
+.input-container {
+  position: relative;
+  width: 400px; /* Set the width of the input container */
+  margin: 2px;
+
+}
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  background: #cdcdcd;
+  height: 60px;
+  padding-left: 20px !important;
+
+}
+
+.input-container::after {
+  content: "tons of CO2/month";
+  position: absolute;
+  right: 10px; /* Adjust the right value to move the text closer or farther from the input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: black; /* Set the color of the text */
+  font-weight: bold;
+  font-size: 14px; /* Set the font size of the text */
+}
+
+.input-container1 {
+  position: relative;
+  width: 400px; /* Set the width of the input container */
+  margin: 2px;
+
+}
+.input-container1 input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  background: #cdcdcd;
+  height: 60px;
+  padding-left: 20px !important;
+
+}
+
+.input-container1::after {
+  content: "months";
+  position: absolute;
+  right: 10px; /* Adjust the right value to move the text closer or farther from the input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: black; /* Set the color of the text */
+  font-weight: bold;
+  font-size: 14px; /* Set the font size of the text */
+}
+
+.input-container2 {
+  position: relative;
+  width: 400px; /* Set the width of the input container */
+  margin: 2px;
+
+}
+.input-container2 input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  background: #cdcdcd;
+  height: 60px;
+  padding-left: 20px !important;
+
+}
+
+.input-container2::after {
+  content: "kWh";
+  position: absolute;
+  right: 10px; /* Adjust the right value to move the text closer or farther from the input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: black; /* Set the color of the text */
+  font-weight: bold;
+  font-size: 14px; /* Set the font size of the text */
+}
+
+
+.input-container3 {
+  position: relative;
+  width: 400px; /* Set the width of the input container */
+  margin: 2px;
+
+}
+.input-container3 input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  background: #cdcdcd;
+  height: 60px;
+  padding-left: 20px !important;
+
+}
+
+.input-container3::after {
+  content: "tons of CO2/kWh";
+  position: absolute;
+  right: 10px; /* Adjust the right value to move the text closer or farther from the input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: black; /* Set the color of the text */
+  font-weight: bold;
+  font-size: 14px; /* Set the font size of the text */
+}
+

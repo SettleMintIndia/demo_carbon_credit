@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import {
   useCreateUserMutation,
-  useGetLoggedInUserQuery,
+useGetLoggedInUserLazyQuery
 } from '@demo-carbon-credit/database';
 import toast from 'react-hot-toast';
 import { NextPageWithLayout } from './_app';
@@ -31,7 +31,8 @@ const Page: NextPageWithLayout = () => {
   const [passwordType, setPasswordType] = useState('password');
 
   // const [createUser] = useInsertUsersMutation();
-  const [createUserMutation] = useCreateUserMutation();
+  const [createUserMutation] = useCreateUserMutation({});
+  const [getUser] = useGetLoggedInUserLazyQuery()
   const [userDetailSignUp, setuserDetailSignUp] = useState<IUser | undefined>(
     undefined
   );
@@ -40,9 +41,9 @@ const Page: NextPageWithLayout = () => {
     setuserDetailSignUp({ ...userDetailSignUp, [name]: value });
   };
 
-
   const handleSubmitSignUp = async () => {
     event.preventDefault();
+
     const response = await fetch('/api/createUser').then((response) =>
       response.json()
     );
@@ -52,31 +53,21 @@ const Page: NextPageWithLayout = () => {
         pvtKey: await response.walletKey,
         username: userDetailSignUp.username,
         password: userDetailSignUp.password,
-
+       
       },
     });
   };
 
-  const { data } = useGetLoggedInUserQuery({
-    variables: {
-      username: user?.username,
-    },
-    fetchPolicy: 'network-only',
-  });
   
-  // User Setting data
- 
   React.useEffect(() => {
+    
   }, []);
 
-  console.log('user data: ', data);
   const handleChange = (name: keyof ILogin, value: ILogin[keyof ILogin]) => {
     setUser({ ...user, [name]: value });
   };
 
-  const userDetail = data?.z_users[0]?.password;
 
-  console.log('password', userDetail);
 
   const togglePassword = () => {
     if (passwordType === 'password') {
@@ -86,8 +77,8 @@ const Page: NextPageWithLayout = () => {
     setPasswordType('password');
   };
 
-  const authentication = () => {
-    event.preventDefault();
+  const authentication = async() => {
+   // event.preventDefault();
     console.log(user);
     let error = false;
 
@@ -107,28 +98,38 @@ const Page: NextPageWithLayout = () => {
       setUserErr('');
     }
     if (!error) {
-      console.log(userDetail);
+      
+      var password;
+      var user_id;
+      await getUser({
+        variables: {
+          username: user?.username,
+        },
+        fetchPolicy: 'network-only',
+      }).then((data)=>{
+        console.log("userdata",data)
+         password = data.data?.z_users[0]?.password;
+         user_id=data.data?.z_users[0]?.id
 
-      Router.push('/dashboard')
+      })
 
-/*       if (userDetail === undefined || userDetail === null) {
+      console.log(password,user_id);
+      if (password === undefined || password === null) {
         console.warn('The demo backend is down!');
         localStorage.setItem('user', user?.username);
         localStorage.setItem('password', user?.password);
-        Router.push('/listAsset');
+        alert('Wrong username or password!');
       } else {
-        if (userDetail == user?.password) {
+        if (password == user?.password) {
           localStorage.setItem('user', user?.username);
           localStorage.setItem('password', user?.password);
-          if (localStorage.getItem('user') === 'admin') {
-            Router.push('/listAsset');
-          } else {
-            Router.push('/token');
-          }
+          localStorage.setItem('user_id',user_id)
+
+          Router.push('/dashboard')
         } else {
           alert('Wrong username or password!');
         }
-      } */
+      }
     } else {
       console.log('typo', userDetail);
       console.log('this is user', user);
@@ -155,7 +156,8 @@ const Page: NextPageWithLayout = () => {
                   </div>
 
                   <h2 className="header-text">
-                    Carbon Credit Demo                  </h2>
+                    Private Equity Fund Tokenization
+                  </h2>
                   {/* <h3>Sign In</h3> */}
                   <Form>
                     <div className="form-area">
@@ -278,7 +280,9 @@ const Page: NextPageWithLayout = () => {
                             toast.promise(handleSubmitSignUp(), {
                               loading: 'Signing Up...',
                               success: (data) => {
-                                Router.push('/');
+                                //Router.push('/');
+                                location.reload();
+
                                 return 'User Created';
                               },
                               error: (err) =>

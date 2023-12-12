@@ -6,7 +6,7 @@ const defaultOptions = {"context":{"clientName":"hasura"}} as const;
 export type GetAllUsersQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetAllUsersQuery = { __typename: 'query_root', z_users: Array<{ __typename: 'z_users', id: string, address: string, pvtKey: string, password: string | null, username: string }> };
+export type GetAllUsersQuery = { __typename: 'query_root', z_users: Array<{ __typename: 'z_users', id: string, address: string, pvtKey: string, password: string, username: string }> };
 
 export type CreateUserMutationVariables = Types.Exact<{
   pvtKey: Types.InputMaybe<Types.Scalars['String']>;
@@ -23,7 +23,7 @@ export type GetLoggedInUserQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetLoggedInUserQuery = { __typename: 'query_root', z_users: Array<{ __typename: 'z_users', username: string, password: string | null }> };
+export type GetLoggedInUserQuery = { __typename: 'query_root', z_users: Array<{ __typename: 'z_users', username: string, password: string, address: string, id: string, pvtKey: string }> };
 
 
 export const GetAllUsersDocument = /*#__PURE__*/ gql`
@@ -112,6 +112,9 @@ export const GetLoggedInUserDocument = /*#__PURE__*/ gql`
   z_users(where: {username: {_eq: $username}}) {
     username
     password
+    address
+    id
+    pvtKey
   }
 }
     `;

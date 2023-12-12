@@ -54,6 +54,11 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     }
   };
 
+  const handleLogout=()=>{
+    localStorage.clear();
+    router.push('/');
+  }
+ 
   return (
     <div>
       {!router.asPath.endsWith('/') && !router.asPath.endsWith('/signup') ? (
@@ -135,7 +140,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                     <div>
                       <button className="mint-button">Mint Token</button>
                     </div>
-                    <div className="logout-container">
+                    <div className="logout-container" onClick={()=>handleLogout()}>
                       <div>
                         <img src="logout.svg" alt="" />
                       </div>
