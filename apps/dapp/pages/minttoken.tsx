@@ -6,9 +6,8 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import toast from 'react-hot-toast';
-import {
-  useCreateTokenMutation,
-} from '@demo-carbon-credit/database';
+import { useCreateTokenMutation } from '@demo-carbon-credit/database';
+import { Button, Modal } from 'react-bootstrap';
 
 const Page: NextPageWithLayout = () => {
   // Fetch assets data
@@ -39,9 +38,11 @@ const Page: NextPageWithLayout = () => {
   const [cci_timeperiod, setcci_timeperiod] = useState('');
   const [cci_timeperioderr, setcci_timeperioderr] = useState('');
 
-  const [createTokenMutation] = useCreateTokenMutation()
+  const [createTokenMutation] = useCreateTokenMutation();
+  const [show, setShow] = useState(false);
 
-
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleCpUpload = () => {
     let error = false;
@@ -74,21 +75,18 @@ const Page: NextPageWithLayout = () => {
       setcc_timeperioderr('');
     }
     if (!error) {
-      let tokens:any =(Number(cc_base_emission)-Number(cc_actual_emission))  *Number(cc_emission_factor)* Number(cc_timeperiod)
+      let tokens: any =
+        (Number(cc_base_emission) - Number(cc_actual_emission)) *
+        Number(cc_emission_factor) *
+        Number(cc_timeperiod);
 
       console.log(tokens);
       handleMint(tokens);
-
-
-
     } else {
-
     }
-  }
-
+  };
 
   const handleEeUpload = () => {
-
     let error = false;
     setee_base_emissionerr('');
     setee_actual_emissionerr('');
@@ -119,21 +117,19 @@ const Page: NextPageWithLayout = () => {
       setee_timeperioderr('');
     }
     if (!error) {
-     
-      let tokens:any =(Number(ee_base_emission)-Number(ee_base_emission))  *Number(ee_emission_factor)* Number(ee_timeperiod)
+      let tokens: any =
+        (Number(ee_base_emission) - Number(ee_base_emission)) *
+        Number(ee_emission_factor) *
+        Number(ee_timeperiod);
 
       console.log(tokens);
 
       handleMint(tokens);
-
     } else {
-
     }
-
-  }
+  };
 
   const handleCCIUpload = () => {
-
     let error = false;
     setco2_amounterr('');
     setccus_factorerr('');
@@ -150,7 +146,7 @@ const Page: NextPageWithLayout = () => {
     } else {
       setccus_factorerr('');
     }
-    
+
     if (cci_timeperiod == '') {
       setcci_timeperioderr('Please enter time period');
       error = true;
@@ -158,49 +154,41 @@ const Page: NextPageWithLayout = () => {
       setcci_timeperioderr('');
     }
     if (!error) {
-      let tokens:any =  Number(co2_amount)* Number(ccus_factor) * Number(cci_timeperiod)
+      let tokens: any =
+        Number(co2_amount) * Number(ccus_factor) * Number(cci_timeperiod);
 
       console.log(tokens);
       handleMint(tokens);
-
-
     } else {
-
     }
+  };
 
-
-  }
-
-  const  handleMint=(tokens)=>{
+  const handleMint = (tokens) => {
     console.log(tokens);
-    let user_id=localStorage.getItem('user_id');
-    console.log('user_id',user_id);
-    let tokens_str=tokens.toString();
+    let user_id = localStorage.getItem('user_id');
+    console.log('user_id', user_id);
+    let tokens_str = tokens.toString();
 
-      try {
-          const addusertokenpromise = async () => {
-              await createTokenMutation({
-                variables: {
-                       token:tokens_str, // value for 'token'
-                       tx_hash:"#0000", // value for 'tx_hash'
-                       user_id:user_id // value for 'user_id'
-                     },
-              }) 
-
-             };
-          toast.promise(addusertokenpromise(), {
-              loading: 'Creating CC Tokens...',
-              success: (data) => `Token created successfully`,
-              error: (err) => `Cannot publish token, please try again later.`,
-          });
-          Router.push('/dashboard');
-        
-      } catch (error: any) {
-          toast.error(error.message);
-      
-  }
-}
-
+    try {
+      const addusertokenpromise = async () => {
+        await createTokenMutation({
+          variables: {
+            token: tokens_str, // value for 'token'
+            tx_hash: '#0000', // value for 'tx_hash'
+            user_id: user_id, // value for 'user_id'
+          },
+        });
+      };
+      toast.promise(addusertokenpromise(), {
+        loading: 'Creating CC Tokens...',
+        success: (data) => `Token created successfully`,
+        error: (err) => `Cannot publish token, please try again later.`,
+      });
+      Router.push('/dashboard');
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
 
   // Initial call
   return (
@@ -228,7 +216,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setcc_base_emission(e.target.value);
-                  }} />
+                  }}
+                />
                 {cc_base_emissionerr != '' && (
                   <p className="alert-message">{cc_base_emissionerr}</p>
                 )}
@@ -248,7 +237,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setcc_actual_emission(e.target.value);
-                  }} />
+                  }}
+                />
                 {cc_actual_emissionerr != '' && (
                   <p className="alert-message">{cc_actual_emissionerr}</p>
                 )}
@@ -268,7 +258,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setcc_emission_factor(e.target.value);
-                  }} />
+                  }}
+                />
                 {cc_emission_factorerr != '' && (
                   <p className="alert-message">{cc_emission_factorerr}</p>
                 )}
@@ -288,7 +279,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setcc_timeperiod(e.target.value);
-                  }} />
+                  }}
+                />
                 {cc_timeperioderr != '' && (
                   <p className="alert-message">{cc_timeperioderr}</p>
                 )}
@@ -296,8 +288,37 @@ const Page: NextPageWithLayout = () => {
             </div>
 
             <div className="btn-wrap">
-              <button className="upload">Upload Document</button>
-              <button className="calculate" onClick={() => handleCpUpload()}>Calculate Carbon Credit</button>
+              <button className="upload" onClick={() => handleCpUpload()}>
+                Upload Document
+              </button>
+              <button className="calculate" onClick={handleShow}>
+                Calculate Carbon Credit
+              </button>
+              <Modal
+                className="cleaner-production"
+                show={show}
+                onHide={handleClose}
+              >
+                <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title>You can mint 123 Tokens</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {' '}
+                  <p>
+                    Formula: <br />
+                    <span style={{ fontWeight: 'bold' }}>
+                      Carbon credits ={' '}
+                    </span>{' '}
+                    (Baseline emissions - Actual emissions) * Emission factor *
+                    Time period
+                  </p>
+                </Modal.Body>
+                <div className="modal-button">
+                  <Button variant="primary" onClick={handleClose}>
+                    Mint
+                  </Button>
+                </div>
+              </Modal>
             </div>
           </TabPanel>
           <TabPanel>
@@ -316,7 +337,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setee_base_emission(e.target.value);
-                  }} />
+                  }}
+                />
                 {ee_base_emissionerr != '' && (
                   <p className="alert-message">{ee_base_emissionerr}</p>
                 )}
@@ -337,7 +359,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setee_actual_emission(e.target.value);
-                  }} />
+                  }}
+                />
                 {ee_actual_emissionerr != '' && (
                   <p className="alert-message">{ee_actual_emissionerr}</p>
                 )}
@@ -358,7 +381,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setee_emission_factor(e.target.value);
-                  }} />
+                  }}
+                />
                 {ee_emission_factorerr != '' && (
                   <p className="alert-message">{ee_emission_factorerr}</p>
                 )}
@@ -379,7 +403,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setee_timeperiod(e.target.value);
-                  }} />
+                  }}
+                />
                 {ee_timeperioderr != '' && (
                   <p className="alert-message">{ee_timeperioderr}</p>
                 )}
@@ -387,8 +412,37 @@ const Page: NextPageWithLayout = () => {
             </div>
 
             <div className="btn-wrap">
-              <button className="upload">Upload Document</button>
-              <button className="calculate" onClick={() => handleEeUpload()}>Calculate Carbon Credit</button>
+              <button className="upload" onClick={() => handleCpUpload()}>
+                Upload Document
+              </button>
+              <button className="calculate" onClick={handleShow}>
+                Calculate Carbon Credit
+              </button>
+              <Modal
+                className="energy-efficiency"
+                show={show}
+                onHide={handleClose}
+              >
+                <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title>You can mint 123 Tokens</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {' '}
+                  <p>
+                    Formula: <br />
+                    <span style={{ fontWeight: 'bold' }}>
+                      Carbon credits ={' '}
+                    </span>{' '}
+                    (Baseline energy consumption - Actual energy consumption) *
+                    Emission factor * Time period
+                  </p>
+                </Modal.Body>
+                <div className="modal-button">
+                  <Button variant="primary" onClick={handleClose}>
+                    Mint
+                  </Button>
+                </div>
+              </Modal>
             </div>
           </TabPanel>
           <TabPanel>
@@ -406,7 +460,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setco2_amount(e.target.value);
-                  }} />
+                  }}
+                />
                 {co2_amounterr != '' && (
                   <p className="alert-message">{co2_amounterr}</p>
                 )}
@@ -426,7 +481,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setccus_factor(e.target.value);
-                  }} />
+                  }}
+                />
                 {ccus_factorerr != '' && (
                   <p className="alert-message">{ccus_factorerr}</p>
                 )}
@@ -447,7 +503,8 @@ const Page: NextPageWithLayout = () => {
                   className="form-control"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setcci_timeperiod(e.target.value);
-                  }} />
+                  }}
+                />
                 {cci_timeperioderr != '' && (
                   <p className="alert-message">{ee_timeperioderr}</p>
                 )}
@@ -455,8 +512,38 @@ const Page: NextPageWithLayout = () => {
             </div>
 
             <div className="btn-wrap">
-              <button className="upload">Upload Document</button>
-              <button className="calculate" onClick={() => handleCCIUpload()}>Calculate Carbon Credit</button>
+              <button className="upload" onClick={() => handleCpUpload()}>
+                Upload Document
+              </button>
+              <button className="calculate" onClick={handleShow}>
+                Calculate Carbon Credit
+              </button>
+              <Modal
+                className="carbon-capture"
+                show={show}
+                onHide={handleClose}
+              >
+                <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title>You can mint 123 Tokens</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {' '}
+                  <p>
+                    Formula: <br />
+                    <span style={{ fontWeight: 'bold' }}>
+                      Carbon credits ={' '}
+                    </span>{' '}
+                    Amount of captured carbon dioxide * Carbon capture
+                    utilization and storage (CCUS) efficiency factor * Time
+                    period
+                  </p>
+                </Modal.Body>
+                <div className="modal-button">
+                  <Button variant="primary" onClick={handleClose}>
+                    Mint
+                  </Button>
+                </div>
+              </Modal>
             </div>
           </TabPanel>
         </Tabs>
