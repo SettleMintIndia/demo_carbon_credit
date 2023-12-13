@@ -62,6 +62,10 @@ export type Mutation_Root = {
   delete_z_minttokens: Maybe<Z_Minttokens_Mutation_Response>;
   /** delete single row from the table: "z_minttokens" */
   delete_z_minttokens_by_pk: Maybe<Z_Minttokens>;
+  /** delete data from the table: "z_secondary_marketplace" */
+  delete_z_secondary_marketplace: Maybe<Z_Secondary_Marketplace_Mutation_Response>;
+  /** delete single row from the table: "z_secondary_marketplace" */
+  delete_z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
   /** delete data from the table: "z_users" */
   delete_z_users: Maybe<Z_Users_Mutation_Response>;
   /** delete single row from the table: "z_users" */
@@ -70,6 +74,10 @@ export type Mutation_Root = {
   insert_z_minttokens: Maybe<Z_Minttokens_Mutation_Response>;
   /** insert a single row into the table: "z_minttokens" */
   insert_z_minttokens_one: Maybe<Z_Minttokens>;
+  /** insert data into the table: "z_secondary_marketplace" */
+  insert_z_secondary_marketplace: Maybe<Z_Secondary_Marketplace_Mutation_Response>;
+  /** insert a single row into the table: "z_secondary_marketplace" */
+  insert_z_secondary_marketplace_one: Maybe<Z_Secondary_Marketplace>;
   /** insert data into the table: "z_users" */
   insert_z_users: Maybe<Z_Users_Mutation_Response>;
   /** insert a single row into the table: "z_users" */
@@ -80,6 +88,12 @@ export type Mutation_Root = {
   update_z_minttokens_by_pk: Maybe<Z_Minttokens>;
   /** update multiples rows of table: "z_minttokens" */
   update_z_minttokens_many: Maybe<Array<Maybe<Z_Minttokens_Mutation_Response>>>;
+  /** update data of the table: "z_secondary_marketplace" */
+  update_z_secondary_marketplace: Maybe<Z_Secondary_Marketplace_Mutation_Response>;
+  /** update single row of the table: "z_secondary_marketplace" */
+  update_z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
+  /** update multiples rows of table: "z_secondary_marketplace" */
+  update_z_secondary_marketplace_many: Maybe<Array<Maybe<Z_Secondary_Marketplace_Mutation_Response>>>;
   /** update data of the table: "z_users" */
   update_z_users: Maybe<Z_Users_Mutation_Response>;
   /** update single row of the table: "z_users" */
@@ -97,6 +111,18 @@ export type Mutation_RootDelete_Z_MinttokensArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Z_Minttokens_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_Secondary_MarketplaceArgs = {
+  where: Z_Secondary_Marketplace_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_Secondary_Marketplace_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -124,6 +150,20 @@ export type Mutation_RootInsert_Z_MinttokensArgs = {
 export type Mutation_RootInsert_Z_Minttokens_OneArgs = {
   object: Z_Minttokens_Insert_Input;
   on_conflict: InputMaybe<Z_Minttokens_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_Secondary_MarketplaceArgs = {
+  objects: Array<Z_Secondary_Marketplace_Insert_Input>;
+  on_conflict: InputMaybe<Z_Secondary_Marketplace_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_Secondary_Marketplace_OneArgs = {
+  object: Z_Secondary_Marketplace_Insert_Input;
+  on_conflict: InputMaybe<Z_Secondary_Marketplace_On_Conflict>;
 };
 
 
@@ -158,6 +198,26 @@ export type Mutation_RootUpdate_Z_Minttokens_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Z_Minttokens_ManyArgs = {
   updates: Array<Z_Minttokens_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Secondary_MarketplaceArgs = {
+  _set: InputMaybe<Z_Secondary_Marketplace_Set_Input>;
+  where: Z_Secondary_Marketplace_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Secondary_Marketplace_By_PkArgs = {
+  _set: InputMaybe<Z_Secondary_Marketplace_Set_Input>;
+  pk_columns: Z_Secondary_Marketplace_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Secondary_Marketplace_ManyArgs = {
+  updates: Array<Z_Secondary_Marketplace_Updates>;
 };
 
 
@@ -204,6 +264,12 @@ export type Query_Root = {
   z_minttokens_aggregate: Z_Minttokens_Aggregate;
   /** fetch data from the table: "z_minttokens" using primary key columns */
   z_minttokens_by_pk: Maybe<Z_Minttokens>;
+  /** fetch data from the table: "z_secondary_marketplace" */
+  z_secondary_marketplace: Array<Z_Secondary_Marketplace>;
+  /** fetch aggregated fields from the table: "z_secondary_marketplace" */
+  z_secondary_marketplace_aggregate: Z_Secondary_Marketplace_Aggregate;
+  /** fetch data from the table: "z_secondary_marketplace" using primary key columns */
+  z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
   /** fetch data from the table: "z_users" */
   z_users: Array<Z_Users>;
   /** fetch aggregated fields from the table: "z_users" */
@@ -232,6 +298,29 @@ export type Query_RootZ_Minttokens_AggregateArgs = {
 
 
 export type Query_RootZ_Minttokens_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootZ_Secondary_MarketplaceArgs = {
+  distinct_on: InputMaybe<Array<Z_Secondary_Marketplace_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Secondary_Marketplace_Order_By>>;
+  where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Secondary_Marketplace_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Secondary_Marketplace_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Secondary_Marketplace_Order_By>>;
+  where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Secondary_Marketplace_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -268,6 +357,14 @@ export type Subscription_Root = {
   z_minttokens_by_pk: Maybe<Z_Minttokens>;
   /** fetch data from the table in a streaming manner: "z_minttokens" */
   z_minttokens_stream: Array<Z_Minttokens>;
+  /** fetch data from the table: "z_secondary_marketplace" */
+  z_secondary_marketplace: Array<Z_Secondary_Marketplace>;
+  /** fetch aggregated fields from the table: "z_secondary_marketplace" */
+  z_secondary_marketplace_aggregate: Z_Secondary_Marketplace_Aggregate;
+  /** fetch data from the table: "z_secondary_marketplace" using primary key columns */
+  z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
+  /** fetch data from the table in a streaming manner: "z_secondary_marketplace" */
+  z_secondary_marketplace_stream: Array<Z_Secondary_Marketplace>;
   /** fetch data from the table: "z_users" */
   z_users: Array<Z_Users>;
   /** fetch aggregated fields from the table: "z_users" */
@@ -306,6 +403,36 @@ export type Subscription_RootZ_Minttokens_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Z_Minttokens_Stream_Cursor_Input>>;
   where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Secondary_MarketplaceArgs = {
+  distinct_on: InputMaybe<Array<Z_Secondary_Marketplace_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Secondary_Marketplace_Order_By>>;
+  where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Secondary_Marketplace_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Secondary_Marketplace_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Secondary_Marketplace_Order_By>>;
+  where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Secondary_Marketplace_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootZ_Secondary_Marketplace_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Z_Secondary_Marketplace_Stream_Cursor_Input>>;
+  where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
 };
 
 
@@ -372,6 +499,8 @@ export type Z_Minttokens = {
   token: Scalars['String'];
   tx_hash: Scalars['String'];
   user_id: Scalars['uuid'];
+  /** An object relationship */
+  z_user: Z_Users;
 };
 
 /** aggregated selection of "z_minttokens" */
@@ -406,6 +535,7 @@ export type Z_Minttokens_Bool_Exp = {
   token: InputMaybe<String_Comparison_Exp>;
   tx_hash: InputMaybe<String_Comparison_Exp>;
   user_id: InputMaybe<Uuid_Comparison_Exp>;
+  z_user: InputMaybe<Z_Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "z_minttokens" */
@@ -421,6 +551,7 @@ export type Z_Minttokens_Insert_Input = {
   token: InputMaybe<Scalars['String']>;
   tx_hash: InputMaybe<Scalars['String']>;
   user_id: InputMaybe<Scalars['uuid']>;
+  z_user: InputMaybe<Z_Users_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -452,6 +583,13 @@ export type Z_Minttokens_Mutation_Response = {
   returning: Array<Z_Minttokens>;
 };
 
+/** input type for inserting object relation for remote table "z_minttokens" */
+export type Z_Minttokens_Obj_Rel_Insert_Input = {
+  data: Z_Minttokens_Insert_Input;
+  /** upsert condition */
+  on_conflict: InputMaybe<Z_Minttokens_On_Conflict>;
+};
+
 /** on_conflict condition type for table "z_minttokens" */
 export type Z_Minttokens_On_Conflict = {
   constraint: Z_Minttokens_Constraint;
@@ -466,6 +604,7 @@ export type Z_Minttokens_Order_By = {
   token: InputMaybe<Order_By>;
   tx_hash: InputMaybe<Order_By>;
   user_id: InputMaybe<Order_By>;
+  z_user: InputMaybe<Z_Users_Order_By>;
 };
 
 /** primary key columns input for table: z_minttokens */
@@ -532,6 +671,227 @@ export type Z_Minttokens_Updates = {
   _set: InputMaybe<Z_Minttokens_Set_Input>;
   /** filter the rows which have to be updated */
   where: Z_Minttokens_Bool_Exp;
+};
+
+/** columns and relationships of "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace = {
+  __typename: 'z_secondary_marketplace';
+  amount: Scalars['String'];
+  buyer_id: Maybe<Scalars['uuid']>;
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  minttoken_id: Scalars['uuid'];
+  owner_id: Scalars['uuid'];
+  tokens: Scalars['String'];
+  tx_hash: Scalars['String'];
+  /** An object relationship */
+  z_buyer_user: Maybe<Z_Users>;
+  /** An object relationship */
+  z_minttoken: Z_Minttokens;
+  /** An object relationship */
+  z_user: Z_Users;
+};
+
+/** aggregated selection of "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Aggregate = {
+  __typename: 'z_secondary_marketplace_aggregate';
+  aggregate: Maybe<Z_Secondary_Marketplace_Aggregate_Fields>;
+  nodes: Array<Z_Secondary_Marketplace>;
+};
+
+/** aggregate fields of "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Aggregate_Fields = {
+  __typename: 'z_secondary_marketplace_aggregate_fields';
+  count: Scalars['Int'];
+  max: Maybe<Z_Secondary_Marketplace_Max_Fields>;
+  min: Maybe<Z_Secondary_Marketplace_Min_Fields>;
+};
+
+
+/** aggregate fields of "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Aggregate_FieldsCountArgs = {
+  columns: InputMaybe<Array<Z_Secondary_Marketplace_Select_Column>>;
+  distinct: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "z_secondary_marketplace". All fields are combined with a logical 'AND'. */
+export type Z_Secondary_Marketplace_Bool_Exp = {
+  _and: InputMaybe<Array<Z_Secondary_Marketplace_Bool_Exp>>;
+  _not: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+  _or: InputMaybe<Array<Z_Secondary_Marketplace_Bool_Exp>>;
+  amount: InputMaybe<String_Comparison_Exp>;
+  buyer_id: InputMaybe<Uuid_Comparison_Exp>;
+  created_at: InputMaybe<Timestamptz_Comparison_Exp>;
+  id: InputMaybe<Uuid_Comparison_Exp>;
+  minttoken_id: InputMaybe<Uuid_Comparison_Exp>;
+  owner_id: InputMaybe<Uuid_Comparison_Exp>;
+  tokens: InputMaybe<String_Comparison_Exp>;
+  tx_hash: InputMaybe<String_Comparison_Exp>;
+  z_buyer_user: InputMaybe<Z_Users_Bool_Exp>;
+  z_minttoken: InputMaybe<Z_Minttokens_Bool_Exp>;
+  z_user: InputMaybe<Z_Users_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "z_secondary_marketplace" */
+export enum Z_Secondary_Marketplace_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ZSecondaryMarketplacePkey = 'z_secondary_marketplace_pkey'
+}
+
+/** input type for inserting data into table "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Insert_Input = {
+  amount: InputMaybe<Scalars['String']>;
+  buyer_id: InputMaybe<Scalars['uuid']>;
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  minttoken_id: InputMaybe<Scalars['uuid']>;
+  owner_id: InputMaybe<Scalars['uuid']>;
+  tokens: InputMaybe<Scalars['String']>;
+  tx_hash: InputMaybe<Scalars['String']>;
+  z_buyer_user: InputMaybe<Z_Users_Obj_Rel_Insert_Input>;
+  z_minttoken: InputMaybe<Z_Minttokens_Obj_Rel_Insert_Input>;
+  z_user: InputMaybe<Z_Users_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Z_Secondary_Marketplace_Max_Fields = {
+  __typename: 'z_secondary_marketplace_max_fields';
+  amount: Maybe<Scalars['String']>;
+  buyer_id: Maybe<Scalars['uuid']>;
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  minttoken_id: Maybe<Scalars['uuid']>;
+  owner_id: Maybe<Scalars['uuid']>;
+  tokens: Maybe<Scalars['String']>;
+  tx_hash: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Z_Secondary_Marketplace_Min_Fields = {
+  __typename: 'z_secondary_marketplace_min_fields';
+  amount: Maybe<Scalars['String']>;
+  buyer_id: Maybe<Scalars['uuid']>;
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  minttoken_id: Maybe<Scalars['uuid']>;
+  owner_id: Maybe<Scalars['uuid']>;
+  tokens: Maybe<Scalars['String']>;
+  tx_hash: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Mutation_Response = {
+  __typename: 'z_secondary_marketplace_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Z_Secondary_Marketplace>;
+};
+
+/** on_conflict condition type for table "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_On_Conflict = {
+  constraint: Z_Secondary_Marketplace_Constraint;
+  update_columns: Array<Z_Secondary_Marketplace_Update_Column>;
+  where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "z_secondary_marketplace". */
+export type Z_Secondary_Marketplace_Order_By = {
+  amount: InputMaybe<Order_By>;
+  buyer_id: InputMaybe<Order_By>;
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  minttoken_id: InputMaybe<Order_By>;
+  owner_id: InputMaybe<Order_By>;
+  tokens: InputMaybe<Order_By>;
+  tx_hash: InputMaybe<Order_By>;
+  z_buyer_user: InputMaybe<Z_Users_Order_By>;
+  z_minttoken: InputMaybe<Z_Minttokens_Order_By>;
+  z_user: InputMaybe<Z_Users_Order_By>;
+};
+
+/** primary key columns input for table: z_secondary_marketplace */
+export type Z_Secondary_Marketplace_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "z_secondary_marketplace" */
+export enum Z_Secondary_Marketplace_Select_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  BuyerId = 'buyer_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MinttokenId = 'minttoken_id',
+  /** column name */
+  OwnerId = 'owner_id',
+  /** column name */
+  Tokens = 'tokens',
+  /** column name */
+  TxHash = 'tx_hash'
+}
+
+/** input type for updating data in table "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Set_Input = {
+  amount: InputMaybe<Scalars['String']>;
+  buyer_id: InputMaybe<Scalars['uuid']>;
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  minttoken_id: InputMaybe<Scalars['uuid']>;
+  owner_id: InputMaybe<Scalars['uuid']>;
+  tokens: InputMaybe<Scalars['String']>;
+  tx_hash: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "z_secondary_marketplace" */
+export type Z_Secondary_Marketplace_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Z_Secondary_Marketplace_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Z_Secondary_Marketplace_Stream_Cursor_Value_Input = {
+  amount: InputMaybe<Scalars['String']>;
+  buyer_id: InputMaybe<Scalars['uuid']>;
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  minttoken_id: InputMaybe<Scalars['uuid']>;
+  owner_id: InputMaybe<Scalars['uuid']>;
+  tokens: InputMaybe<Scalars['String']>;
+  tx_hash: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "z_secondary_marketplace" */
+export enum Z_Secondary_Marketplace_Update_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  BuyerId = 'buyer_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MinttokenId = 'minttoken_id',
+  /** column name */
+  OwnerId = 'owner_id',
+  /** column name */
+  Tokens = 'tokens',
+  /** column name */
+  TxHash = 'tx_hash'
+}
+
+export type Z_Secondary_Marketplace_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Z_Secondary_Marketplace_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Z_Secondary_Marketplace_Bool_Exp;
 };
 
 /** columns and relationships of "z_users" */
@@ -625,6 +985,13 @@ export type Z_Users_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Z_Users>;
+};
+
+/** input type for inserting object relation for remote table "z_users" */
+export type Z_Users_Obj_Rel_Insert_Input = {
+  data: Z_Users_Insert_Input;
+  /** upsert condition */
+  on_conflict: InputMaybe<Z_Users_On_Conflict>;
 };
 
 /** on_conflict condition type for table "z_users" */

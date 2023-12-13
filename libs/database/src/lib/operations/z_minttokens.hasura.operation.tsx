@@ -12,6 +12,13 @@ export type CreateTokenMutationVariables = Types.Exact<{
 
 export type CreateTokenMutation = { __typename: 'mutation_root', insert_z_minttokens: { __typename: 'z_minttokens_mutation_response', returning: Array<{ __typename: 'z_minttokens', id: string }> } | null };
 
+export type GettokensQueryVariables = Types.Exact<{
+  user_id: Types.InputMaybe<Types.Scalars['uuid']>;
+}>;
+
+
+export type GettokensQuery = { __typename: 'query_root', z_minttokens: Array<{ __typename: 'z_minttokens', id: string, token: string, tx_hash: string, created_at: string, z_user: { __typename: 'z_users', password: string, pvtKey: string, address: string, username: string, id: string } }> };
+
 
 export const CreateTokenDocument = /*#__PURE__*/ gql`
     mutation createToken($token: String, $tx_hash: String, $user_id: uuid) {
@@ -52,3 +59,51 @@ export function useCreateTokenMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateTokenMutationHookResult = ReturnType<typeof useCreateTokenMutation>;
 export type CreateTokenMutationResult = Apollo.MutationResult<CreateTokenMutation>;
 export type CreateTokenMutationOptions = Apollo.BaseMutationOptions<CreateTokenMutation, CreateTokenMutationVariables>;
+export const GettokensDocument = /*#__PURE__*/ gql`
+    query gettokens($user_id: uuid) {
+  z_minttokens(where: {user_id: {_eq: $user_id}}) {
+    id
+    token
+    tx_hash
+    created_at
+    z_user {
+      password
+      pvtKey
+      address
+      username
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useGettokensQuery__
+ *
+ * To run a query within a React component, call `useGettokensQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGettokensQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGettokensQuery({
+ *   variables: {
+ *      user_id: // value for 'user_id'
+ *   },
+ * });
+ */
+export function useGettokensQuery(baseOptions?: Apollo.QueryHookOptions<GettokensQuery, GettokensQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GettokensQuery, GettokensQueryVariables>(GettokensDocument, options);
+      }
+export function useGettokensLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GettokensQuery, GettokensQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GettokensQuery, GettokensQueryVariables>(GettokensDocument, options);
+        }
+export type GettokensQueryHookResult = ReturnType<typeof useGettokensQuery>;
+export type GettokensLazyQueryHookResult = ReturnType<typeof useGettokensLazyQuery>;
+export type GettokensQueryResult = Apollo.QueryResult<GettokensQuery, GettokensQueryVariables>;
+export function refetchGettokensQuery(variables?: GettokensQueryVariables) {
+      return { query: GettokensDocument, variables: variables }
+    }

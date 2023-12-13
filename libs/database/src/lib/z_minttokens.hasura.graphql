@@ -17,3 +17,22 @@ mutation createToken(
     }
   }
 }
+
+
+
+
+query gettokens($user_id: uuid) {
+  z_minttokens(where: {user_id: {_eq: $user_id}}) {
+    id
+    token
+    tx_hash
+    created_at
+    z_user {
+      password
+      pvtKey
+      address
+      username
+      id
+    }
+  }
+}

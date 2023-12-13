@@ -1,0 +1,72 @@
+mutation createSecondaryMarketPlace(
+  $minttoken_id: uuid
+  $amount: String
+  $tokens:String
+  $owner_id:uuid
+  $tx_hash:String
+ 
+) {
+  insert_z_secondary_marketplace(
+    objects: {
+      minttoken_id: $minttoken_id
+      amount: $amount
+      tokens: $tokens
+      owner_id: $owner_id
+      tx_hash: $tx_hash
+
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+
+query getSecondayMarketPlace {
+  z_secondary_marketplace {
+    amount
+    buyer_id
+    created_at
+    id
+    minttoken_id
+    owner_id
+    tokens
+    tx_hash
+    z_buyer_user {
+      address
+      password
+      pvtKey
+      id
+      created_at
+      username
+    }
+    z_minttoken {
+      created_at
+      id
+      token
+      tx_hash
+      user_id
+      z_user {
+        address
+        id
+        password
+        pvtKey
+        username
+      }
+    }
+     z_user {
+      address
+      created_at
+      id
+      password
+      pvtKey
+      username
+    }
+  }
+}
+
+
+
+
+

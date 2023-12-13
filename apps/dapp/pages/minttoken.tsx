@@ -193,7 +193,7 @@ const Page: NextPageWithLayout = () => {
               success: (data) => `Token created successfully`,
               error: (err) => `Cannot publish token, please try again later.`,
           });
-          Router.push('/dashboard');
+          Router.push('/mytoken');
         
       } catch (error: any) {
           toast.error(error.message);
