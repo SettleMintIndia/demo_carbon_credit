@@ -58,20 +58,46 @@ export enum Cursor_Ordering {
 /** mutation root */
 export type Mutation_Root = {
   __typename: 'mutation_root';
+  /** delete data from the table: "z_minttokens" */
+  delete_z_minttokens: Maybe<Z_Minttokens_Mutation_Response>;
+  /** delete single row from the table: "z_minttokens" */
+  delete_z_minttokens_by_pk: Maybe<Z_Minttokens>;
   /** delete data from the table: "z_users" */
   delete_z_users: Maybe<Z_Users_Mutation_Response>;
   /** delete single row from the table: "z_users" */
   delete_z_users_by_pk: Maybe<Z_Users>;
+  /** insert data into the table: "z_minttokens" */
+  insert_z_minttokens: Maybe<Z_Minttokens_Mutation_Response>;
+  /** insert a single row into the table: "z_minttokens" */
+  insert_z_minttokens_one: Maybe<Z_Minttokens>;
   /** insert data into the table: "z_users" */
   insert_z_users: Maybe<Z_Users_Mutation_Response>;
   /** insert a single row into the table: "z_users" */
   insert_z_users_one: Maybe<Z_Users>;
+  /** update data of the table: "z_minttokens" */
+  update_z_minttokens: Maybe<Z_Minttokens_Mutation_Response>;
+  /** update single row of the table: "z_minttokens" */
+  update_z_minttokens_by_pk: Maybe<Z_Minttokens>;
+  /** update multiples rows of table: "z_minttokens" */
+  update_z_minttokens_many: Maybe<Array<Maybe<Z_Minttokens_Mutation_Response>>>;
   /** update data of the table: "z_users" */
   update_z_users: Maybe<Z_Users_Mutation_Response>;
   /** update single row of the table: "z_users" */
   update_z_users_by_pk: Maybe<Z_Users>;
   /** update multiples rows of table: "z_users" */
   update_z_users_many: Maybe<Array<Maybe<Z_Users_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_MinttokensArgs = {
+  where: Z_Minttokens_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_Minttokens_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -88,6 +114,20 @@ export type Mutation_RootDelete_Z_Users_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Z_MinttokensArgs = {
+  objects: Array<Z_Minttokens_Insert_Input>;
+  on_conflict: InputMaybe<Z_Minttokens_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_Minttokens_OneArgs = {
+  object: Z_Minttokens_Insert_Input;
+  on_conflict: InputMaybe<Z_Minttokens_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Z_UsersArgs = {
   objects: Array<Z_Users_Insert_Input>;
   on_conflict: InputMaybe<Z_Users_On_Conflict>;
@@ -98,6 +138,26 @@ export type Mutation_RootInsert_Z_UsersArgs = {
 export type Mutation_RootInsert_Z_Users_OneArgs = {
   object: Z_Users_Insert_Input;
   on_conflict: InputMaybe<Z_Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_MinttokensArgs = {
+  _set: InputMaybe<Z_Minttokens_Set_Input>;
+  where: Z_Minttokens_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Minttokens_By_PkArgs = {
+  _set: InputMaybe<Z_Minttokens_Set_Input>;
+  pk_columns: Z_Minttokens_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Minttokens_ManyArgs = {
+  updates: Array<Z_Minttokens_Updates>;
 };
 
 
@@ -138,12 +198,41 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename: 'query_root';
+  /** fetch data from the table: "z_minttokens" */
+  z_minttokens: Array<Z_Minttokens>;
+  /** fetch aggregated fields from the table: "z_minttokens" */
+  z_minttokens_aggregate: Z_Minttokens_Aggregate;
+  /** fetch data from the table: "z_minttokens" using primary key columns */
+  z_minttokens_by_pk: Maybe<Z_Minttokens>;
   /** fetch data from the table: "z_users" */
   z_users: Array<Z_Users>;
   /** fetch aggregated fields from the table: "z_users" */
   z_users_aggregate: Z_Users_Aggregate;
   /** fetch data from the table: "z_users" using primary key columns */
   z_users_by_pk: Maybe<Z_Users>;
+};
+
+
+export type Query_RootZ_MinttokensArgs = {
+  distinct_on: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Minttokens_Order_By>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Minttokens_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Minttokens_Order_By>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Minttokens_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -171,6 +260,14 @@ export type Query_RootZ_Users_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename: 'subscription_root';
+  /** fetch data from the table: "z_minttokens" */
+  z_minttokens: Array<Z_Minttokens>;
+  /** fetch aggregated fields from the table: "z_minttokens" */
+  z_minttokens_aggregate: Z_Minttokens_Aggregate;
+  /** fetch data from the table: "z_minttokens" using primary key columns */
+  z_minttokens_by_pk: Maybe<Z_Minttokens>;
+  /** fetch data from the table in a streaming manner: "z_minttokens" */
+  z_minttokens_stream: Array<Z_Minttokens>;
   /** fetch data from the table: "z_users" */
   z_users: Array<Z_Users>;
   /** fetch aggregated fields from the table: "z_users" */
@@ -179,6 +276,36 @@ export type Subscription_Root = {
   z_users_by_pk: Maybe<Z_Users>;
   /** fetch data from the table in a streaming manner: "z_users" */
   z_users_stream: Array<Z_Users>;
+};
+
+
+export type Subscription_RootZ_MinttokensArgs = {
+  distinct_on: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Minttokens_Order_By>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Minttokens_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Minttokens_Order_By>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Minttokens_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootZ_Minttokens_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Z_Minttokens_Stream_Cursor_Input>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
 };
 
 
@@ -237,13 +364,183 @@ export type Uuid_Comparison_Exp = {
   _nin: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+/** columns and relationships of "z_minttokens" */
+export type Z_Minttokens = {
+  __typename: 'z_minttokens';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  token: Scalars['String'];
+  tx_hash: Scalars['String'];
+  user_id: Scalars['uuid'];
+};
+
+/** aggregated selection of "z_minttokens" */
+export type Z_Minttokens_Aggregate = {
+  __typename: 'z_minttokens_aggregate';
+  aggregate: Maybe<Z_Minttokens_Aggregate_Fields>;
+  nodes: Array<Z_Minttokens>;
+};
+
+/** aggregate fields of "z_minttokens" */
+export type Z_Minttokens_Aggregate_Fields = {
+  __typename: 'z_minttokens_aggregate_fields';
+  count: Scalars['Int'];
+  max: Maybe<Z_Minttokens_Max_Fields>;
+  min: Maybe<Z_Minttokens_Min_Fields>;
+};
+
+
+/** aggregate fields of "z_minttokens" */
+export type Z_Minttokens_Aggregate_FieldsCountArgs = {
+  columns: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  distinct: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "z_minttokens". All fields are combined with a logical 'AND'. */
+export type Z_Minttokens_Bool_Exp = {
+  _and: InputMaybe<Array<Z_Minttokens_Bool_Exp>>;
+  _not: InputMaybe<Z_Minttokens_Bool_Exp>;
+  _or: InputMaybe<Array<Z_Minttokens_Bool_Exp>>;
+  created_at: InputMaybe<Timestamptz_Comparison_Exp>;
+  id: InputMaybe<Uuid_Comparison_Exp>;
+  token: InputMaybe<String_Comparison_Exp>;
+  tx_hash: InputMaybe<String_Comparison_Exp>;
+  user_id: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "z_minttokens" */
+export enum Z_Minttokens_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ZMinttokensPkey = 'z_minttokens_pkey'
+}
+
+/** input type for inserting data into table "z_minttokens" */
+export type Z_Minttokens_Insert_Input = {
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  token: InputMaybe<Scalars['String']>;
+  tx_hash: InputMaybe<Scalars['String']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type Z_Minttokens_Max_Fields = {
+  __typename: 'z_minttokens_max_fields';
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  token: Maybe<Scalars['String']>;
+  tx_hash: Maybe<Scalars['String']>;
+  user_id: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type Z_Minttokens_Min_Fields = {
+  __typename: 'z_minttokens_min_fields';
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  token: Maybe<Scalars['String']>;
+  tx_hash: Maybe<Scalars['String']>;
+  user_id: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "z_minttokens" */
+export type Z_Minttokens_Mutation_Response = {
+  __typename: 'z_minttokens_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Z_Minttokens>;
+};
+
+/** on_conflict condition type for table "z_minttokens" */
+export type Z_Minttokens_On_Conflict = {
+  constraint: Z_Minttokens_Constraint;
+  update_columns: Array<Z_Minttokens_Update_Column>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "z_minttokens". */
+export type Z_Minttokens_Order_By = {
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  token: InputMaybe<Order_By>;
+  tx_hash: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: z_minttokens */
+export type Z_Minttokens_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "z_minttokens" */
+export enum Z_Minttokens_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Token = 'token',
+  /** column name */
+  TxHash = 'tx_hash',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "z_minttokens" */
+export type Z_Minttokens_Set_Input = {
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  token: InputMaybe<Scalars['String']>;
+  tx_hash: InputMaybe<Scalars['String']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** Streaming cursor of the table "z_minttokens" */
+export type Z_Minttokens_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Z_Minttokens_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Z_Minttokens_Stream_Cursor_Value_Input = {
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  token: InputMaybe<Scalars['String']>;
+  tx_hash: InputMaybe<Scalars['String']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "z_minttokens" */
+export enum Z_Minttokens_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Token = 'token',
+  /** column name */
+  TxHash = 'tx_hash',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Z_Minttokens_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Z_Minttokens_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Z_Minttokens_Bool_Exp;
+};
+
 /** columns and relationships of "z_users" */
 export type Z_Users = {
   __typename: 'z_users';
   address: Scalars['String'];
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
-  password: Maybe<Scalars['String']>;
+  password: Scalars['String'];
   pvtKey: Scalars['String'];
   username: Scalars['String'];
 };

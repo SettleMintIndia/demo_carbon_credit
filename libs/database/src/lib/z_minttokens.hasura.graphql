@@ -1,0 +1,19 @@
+mutation createToken(
+  $token: String
+  $tx_hash: String
+  $user_id: uuid
+ 
+) {
+  insert_z_minttokens(
+    objects: {
+      token: $token
+      tx_hash: $tx_hash
+      user_id: $user_id
+
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}

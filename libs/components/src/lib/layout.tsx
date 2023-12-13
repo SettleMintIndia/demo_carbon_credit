@@ -30,8 +30,20 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     localStorage.getItem('user') != `${localStorage.getItem('user')}`
       ? true
       : false;
-
+  const [title, setTitle] = useState<string>('');
   useEffect(() => {
+    setTitle(
+      router.pathname === '/dashboard'
+        ? 'Dashboard'
+        : router.pathname === '/minttoken'
+        ? 'Mint Token'
+        : router.pathname === '/transactionlog'
+        ? 'Transactions'
+        : router.pathname === '/marketPlace'
+        ? 'Token MarketPlace'
+        : ''
+    );
+
     if (localStorage.getItem('user')) {
       setLogin(true);
     }
@@ -54,102 +66,109 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    router.push('/');
+  };
+
   return (
     <div>
       {!router.asPath.endsWith('/') && !router.asPath.endsWith('/signup') ? (
         <div className="sideba_content">
           <Box sx={{ flexGrow: 1 }}>
-          <div className="base-container">
-      {/* Left sidebar */}
-      <div className="left-side">
-        <div className="link-container">
-          <div className="logo-name">Carbon Credit</div>
-          <ul className="dashboard-list">
-            <a href="/dashboard" className="link">
-              <li className="active-left-nav">
-                <div
-                  className="link-item
+            <div className="base-container">
+              {/* Left sidebar */}
+              <div className="left-side">
+                <div className="link-container">
+                  <div className="logo-name">Carbon Credit</div>
+                  <ul className="dashboard-list">
+                    <a href="/dashboard" className="link">
+                      <li>
+                        <div
+                          className="link-item
               "
-                >
-                  <img src="dashboard.svg" alt="" />
-                  Dashboard
-                </div>
-              </li>
-            </a>
-            <a href="/minttoken" className="link">
-              <li>
-                <div
-                  className="link-item
+                        >
+                          <img src="dashboard.svg" alt="" />
+                          Dashboard
+                        </div>
+                      </li>
+                    </a>
+                    <a href="/minttoken" className="link">
+                      <li>
+                        <div
+                          className="link-item
               "
-                >
-                  <img src="mint.svg" alt="" />
-                  Mint Token
-                </div>
-              </li>
-            </a>
-            <a href="/transactionslog" className="link">
-              <li>
-                <div
-                  className="link-item
+                        >
+                          <img src="mint.svg" alt="" />
+                          Mint Token
+                        </div>
+                      </li>
+                    </a>
+                    <a href="/transactionslog" className="link">
+                      <li>
+                        <div
+                          className="link-item
               "
-                >
-                  <img src="transaction.svg" alt="" />
-                  Transactions
-                </div>
-              </li>
-            </a>
-            <a href="/transactionslog" className="link">
-              <li>
-                <div
-                  className="link-item
+                        >
+                          <img src="transaction.svg" alt="" />
+                          Transactions
+                        </div>
+                      </li>
+                    </a>
+                    <a href="/marketPlace" className="link">
+                      <li>
+                        <div
+                          className="link-item
               "
-                >
-                  <img src="setting.svg" alt="" />
-                  Token Marketplace
-                </div>
-              </li>
-            </a>
-            <a href="/notifications" className="link">
-              <li>
-                <div
-                  className="link-item
+                        >
+                          <img src="setting.svg" alt="" />
+                          Token Marketplace
+                        </div>
+                      </li>
+                    </a>
+                    <a href="/notifications" className="link">
+                      <li>
+                        <div
+                          className="link-item
               "
-                >
-                  <img src="notification.svg" alt="" />
-                  Notifications
+                        >
+                          <img src="notification.svg" alt="" />
+                          Notifications
+                        </div>
+                      </li>
+                    </a>
+                  </ul>
                 </div>
-              </li>
-            </a>
-          </ul>
-        </div>
-      </div>
-
-      {/* Right page contain */}
-      <div className="right-side">
-        {/* Top bar */}
-        <div className="navbar-contain">
-          <div className="title-container">
-            <h3>Dashboard</h3>
-          </div>
-          <div className="nav-right">
-            <div>
-              <button className="mint-button">Mint Token</button>
-            </div>
-            <div className="logout-container">
-              <div>
-                <img src="logout.svg" alt="" />
               </div>
-              <div>
-                <p>LOGOUT</p>
+
+              {/* Right page contain */}
+              <div className="right-side">
+                {/* Top bar */}
+                <div className="navbar-contain">
+                  <div className="title-container">
+                    <h3>{title}</h3>
+                  </div>
+                  <div className="nav-right">
+                    <div>
+                      <button className="mint-button">Mint Token</button>
+                    </div>
+                    <div
+                      className="logout-container"
+                      onClick={() => handleLogout()}
+                    >
+                      <div>
+                        <img src="logout.svg" alt="" />
+                      </div>
+                      <div>
+                        <p>LOGOUT</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {children}
               </div>
             </div>
-          </div>
-        </div>
-        {children}
-
-      </div>
-    </div>
-           {/*  <AppBar position="static">
+            {/*  <AppBar position="static">
               <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   <Link href="/listAsset">
@@ -177,7 +196,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                 )}
               </Toolbar>
             </AppBar> */}
-           {/*  <div className="outer-wrap">
+            {/*  <div className="outer-wrap">
               <div className="row">
                 <div className="col-md-2 ">
                 <div className="logo-name">Carbon Credit</div>
