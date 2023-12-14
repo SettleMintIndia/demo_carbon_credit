@@ -2,6 +2,7 @@ import App, { AppContext, AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import Head from 'next/head';
 import './styles.css';
+import './responsiveness.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useApollo } from '../hooks/use-apollo';
 import { Toaster } from 'react-hot-toast';
