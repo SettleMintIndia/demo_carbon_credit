@@ -1,0 +1,49 @@
+
+mutation createTransctionHistory(
+  $amount: String 
+  $mint_id: uuid 
+  $sender: uuid 
+  $receiver: uuid 
+  $token:String
+  $tx_hash:String
+) {
+  insert_z_transaction_history(
+    objects: {
+      amount: $amount
+      mint_id: $mint_id
+      sender: $sender
+      receiver: $receiver
+      token:$token
+      tx_hash:$tx_hash
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+
+
+query getAllTransactions {
+  z_transaction_history {
+    id
+    receiver
+    sender
+    token
+    amount
+    tx_hash
+    created_at
+    z_user_receiver {
+      address
+      username
+      password
+    }
+    z_user_sender {
+      username
+      password
+      address
+    }
+  
+  }
+}

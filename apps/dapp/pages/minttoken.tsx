@@ -195,17 +195,41 @@ const Page: NextPageWithLayout = () => {
 
   }
 
-  const  handleMint=()=>{
+  const  handleMint=async()=>{
     let user_id=localStorage.getItem('user_id');
     console.log('user_id',user_id);
     let tokens_str=token.toString();
+
+   
+    const response = await fetch('/api/mint', {
+      method: 'post',
+      body: JSON.stringify({
+        tokenCount: tokens_str,
+        recipient: localStorage.getItem('user_address'),
+      }),
+    })
+      .then((response) => {
+        response.json()
+      })
+    console.log("response",response)
+
+    const tx = await fetch('/api/mint', {
+      method: 'POST',
+      body: JSON.stringify(tokens_str),
+    })
+      .then((response) => {
+        return response.status;
+      })
+      .catch((error) => {
+        toast.error(`Cannot mint, please try again later.${error}`);
+      });
 
       try {
           const addusertokenpromise = async () => {
               await createTokenMutation({
                 variables: {
                        token:tokens_str, // value for 'token'
-                       tx_hash:"#0000", // value for 'tx_hash'
+                       tx_hash:'#123', // value for 'tx_hash'
                        user_id:user_id // value for 'user_id'
                      },
               }) 

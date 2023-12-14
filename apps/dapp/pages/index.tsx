@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import {
   useCreateUserMutation,
-useGetLoggedInUserLazyQuery
+  useGetLoggedInUserLazyQuery
 } from '@demo-carbon-credit/database';
 import toast from 'react-hot-toast';
 import { NextPageWithLayout } from './_app';
@@ -53,14 +53,14 @@ const Page: NextPageWithLayout = () => {
         pvtKey: await response.walletKey,
         username: userDetailSignUp.username,
         password: userDetailSignUp.password,
-       
+
       },
     });
   };
 
-  
+
   React.useEffect(() => {
-    
+
   }, []);
 
   const handleChange = (name: keyof ILogin, value: ILogin[keyof ILogin]) => {
@@ -77,8 +77,8 @@ const Page: NextPageWithLayout = () => {
     setPasswordType('password');
   };
 
-  const authentication = async() => {
-   // event.preventDefault();
+  const authentication = async () => {
+    // event.preventDefault();
     console.log(user);
     let error = false;
 
@@ -98,22 +98,24 @@ const Page: NextPageWithLayout = () => {
       setUserErr('');
     }
     if (!error) {
-      
+
       var password;
       var user_id;
+      var address;
       await getUser({
         variables: {
           username: user?.username,
         },
         fetchPolicy: 'network-only',
-      }).then((data)=>{
-        console.log("userdata",data)
-         password = data.data?.z_users[0]?.password;
-         user_id=data.data?.z_users[0]?.id
+      }).then((data) => {
+        console.log("userdata", data)
+        password = data.data?.z_users[0]?.password;
+        user_id = data.data?.z_users[0]?.id
+        address=data.data ?.z_users[0]?.address
 
       })
 
-      console.log(password,user_id);
+      console.log(password, user_id);
       if (password === undefined || password === null) {
         console.warn('The demo backend is down!');
         localStorage.setItem('user', user?.username);
@@ -121,9 +123,11 @@ const Page: NextPageWithLayout = () => {
         alert('Wrong username or password!');
       } else {
         if (password == user?.password) {
+          console.log("useraddress",address)
           localStorage.setItem('user', user?.username);
           localStorage.setItem('password', user?.password);
-          localStorage.setItem('user_id',user_id)
+          localStorage.setItem('user_address', address)
+          localStorage.setItem('user_id', user_id)
 
           Router.push('/dashboard')
         } else {

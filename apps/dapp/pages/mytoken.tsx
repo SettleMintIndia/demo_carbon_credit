@@ -53,7 +53,7 @@ const Page: NextPageWithLayout = () => {
                             balance={tx.totalQuantity}
                             assetId={tx.id}
                             price={String(tx.initialPrice)}
-                            token={tx.token}
+                            totaltoken={tx.token}
                           />
                         ),
                       });
@@ -65,6 +65,10 @@ const Page: NextPageWithLayout = () => {
               </tr>
             );
           })}
+          {totaltokens?.length ==0 && <tr>
+            <td colSpan={12}><p style={{textAlign:'center',fontWeight:'bold'}}> No Data Found</p></td>
+            </tr>
+            }
         </tbody>
       </Table>
     </>

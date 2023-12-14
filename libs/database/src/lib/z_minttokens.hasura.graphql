@@ -36,3 +36,13 @@ query gettokens($user_id: uuid) {
     }
   }
 }
+
+mutation updateMintTokens($token: String = "", $id: uuid = "") {
+  update_z_minttokens_by_pk(
+    pk_columns: { id: $id }
+    _set: { token: $token }
+  ) {
+    token
+    id
+  }
+}
