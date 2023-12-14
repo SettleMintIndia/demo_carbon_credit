@@ -156,7 +156,7 @@ const Page: NextPageWithLayout = () => {
                   </div>
 
                   <h2 className="header-text">
-                    Private Equity Fund Tokenization
+                    Carbon Credit Demo
                   </h2>
                   {/* <h3>Sign In</h3> */}
                   <Form>

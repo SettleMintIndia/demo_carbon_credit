@@ -30,8 +30,20 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     localStorage.getItem('user') != `${localStorage.getItem('user')}`
       ? true
       : false;
-
+  const [title, setTitle] = useState<string>('');
   useEffect(() => {
+    setTitle(
+      router.pathname === '/dashboard'
+        ? 'Dashboard'
+        : router.pathname === '/minttoken'
+        ? 'Mint Token'
+        : router.pathname === '/transactionlog'
+        ? 'Transactions'
+        : router.pathname === '/tokenmarketplace'
+        ? 'Token MarketPlace'
+        : ''
+    );
+
     if (localStorage.getItem('user')) {
       setLogin(true);
     }
@@ -54,11 +66,11 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     }
   };
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     localStorage.clear();
     router.push('/');
-  }
- 
+  };
+
   return (
     <div>
       {!router.asPath.endsWith('/') && !router.asPath.endsWith('/signup') ? (
@@ -115,6 +127,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                         </div>
                       </li>
                     </a>
+                    {/* <a href="/tokenmarketplace" className="link"></a> */}
                     <a href="/tokenmarketplace" className="link">
                       <li>
                         <div
@@ -146,13 +159,16 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                 {/* Top bar */}
                 <div className="navbar-contain">
                   <div className="title-container">
-                    <h3>Dashboard</h3>
+                    <h3>{title}</h3>
                   </div>
                   <div className="nav-right">
                     <div>
                       <button className="mint-button">Mint Token</button>
                     </div>
-                    <div className="logout-container" onClick={()=>handleLogout()}>
+                    <div
+                      className="logout-container"
+                      onClick={() => handleLogout()}
+                    >
                       <div>
                         <img src="logout.svg" alt="" />
                       </div>

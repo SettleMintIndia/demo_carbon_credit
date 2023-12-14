@@ -1831,6 +1831,7 @@ ul.dashboard-notes li:nth-child(3) {
 }
 
 /* Carbon Credit */
+/* sneha css  */
 
 .base-container {
   min-height: 100vh;
@@ -2009,7 +2010,7 @@ ul.dashboard-notes li:nth-child(3) {
   height: 60px;
   padding-left: 20px !important;
   width: 110%;
-} 
+}
 .react-tabs__tab-panel {
   margin-top: 50px !important;
 }
@@ -2028,7 +2029,7 @@ ul.dashboard-notes li:nth-child(3) {
   font-weight: 500;
 }
 .mint-token .btn-wrap .calculate {
-  background: green;
+  background: #217d22;
   color: white !important;
   border-radius: 30px !important;
   height: 55px;
@@ -2040,7 +2041,6 @@ ul.dashboard-notes li:nth-child(3) {
   position: relative;
   width: 400px; /* Set the width of the input container */
   margin: 2px;
-
 }
 .input-container input {
   width: 100%;
@@ -2049,25 +2049,22 @@ ul.dashboard-notes li:nth-child(3) {
   background: #cdcdcd;
   height: 60px;
   padding-left: 20px !important;
-
 }
 
 .input-container::after {
-  content: "tons of CO2/month";
+  content: 'tons of CO2/month';
   position: absolute;
   right: 10px; /* Adjust the right value to move the text closer or farther from the input */
   top: 50%;
   transform: translateY(-50%);
-  color: black; /* Set the color of the text */
-  font-weight: bold;
   font-size: 14px; /* Set the font size of the text */
 }
-
+.input-container::after:hover {
+}
 .input-container1 {
   position: relative;
   width: 400px; /* Set the width of the input container */
   margin: 2px;
-
 }
 .input-container1 input {
   width: 100%;
@@ -2076,17 +2073,14 @@ ul.dashboard-notes li:nth-child(3) {
   background: #cdcdcd;
   height: 60px;
   padding-left: 20px !important;
-
 }
 
 .input-container1::after {
-  content: "months";
+  content: 'months';
   position: absolute;
   right: 10px; /* Adjust the right value to move the text closer or farther from the input */
   top: 50%;
   transform: translateY(-50%);
-  color: black; /* Set the color of the text */
-  font-weight: bold;
   font-size: 14px; /* Set the font size of the text */
 }
 
@@ -2094,7 +2088,6 @@ ul.dashboard-notes li:nth-child(3) {
   position: relative;
   width: 400px; /* Set the width of the input container */
   margin: 2px;
-
 }
 .input-container2 input {
   width: 100%;
@@ -2103,26 +2096,21 @@ ul.dashboard-notes li:nth-child(3) {
   background: #cdcdcd;
   height: 60px;
   padding-left: 20px !important;
-
 }
 
 .input-container2::after {
-  content: "kWh";
+  content: 'kWh';
   position: absolute;
   right: 10px; /* Adjust the right value to move the text closer or farther from the input */
   top: 50%;
   transform: translateY(-50%);
-  color: black; /* Set the color of the text */
-  font-weight: bold;
   font-size: 14px; /* Set the font size of the text */
 }
-
 
 .input-container3 {
   position: relative;
   width: 400px; /* Set the width of the input container */
   margin: 2px;
-
 }
 .input-container3 input {
   width: 100%;
@@ -2131,17 +2119,137 @@ ul.dashboard-notes li:nth-child(3) {
   background: #cdcdcd;
   height: 60px;
   padding-left: 20px !important;
-
 }
 
 .input-container3::after {
-  content: "tons of CO2/kWh";
+  content: 'tons of CO2/kWh';
   position: absolute;
   right: 10px; /* Adjust the right value to move the text closer or farther from the input */
   top: 50%;
   transform: translateY(-50%);
-  color: black; /* Set the color of the text */
-  font-weight: bold;
   font-size: 14px; /* Set the font size of the text */
 }
 
+/* sneha css  */
+.cleaner-production .modal-content {
+  background: #8d8a8a !important;
+  border: 1px solid black !important;
+}
+.cleaner-production .modal-header {
+  background: #217d22;
+  padding: 30px 50px !important;
+  border-bottom: none !important;
+}
+.cleaner-production .modal-title {
+  font-size: 30px !important;
+}
+.cleaner-production .modal-body {
+  color: white;
+  font-size: 24px;
+  padding: 30px 50px !important;
+}
+.cleaner-production .modal-button {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cleaner-production .modal-button .btn {
+  background: green;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+}
+.energy-efficiency .modal-content {
+  background: #8d8a8a !important;
+  border: 1px solid black !important;
+}
+.energy-efficiency .modal-header {
+  background: #217d22;
+  padding: 30px 50px !important;
+  border-bottom: none !important;
+}
+.energy-efficiency .modal-title {
+  font-size: 30px !important;
+}
+.energy-efficiency .modal-body {
+  color: white;
+  font-size: 24px;
+  padding: 30px 50px !important;
+}
+.energy-efficiency .modal-button {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.energy-efficiency .modal-button .btn {
+  background: green;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+}
+.carbon-capture .modal-content {
+  background: #8d8a8a !important;
+  border: 1px solid black !important;
+}
+.carbon-capture .modal-header {
+  background: #217d22;
+  padding: 30px 50px !important;
+  border-bottom: none !important;
+}
+.carbon-capture .modal-title {
+  font-size: 30px !important;
+}
+.carbon-capture .modal-body {
+  color: white;
+  font-size: 24px;
+  padding: 30px 50px !important;
+}
+.carbon-capture .modal-button {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.carbon-capture .modal-button .btn {
+  background: green;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+}
+.token-marketplace {
+  margin-top: 50px;
+}
+.token-marketplace .form-group {
+  display: flex;
+  width: 80%;
+  align-items: center;
+}
+.token-marketplace .form-group label {
+  width: 30%;
+  font-size: 20px;
+  font-weight: 500;
+}
+.token-marketplace .form-group input {
+  border: none;
+  border-radius: 30px;
+  background: #cdcdcd;
+  height: 60px;
+  padding-left: 20px !important;
+  width: 110%;
+}
+.token-marketplace .btn-wrap {
+  margin-right: 25%;
+  margin-top: 40px;
+
+  text-align: center;
+}
+.token-marketplace .btn-wrap .transfer {
+  background: #217d22;
+  color: white !important;
+  border-radius: 30px !important;
+  height: 55px;
+  width: 200px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+.marketplace-input-container {
+  position: relative;
+  width: 400px;
+  margin: 2px;
+}

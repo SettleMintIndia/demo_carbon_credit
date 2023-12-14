@@ -13,24 +13,27 @@ const Page: NextPageWithLayout = () => {
     const { setModal } = useModalContext();
     const [user_id, setUserId] = useState('');
     
-    const [getTokensLazyQuery, { data: mytokensdata, loading, error }] = useGettokensLazyQuery({
+    /* const [getTokensLazyQuery, { data: mytokensdata, loading, error }] = useGettokensLazyQuery({
         variables: {
             user_id: user_id // value for 'user_id'
 
         }
-    });
+    }); */
 
+    const [getTokensLazyQuery, { data: mytokensdata, loading, error }] =
+    useGettokensLazyQuery({
+      variables: {
+        user_id: localStorage.getItem('user_id'),
+      },
+      fetchPolicy: 'network-only',
+    });
     var totaltokens = mytokensdata?.z_minttokens
     console.log("totaltokens", totaltokens)
     useEffect(() => {
-        let userid = localStorage.getItem('user_id');
-        console.log('user_id', userid);
-        setUserId(userid)
+        getTokensLazyQuery();
 
-        if (localStorage.getItem('user_id')) {
-            getTokensLazyQuery();
-        }
-    }, [user_id]);
+       
+    }, []);
     return (
         <>
         <div className="mb-4">

@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 import {
   useCreateTokenMutation,
 } from '@demo-carbon-credit/database';
+import { Button, Modal } from 'react-bootstrap';
+
 
 const Page: NextPageWithLayout = () => {
   // Fetch assets data
@@ -40,7 +42,21 @@ const Page: NextPageWithLayout = () => {
   const [cci_timeperioderr, setcci_timeperioderr] = useState('');
 
   const [createTokenMutation] = useCreateTokenMutation()
+  const [show, setShow] = useState(false);
+  const [eeshow, seteeShow] = useState(false);
+  const [ccshow, setccShow] = useState(false);
 
+
+  const [token,setToken]=useState('')
+
+  const handleClose = () => setShow(false);
+  const handleeeClose=()=>seteeShow(false)
+  const handleccClose=()=>setccShow(false)
+
+  const handleShow = () => setShow(true);
+  const handleeeShow = () => seteeShow(true);
+
+  
 
 
   const handleCpUpload = () => {
@@ -77,7 +93,10 @@ const Page: NextPageWithLayout = () => {
       let tokens:any =(Number(cc_base_emission)-Number(cc_actual_emission))  *Number(cc_emission_factor)* Number(cc_timeperiod)
 
       console.log(tokens);
-      handleMint(tokens);
+      setShow(true)
+      setToken(tokens);
+
+      //handleMint(tokens);
 
 
 
@@ -120,11 +139,14 @@ const Page: NextPageWithLayout = () => {
     }
     if (!error) {
      
-      let tokens:any =(Number(ee_base_emission)-Number(ee_base_emission))  *Number(ee_emission_factor)* Number(ee_timeperiod)
+      let tokens:any =(Number(ee_base_emission)-Number(ee_actual_emission))  *Number(ee_emission_factor)* Number(ee_timeperiod)
 
       console.log(tokens);
+      seteeShow(true)
+      setToken(tokens);
 
-      handleMint(tokens);
+
+      //handleMint(tokens);
 
     } else {
 
@@ -144,7 +166,7 @@ const Page: NextPageWithLayout = () => {
     } else {
       setco2_amounterr('');
     }
-    if (ee_actual_emission == '') {
+    if (ccus_factor == '') {
       setccus_factorerr('Please enter CCUS factor');
       error = true;
     } else {
@@ -161,7 +183,9 @@ const Page: NextPageWithLayout = () => {
       let tokens:any =  Number(co2_amount)* Number(ccus_factor) * Number(cci_timeperiod)
 
       console.log(tokens);
-      handleMint(tokens);
+      setToken(tokens);
+      setccShow(true);
+     // handleMint();
 
 
     } else {
@@ -171,11 +195,10 @@ const Page: NextPageWithLayout = () => {
 
   }
 
-  const  handleMint=(tokens)=>{
-    console.log(tokens);
+  const  handleMint=()=>{
     let user_id=localStorage.getItem('user_id');
     console.log('user_id',user_id);
-    let tokens_str=tokens.toString();
+    let tokens_str=token.toString();
 
       try {
           const addusertokenpromise = async () => {
@@ -298,7 +321,35 @@ const Page: NextPageWithLayout = () => {
             <div className="btn-wrap">
               <button className="upload">Upload Document</button>
               <button className="calculate" onClick={() => handleCpUpload()}>Calculate Carbon Credit</button>
+              <Modal
+                className="cleaner-production"
+                show={show}
+                onHide={handleClose}
+              >
+                <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title>You can mint {token} Tokens</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {' '}
+                  <p>
+                    Formula: <br />
+                    <span style={{ fontWeight: 'bold' }}>
+                      Carbon credits ={' '}
+                    </span>{' '}
+                    (Baseline emissions - Actual emissions) * Emission factor *
+                    Time period
+                  </p>
+                </Modal.Body>
+                <div className="modal-button">
+                  <Button variant="primary" onClick={handleMint}>
+                    Mint
+                  </Button>
+                </div>
+              </Modal>
+         
+            
             </div>
+
           </TabPanel>
           <TabPanel>
             <div className="form-group">
@@ -389,6 +440,32 @@ const Page: NextPageWithLayout = () => {
             <div className="btn-wrap">
               <button className="upload">Upload Document</button>
               <button className="calculate" onClick={() => handleEeUpload()}>Calculate Carbon Credit</button>
+              <Modal
+                className="energy-efficiency"
+                show={eeshow}
+                onHide={handleeeClose}
+              >
+                <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title>You can mint {token} Tokens</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {' '}
+                  <p>
+                    Formula: <br />
+                    <span style={{ fontWeight: 'bold' }}>
+                      Carbon credits ={' '}
+                    </span>{' '}
+                    (Baseline energy consumption - Actual energy consumption) *
+                    Emission factor * Time period
+                  </p>
+                </Modal.Body>
+                <div className="modal-button">
+                  <Button variant="primary" onClick={handleMint}>
+                    Mint
+                  </Button>
+                </div>
+              </Modal>
+           
             </div>
           </TabPanel>
           <TabPanel>
@@ -457,6 +534,34 @@ const Page: NextPageWithLayout = () => {
             <div className="btn-wrap">
               <button className="upload">Upload Document</button>
               <button className="calculate" onClick={() => handleCCIUpload()}>Calculate Carbon Credit</button>
+            
+              <Modal
+                className="carbon-capture"
+                show={ccshow}
+                onHide={handleccClose}
+              >
+                <Modal.Header closeButton closeVariant="white">
+                  <Modal.Title>You can mint {token} Tokens</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {' '}
+                  <p>
+                    Formula: <br />
+                    <span style={{ fontWeight: 'bold' }}>
+                      Carbon credits ={' '}
+                    </span>{' '}
+                    Amount of captured carbon dioxide * Carbon capture
+                    utilization and storage (CCUS) efficiency factor * Time
+                    period
+                  </p>
+                </Modal.Body>
+                <div className="modal-button">
+                  <Button variant="primary" onClick={handleMint}>
+                    Mint
+                  </Button>
+                </div>
+              </Modal>
+            
             </div>
           </TabPanel>
         </Tabs>
