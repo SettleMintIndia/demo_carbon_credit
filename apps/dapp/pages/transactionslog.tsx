@@ -35,6 +35,7 @@ const Page: NextPageWithLayout = () => {
             <tr className="table_wrap">
               <th>From</th>
               <th>To</th>
+              <th>Token</th>
               <th>Amount</th>
               <th>txHash</th>
               <th>Time</th>
@@ -64,6 +65,7 @@ const Page: NextPageWithLayout = () => {
                   </Link>
                 </div>
               </td>
+              <td>{v?.token}</td>
               <td>{v?.amount }</td>
               <td>
                 <div className="token-address">
