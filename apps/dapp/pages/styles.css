@@ -1073,7 +1073,7 @@ table.tablelist.table {
   margin-bottom: 0;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-top: 20px;
 }
 .pagging-area {
   border-radius: 8px;
@@ -2252,4 +2252,7 @@ ul.dashboard-notes li:nth-child(3) {
   position: relative;
   width: 400px;
   margin: 2px;
+}
+.modal-content .modal-body {
+  padding: 0;
 }

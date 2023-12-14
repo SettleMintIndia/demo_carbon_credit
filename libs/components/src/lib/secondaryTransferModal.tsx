@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  useCreateSecondaryMarketPlaceMutation,
-} from '@demo-carbon-credit/database';
+import { useCreateSecondaryMarketPlaceMutation } from '@demo-carbon-credit/database';
 import { useModalContext } from '@demo-carbon-credit/providers';
 import toast from 'react-hot-toast';
 import Router from 'next/router';
@@ -9,13 +7,18 @@ type Props = {
   assetId: string;
   price: string;
   balance: string;
-  token: String
+  token: String;
 };
-export const SecondaryTransferModal = ({ assetId, price, balance, token }: Props) => {
+export const SecondaryTransferModal = ({
+  assetId,
+  price,
+  balance,
+  token,
+}: Props) => {
   const { setModal } = useModalContext();
   const [formValues, setFormValues] = useState({
     price: '',
-    token: ''
+    token: '',
   });
 
   // Get user by username ( get the user uuid )
@@ -36,7 +39,6 @@ export const SecondaryTransferModal = ({ assetId, price, balance, token }: Props
       error: createSecondaryMarketPlaceError,
     },
   ] = useCreateSecondaryMarketPlaceMutation({});
-
 
   // Initial call
   useEffect(() => {
@@ -60,16 +62,16 @@ export const SecondaryTransferModal = ({ assetId, price, balance, token }: Props
         duration: 4000, // Delay of 2000 milliseconds (2 seconds)
       }
     );
-    console.log(formValues)
+    console.log(formValues);
 
     setTimeout(async () => {
       createSecondaryMarketPlaceMutation({
         variables: {
           minttoken_id: assetId, // value for 'minttoken_id'
-          amount: formValues.price,// value for 'amount'
+          amount: formValues.price, // value for 'amount'
           tokens: formValues.token.toString(), // value for 'tokens'
-          owner_id: localStorage.getItem('user_id'),// value for 'owner_id'
-          tx_hash: '#000' // value for 'tx_hash'
+          owner_id: localStorage.getItem('user_id'), // value for 'owner_id'
+          tx_hash: '#000', // value for 'tx_hash'
         },
       })
         .then((res) => {
@@ -93,49 +95,50 @@ export const SecondaryTransferModal = ({ assetId, price, balance, token }: Props
   };
   return (
     <div>
-      <div>
-        <h4>Sell Tokens</h4>
-        <hr />
-      </div>
-      <ul className="token_data_box">
-        <li>
-          <h5>No of Tokens :</h5>
-          <p>{token}</p>
-        </li>
+      <div className="sell-token">
+        <div>
+          <h4>Sell Tokens</h4>
+          <hr />
+        </div>
+        <ul className="token_data_box">
+          <li>
+            <h5>No of Tokens :</h5>
+            <p>{token}</p>
+          </li>
+        </ul>
 
-      </ul>
+        <div className="form-control-info">
+          <label className="secondary-transfer-modal-label" htmlFor="">
+            No of tokens to sell
+          </label>
+          <input
+            type="number"
+            name="token"
+            className="form-control"
+            onChange={onChangeInputFields}
+          />
+        </div>
+        <div className="form-control-info">
+          <label className="secondary-transfer-modal-label" htmlFor="">
+            Selling price
+          </label>
+          <input
+            type="number"
+            name="price"
+            className="form-control"
+            onChange={onChangeInputFields}
+          />
+        </div>
 
-      <div className="form-control-info">
-        <label className="secondary-transfer-modal-label" htmlFor="">
-          No of tokens to sell
-        </label>
-        <input
-          type="number"
-          name="token"
-          className="form-control"
-          onChange={onChangeInputFields}
-        />
-      </div>
-      <div className="form-control-info">
-        <label className="secondary-transfer-modal-label" htmlFor="">
-          Selling price
-        </label>
-        <input
-          type="number"
-          name="price"
-          className="form-control"
-          onChange={onChangeInputFields}
-        />
-      </div>
-
-      <div className="form-control-info">
-        <button
-          onClick={() => {
-            submitSecondaryTransfer();
-          }}
-        >
-          Sell Token
-        </button>
+        <div className="form-control-info">
+          <button
+            onClick={() => {
+              submitSecondaryTransfer();
+            }}
+          >
+            Sell Token
+          </button>
+        </div>
       </div>
     </div>
   );
