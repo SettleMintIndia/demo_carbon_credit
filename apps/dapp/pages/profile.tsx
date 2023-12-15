@@ -1,4 +1,4 @@
-import { useGetUserByUsernameLazyQuery } from '@demo-carbon-credit/database';
+import { useGetLoggedInUserLazyQuery } from '@demo-carbon-credit/database';
 import { NextPageWithLayout } from './_app';
 import { AppLayout } from '@demo-carbon-credit/components';
 import { ReactElement, useEffect, useState } from 'react';
@@ -6,7 +6,7 @@ import QRCode from 'react-qr-code';
 
 const Page: NextPageWithLayout = () => {
   const [getUserByUsernameLazyQuery, { data: userData, loading, error }] =
-    useGetUserByUsernameLazyQuery({
+  useGetLoggedInUserLazyQuery({
       variables: {
         username: localStorage.getItem('user'),
       },
@@ -27,7 +27,7 @@ const Page: NextPageWithLayout = () => {
             <>
               <div key={user.address} className="userpanel">
                 <div className="header-area">
-                  <h2>User Profile</h2>
+                {/*   <h2>User Profile</h2> */}
                 </div>
                 <div className="profile-area">
                   <div className="profile-base">

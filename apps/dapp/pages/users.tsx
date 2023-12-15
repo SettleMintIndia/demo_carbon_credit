@@ -1,7 +1,6 @@
 import {
   useGetUserByApprovedStatusLazyQuery,
   useDisapproveUserMutation,
-  useApproveUserMutation,
 } from '@demo-carbon-credit/database';
 import { NextPageWithLayout } from './_app';
 import { useModalContext } from '@demo-carbon-credit/providers';
@@ -11,132 +10,11 @@ import { Row, Col, Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { id } from 'ethers/lib/utils';
 
 import { ethers } from 'ethers';
 import router, { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
-const contractAbi = [
-  {
-    inputs: [
-      {
-        internalType: 'string',
-        name: 'name',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: 'email',
-        type: 'string',
-      },
-    ],
-    name: 'addCustomer',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'string',
-        name: 'str1',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: 'str2',
-        type: 'string',
-      },
-    ],
-    name: 'compare',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'pure',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'i',
-        type: 'uint256',
-      },
-    ],
-    name: 'kycApprove',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'string',
-        name: 'name',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: 'email',
-        type: 'string',
-      },
-    ],
-    name: 'removeCustomer',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'i',
-        type: 'uint256',
-      },
-      {
-        internalType: 'string',
-        name: 'link',
-        type: 'string',
-      },
-    ],
-    name: 'setIPFSAddress',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-];
 
-const provider = new ethers.providers.JsonRpcProvider(
-  `https://node-1-4d3b.gke-europe.settlemint.com/bpaas-593499Ee5d10f1EEad81348775fa4c182D310008`
-);
-
-const adminWallet = new ethers.Wallet(
-  '0x908e18cc8f9024d5a41e707e88d9a2fc51a1fe612a80130cbbfc10a7b49a299e',
-  provider
-);
-const contract = new ethers.Contract(
-  '0x3Ae9a4092280B4799891Eae8D1a1ae6E85e9509E',
-  contractAbi,
-  provider
-);
-
-const contractWithAdminWallet = contract.connect(adminWallet);
 
 const Page: NextPageWithLayout = () => {
   const [searchData, setSearchData] = useState([]);
@@ -347,151 +225,14 @@ const Page: NextPageWithLayout = () => {
   return (
     <>
       <div className="header-area">
-        <div className="add-btn">
-          <button
-            onClick={() => router.push('/createUser')}
-            className="create-btn"
-          >
-            Create User
-          </button>
-        </div>
+        
         <h2>User Management </h2>
       </div>
-      <div>
-        <h5> New Registered Users </h5>
-      </div>
-      <Row>
-        <Col className="table_head">
-          <Table className="tablelist" responsive>
-            <thead>
-              <th>User Name</th>
-              <th>CIF Number</th>
-              {/* <th>CASA Number</th> */}
-              <th>Customer Segment</th>
-              <th>Role</th>
-              <th>KYC Status</th>
-              <th>Document</th>
-              <th className="text-right">Update KYC</th>
-            </thead>
-            <tbody></tbody>
-            <tbody>
-              {tableData2 &&
-                tableData2.map((v, i) => (
-                  <tr key={i}>
-                    <td>{v.username}</td>
-                    <td>{v.cif}</td>
-                    {/* <td>{v.casa}</td> */}
-                    <td>{v.segment}</td>
-                    <td>{v.role}</td>
-                    <td>Pending</td>
-                    {/* <td>{v.document_cid}</td> */}
-                    <td>
-                      <div className="token-address">
-                        <a
-                          target="_blank"
-                          href={`${process.env.NEXT_PUBLIC_IPFS_GATEWAY}/gateway/ipfs/${v.document_cid}`}
-                        >
-                          link
-                        </a>
-                      </div>
-                    </td>
-                    <td className="text-right">
-                      <button
-                        className="btn-success"
-                        onClick={() => {
-                          toast.promise(ApproveStatus(v.id, v.username), {
-                            loading: 'Approving...',
-                            success: (_data) => {
-                              return 'Approved';
-                            },
-                            error: (err) => 'Cannot approve please try again',
-                          });
-                        }}
-                      >
-                        Approve
-                      </button>
-                      &nbsp;
-                      <button
-                        className="btn-danger"
-                        onClick={() => {
-                          toast.promise(RejectStatus(v.id), {
-                            loading: 'Approving...',
-                            success: (_data) => {
-                              return 'Rejected';
-                            },
-                            error: (err) => 'Cannot reject please try again',
-                          });
-                        }}
-                      >
-                        Reject
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
-          {tableData && tableData.length != 0 && (
-            <div className="pagging-area">
-              <div className="pagination_row_div">
-                <p className="pagination_title">Showing items per page:</p>
-                <div className="pagination_input_div">
-                  <select
-                    className="pagination_select"
-                    style={{ margin: 0, background: 'transparent' }}
-                    name="pagination_value"
-                    value={perPage}
-                    onChange={handlerowsperPage}
-                  >
-                    <option value={4}>4</option>
-                    <option value={8}>8</option>
-                    <option value={10}>10</option>
-                    <option value={20}>20</option>
-                  </select>
-                </div>
-              </div>
-              <div className="pagination_row_right_div">
-                <p className="pagination_total">
-                  Showing {offset + 1} to{' '}
-                  {searchData.length < offset + perPage && (
-                    <span>{searchData.length}</span>
-                  )}
-                  {searchData.length > offset + perPage && (
-                    <span>{offset + perPage} </span>
-                  )}{' '}
-                  of {searchData.length} items
-                </p>
-                <ReactPaginate
-                  previousLabel={
-                    <ArrowBackIosIcon
-                      className="pagination_prev_btn"
-                      style={{ color: '#2438a7' }}
-                    />
-                  }
-                  nextLabel={
-                    <ArrowForwardIosIcon
-                      className="pagination_next_btn"
-                      style={{ color: '#2438a7' }}
-                    />
-                  }
-                  breakLabel={'...'}
-                  breakClassName={'break-me'}
-                  pageCount={pageCount}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={5}
-                  onPageChange={handlePageClick}
-                  containerClassName={'pagination'}
-                  /*  subContainerClassName={"pages pagination"} */
-                  activeClassName={'active'}
-                  forcePage={currentPage}
-                />
-              </div>
-            </div>
-          )}
-        </Col>
-      </Row>
+    
+     
 
       <div>
-        <h5>Approved Users</h5>
+        <h5> Users</h5>
       </div>
 
       <Row>
@@ -499,13 +240,7 @@ const Page: NextPageWithLayout = () => {
           <Table className="tablelist" responsive>
             <thead>
               <th>User Name</th>
-              <th>CIF Number</th>
-              {/* <th>CASA Number</th> */}
-              <th>Segement</th>
-              <th>Role</th>
               <th>Password</th>
-              <th>Document</th>
-              <th>txHash</th>
               <th></th>
             </thead>
             <tbody></tbody>
@@ -577,63 +312,7 @@ const Page: NextPageWithLayout = () => {
             </tbody>
           </Table>
 
-          {tableData && tableData.length != 0 && (
-            <div className="pagging-area">
-              <div className="pagination_row_div">
-                <p className="pagination_title">Showing items per page:</p>
-                <div className="pagination_input_div">
-                  <select
-                    className="pagination_select"
-                    style={{ margin: 0, background: 'transparent' }}
-                    name="pagination_value"
-                    value={perPage}
-                    onChange={handlerowsperPage}
-                  >
-                    <option value={4}>4</option>
-                    <option value={8}>8</option>
-                    <option value={10}>10</option>
-                    <option value={20}>20</option>
-                  </select>
-                </div>
-              </div>
-              <div className="pagination_row_right_div">
-                <p className="pagination_total">
-                  Showing {offset + 1} to{' '}
-                  {searchData.length < offset + perPage && (
-                    <span>{searchData.length}</span>
-                  )}
-                  {searchData.length > offset + perPage && (
-                    <span>{offset + perPage} </span>
-                  )}{' '}
-                  of {searchData.length} items
-                </p>
-                <ReactPaginate
-                  previousLabel={
-                    <ArrowBackIosIcon
-                      className="pagination_prev_btn"
-                      style={{ color: '#2438a7' }}
-                    />
-                  }
-                  nextLabel={
-                    <ArrowForwardIosIcon
-                      className="pagination_next_btn"
-                      style={{ color: '#2438a7' }}
-                    />
-                  }
-                  breakLabel={'...'}
-                  breakClassName={'break-me'}
-                  pageCount={pageCount}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={5}
-                  onPageChange={handlePageClick}
-                  containerClassName={'pagination'}
-                  /*  subContainerClassName={"pages pagination"} */
-                  activeClassName={'active'}
-                  forcePage={currentPage}
-                />
-              </div>
-            </div>
-          )}
+       
         </Col>
       </Row>
     </>

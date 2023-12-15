@@ -47,16 +47,16 @@ const Page: NextPageWithLayout = () => {
   const [ccshow, setccShow] = useState(false);
 
 
-  const [token,setToken]=useState('')
+  const [token, setToken] = useState('')
 
   const handleClose = () => setShow(false);
-  const handleeeClose=()=>seteeShow(false)
-  const handleccClose=()=>setccShow(false)
+  const handleeeClose = () => seteeShow(false)
+  const handleccClose = () => setccShow(false)
 
   const handleShow = () => setShow(true);
   const handleeeShow = () => seteeShow(true);
 
-  
+
 
 
   const handleCpUpload = () => {
@@ -90,7 +90,7 @@ const Page: NextPageWithLayout = () => {
       setcc_timeperioderr('');
     }
     if (!error) {
-      let tokens:any =(Number(cc_base_emission)-Number(cc_actual_emission))  *Number(cc_emission_factor)* Number(cc_timeperiod)
+      let tokens: any = (Number(cc_base_emission) - Number(cc_actual_emission)) * Number(cc_emission_factor) * Number(cc_timeperiod)
 
       console.log(tokens);
       setShow(true)
@@ -138,8 +138,8 @@ const Page: NextPageWithLayout = () => {
       setee_timeperioderr('');
     }
     if (!error) {
-     
-      let tokens:any =(Number(ee_base_emission)-Number(ee_actual_emission))  *Number(ee_emission_factor)* Number(ee_timeperiod)
+
+      let tokens: any = (Number(ee_base_emission) - Number(ee_actual_emission)) * Number(ee_emission_factor) * Number(ee_timeperiod)
 
       console.log(tokens);
       seteeShow(true)
@@ -172,7 +172,7 @@ const Page: NextPageWithLayout = () => {
     } else {
       setccus_factorerr('');
     }
-    
+
     if (cci_timeperiod == '') {
       setcci_timeperioderr('Please enter time period');
       error = true;
@@ -180,12 +180,12 @@ const Page: NextPageWithLayout = () => {
       setcci_timeperioderr('');
     }
     if (!error) {
-      let tokens:any =  Number(co2_amount)* Number(ccus_factor) * Number(cci_timeperiod)
+      let tokens: any = Number(co2_amount) * Number(ccus_factor) * Number(cci_timeperiod)
 
       console.log(tokens);
       setToken(tokens);
       setccShow(true);
-     // handleMint();
+      // handleMint();
 
 
     } else {
@@ -195,12 +195,19 @@ const Page: NextPageWithLayout = () => {
 
   }
 
-  const  handleMint=async()=>{
-    let user_id=localStorage.getItem('user_id');
-    console.log('user_id',user_id);
-    let tokens_str=token.toString();
+  const handleMint = async () => {
+    let user_id = localStorage.getItem('user_id');
+    console.log('user_id', user_id);
+    let tokens_str = token.toString();
+    toast(
+      <div className="loading_image">
+        <img src="/Minting.gif" />
+      </div>,
+      {
+        duration: 4000, // Delay of 2000 milliseconds (2 seconds)
+      }
+    );
 
-   
     const response = await fetch('/api/mint', {
       method: 'post',
       body: JSON.stringify({
@@ -208,45 +215,41 @@ const Page: NextPageWithLayout = () => {
         recipient: localStorage.getItem('user_address'),
       }),
     })
-      .then((response) => {
-        response.json()
-      })
-    console.log("response",response)
+    console.log("response", response);
+    const data = await response.json();
+    console.log("Data", data);
 
-    const tx = await fetch('/api/mint', {
-      method: 'POST',
-      body: JSON.stringify(tokens_str),
-    })
-      .then((response) => {
-        return response.status;
-      })
-      .catch((error) => {
-        toast.error(`Cannot mint, please try again later.${error}`);
+
+
+    try {
+      const addusertokenpromise = async () => {
+        await createTokenMutation({
+          variables: {
+            token: tokens_str, // value for 'token'
+            tx_hash: data?.txHash, // value for 'tx_hash'
+            user_id: user_id // value for 'user_id'
+          },
+        })
+
+      };
+      toast.promise(addusertokenpromise(), {
+        loading: 'Creating CC Tokens...',
+        success: (data) => `Token created successfully`,
+        error: (err) => `Cannot publish token, please try again later.`,
       });
 
-      try {
-          const addusertokenpromise = async () => {
-              await createTokenMutation({
-                variables: {
-                       token:tokens_str, // value for 'token'
-                       tx_hash:'#123', // value for 'tx_hash'
-                       user_id:user_id // value for 'user_id'
-                     },
-              }) 
+      toast(
+        <div className="loading_image">
+          <img src="/Minted.gif" />
+        </div>
+      );
+       Router.push('/mytoken');
 
-             };
-          toast.promise(addusertokenpromise(), {
-              loading: 'Creating CC Tokens...',
-              success: (data) => `Token created successfully`,
-              error: (err) => `Cannot publish token, please try again later.`,
-          });
-          Router.push('/mytoken');
-        
-      } catch (error: any) {
-          toast.error(error.message);
-      
+    } catch (error: any) {
+      toast.error(error.message);
+
+    }
   }
-}
 
 
   // Initial call
@@ -370,8 +373,8 @@ const Page: NextPageWithLayout = () => {
                   </Button>
                 </div>
               </Modal>
-         
-            
+
+
             </div>
 
           </TabPanel>
@@ -489,7 +492,7 @@ const Page: NextPageWithLayout = () => {
                   </Button>
                 </div>
               </Modal>
-           
+
             </div>
           </TabPanel>
           <TabPanel>
@@ -558,7 +561,7 @@ const Page: NextPageWithLayout = () => {
             <div className="btn-wrap">
               <button className="upload">Upload Document</button>
               <button className="calculate" onClick={() => handleCCIUpload()}>Calculate Carbon Credit</button>
-            
+
               <Modal
                 className="carbon-capture"
                 show={ccshow}
@@ -585,7 +588,7 @@ const Page: NextPageWithLayout = () => {
                   </Button>
                 </div>
               </Modal>
-            
+
             </div>
           </TabPanel>
         </Tabs>

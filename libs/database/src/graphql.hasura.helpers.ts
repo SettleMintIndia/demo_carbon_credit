@@ -16,12 +16,14 @@ export const namedOperations = {
     createUser: 'createUser' as const
   }
 }
-export type mutation_rootKeySpecifier = ('delete_z_minttokens' | 'delete_z_minttokens_by_pk' | 'delete_z_secondary_marketplace' | 'delete_z_secondary_marketplace_by_pk' | 'delete_z_transaction_history' | 'delete_z_transaction_history_by_pk' | 'delete_z_users' | 'delete_z_users_by_pk' | 'insert_z_minttokens' | 'insert_z_minttokens_one' | 'insert_z_secondary_marketplace' | 'insert_z_secondary_marketplace_one' | 'insert_z_transaction_history' | 'insert_z_transaction_history_one' | 'insert_z_users' | 'insert_z_users_one' | 'update_z_minttokens' | 'update_z_minttokens_by_pk' | 'update_z_minttokens_many' | 'update_z_secondary_marketplace' | 'update_z_secondary_marketplace_by_pk' | 'update_z_secondary_marketplace_many' | 'update_z_transaction_history' | 'update_z_transaction_history_by_pk' | 'update_z_transaction_history_many' | 'update_z_users' | 'update_z_users_by_pk' | 'update_z_users_many' | mutation_rootKeySpecifier)[];
+export type mutation_rootKeySpecifier = ('delete_z_minttokens' | 'delete_z_minttokens_by_pk' | 'delete_z_secondary_marketplace' | 'delete_z_secondary_marketplace_by_pk' | 'delete_z_token_holder' | 'delete_z_token_holder_by_pk' | 'delete_z_transaction_history' | 'delete_z_transaction_history_by_pk' | 'delete_z_users' | 'delete_z_users_by_pk' | 'insert_z_minttokens' | 'insert_z_minttokens_one' | 'insert_z_secondary_marketplace' | 'insert_z_secondary_marketplace_one' | 'insert_z_token_holder' | 'insert_z_token_holder_one' | 'insert_z_transaction_history' | 'insert_z_transaction_history_one' | 'insert_z_users' | 'insert_z_users_one' | 'update_z_minttokens' | 'update_z_minttokens_by_pk' | 'update_z_minttokens_many' | 'update_z_secondary_marketplace' | 'update_z_secondary_marketplace_by_pk' | 'update_z_secondary_marketplace_many' | 'update_z_token_holder' | 'update_z_token_holder_by_pk' | 'update_z_token_holder_many' | 'update_z_transaction_history' | 'update_z_transaction_history_by_pk' | 'update_z_transaction_history_many' | 'update_z_users' | 'update_z_users_by_pk' | 'update_z_users_many' | mutation_rootKeySpecifier)[];
 export type mutation_rootFieldPolicy = {
 	delete_z_minttokens?: FieldPolicy<any> | FieldReadFunction<any>,
 	delete_z_minttokens_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	delete_z_secondary_marketplace?: FieldPolicy<any> | FieldReadFunction<any>,
 	delete_z_secondary_marketplace_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
+	delete_z_token_holder?: FieldPolicy<any> | FieldReadFunction<any>,
+	delete_z_token_holder_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	delete_z_transaction_history?: FieldPolicy<any> | FieldReadFunction<any>,
 	delete_z_transaction_history_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	delete_z_users?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -30,6 +32,8 @@ export type mutation_rootFieldPolicy = {
 	insert_z_minttokens_one?: FieldPolicy<any> | FieldReadFunction<any>,
 	insert_z_secondary_marketplace?: FieldPolicy<any> | FieldReadFunction<any>,
 	insert_z_secondary_marketplace_one?: FieldPolicy<any> | FieldReadFunction<any>,
+	insert_z_token_holder?: FieldPolicy<any> | FieldReadFunction<any>,
+	insert_z_token_holder_one?: FieldPolicy<any> | FieldReadFunction<any>,
 	insert_z_transaction_history?: FieldPolicy<any> | FieldReadFunction<any>,
 	insert_z_transaction_history_one?: FieldPolicy<any> | FieldReadFunction<any>,
 	insert_z_users?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -40,6 +44,9 @@ export type mutation_rootFieldPolicy = {
 	update_z_secondary_marketplace?: FieldPolicy<any> | FieldReadFunction<any>,
 	update_z_secondary_marketplace_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	update_z_secondary_marketplace_many?: FieldPolicy<any> | FieldReadFunction<any>,
+	update_z_token_holder?: FieldPolicy<any> | FieldReadFunction<any>,
+	update_z_token_holder_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
+	update_z_token_holder_many?: FieldPolicy<any> | FieldReadFunction<any>,
 	update_z_transaction_history?: FieldPolicy<any> | FieldReadFunction<any>,
 	update_z_transaction_history_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	update_z_transaction_history_many?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -47,7 +54,7 @@ export type mutation_rootFieldPolicy = {
 	update_z_users_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	update_z_users_many?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type query_rootKeySpecifier = ('z_minttokens' | 'z_minttokens_aggregate' | 'z_minttokens_by_pk' | 'z_secondary_marketplace' | 'z_secondary_marketplace_aggregate' | 'z_secondary_marketplace_by_pk' | 'z_transaction_history' | 'z_transaction_history_aggregate' | 'z_transaction_history_by_pk' | 'z_users' | 'z_users_aggregate' | 'z_users_by_pk' | query_rootKeySpecifier)[];
+export type query_rootKeySpecifier = ('z_minttokens' | 'z_minttokens_aggregate' | 'z_minttokens_by_pk' | 'z_secondary_marketplace' | 'z_secondary_marketplace_aggregate' | 'z_secondary_marketplace_by_pk' | 'z_token_holder' | 'z_token_holder_aggregate' | 'z_token_holder_by_pk' | 'z_transaction_history' | 'z_transaction_history_aggregate' | 'z_transaction_history_by_pk' | 'z_users' | 'z_users_aggregate' | 'z_users_by_pk' | query_rootKeySpecifier)[];
 export type query_rootFieldPolicy = {
 	z_minttokens?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_minttokens_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -55,6 +62,9 @@ export type query_rootFieldPolicy = {
 	z_secondary_marketplace?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_secondary_marketplace_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_secondary_marketplace_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_transaction_history?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_transaction_history_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_transaction_history_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -62,7 +72,7 @@ export type query_rootFieldPolicy = {
 	z_users_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_users_by_pk?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type subscription_rootKeySpecifier = ('z_minttokens' | 'z_minttokens_aggregate' | 'z_minttokens_by_pk' | 'z_minttokens_stream' | 'z_secondary_marketplace' | 'z_secondary_marketplace_aggregate' | 'z_secondary_marketplace_by_pk' | 'z_secondary_marketplace_stream' | 'z_transaction_history' | 'z_transaction_history_aggregate' | 'z_transaction_history_by_pk' | 'z_transaction_history_stream' | 'z_users' | 'z_users_aggregate' | 'z_users_by_pk' | 'z_users_stream' | subscription_rootKeySpecifier)[];
+export type subscription_rootKeySpecifier = ('z_minttokens' | 'z_minttokens_aggregate' | 'z_minttokens_by_pk' | 'z_minttokens_stream' | 'z_secondary_marketplace' | 'z_secondary_marketplace_aggregate' | 'z_secondary_marketplace_by_pk' | 'z_secondary_marketplace_stream' | 'z_token_holder' | 'z_token_holder_aggregate' | 'z_token_holder_by_pk' | 'z_token_holder_stream' | 'z_transaction_history' | 'z_transaction_history_aggregate' | 'z_transaction_history_by_pk' | 'z_transaction_history_stream' | 'z_users' | 'z_users_aggregate' | 'z_users_by_pk' | 'z_users_stream' | subscription_rootKeySpecifier)[];
 export type subscription_rootFieldPolicy = {
 	z_minttokens?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_minttokens_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -72,6 +82,10 @@ export type subscription_rootFieldPolicy = {
 	z_secondary_marketplace_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_secondary_marketplace_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_secondary_marketplace_stream?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holder_stream?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_transaction_history?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_transaction_history_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_transaction_history_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -122,7 +136,7 @@ export type z_minttokens_mutation_responseFieldPolicy = {
 	affected_rows?: FieldPolicy<any> | FieldReadFunction<any>,
 	returning?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_secondary_marketplaceKeySpecifier = ('amount' | 'created_at' | 'id' | 'minttoken_id' | 'owner_id' | 'tokens' | 'tx_hash' | 'z_minttoken' | 'z_user' | z_secondary_marketplaceKeySpecifier)[];
+export type z_secondary_marketplaceKeySpecifier = ('amount' | 'created_at' | 'id' | 'minttoken_id' | 'owner_id' | 'tokens' | 'z_minttoken' | 'z_user' | z_secondary_marketplaceKeySpecifier)[];
 export type z_secondary_marketplaceFieldPolicy = {
 	amount?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -130,7 +144,6 @@ export type z_secondary_marketplaceFieldPolicy = {
 	minttoken_id?: FieldPolicy<any> | FieldReadFunction<any>,
 	owner_id?: FieldPolicy<any> | FieldReadFunction<any>,
 	tokens?: FieldPolicy<any> | FieldReadFunction<any>,
-	tx_hash?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_minttoken?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_user?: FieldPolicy<any> | FieldReadFunction<any>
 };
@@ -145,28 +158,69 @@ export type z_secondary_marketplace_aggregate_fieldsFieldPolicy = {
 	max?: FieldPolicy<any> | FieldReadFunction<any>,
 	min?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_secondary_marketplace_max_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'minttoken_id' | 'owner_id' | 'tokens' | 'tx_hash' | z_secondary_marketplace_max_fieldsKeySpecifier)[];
+export type z_secondary_marketplace_max_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'minttoken_id' | 'owner_id' | 'tokens' | z_secondary_marketplace_max_fieldsKeySpecifier)[];
 export type z_secondary_marketplace_max_fieldsFieldPolicy = {
 	amount?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	minttoken_id?: FieldPolicy<any> | FieldReadFunction<any>,
 	owner_id?: FieldPolicy<any> | FieldReadFunction<any>,
-	tokens?: FieldPolicy<any> | FieldReadFunction<any>,
-	tx_hash?: FieldPolicy<any> | FieldReadFunction<any>
+	tokens?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_secondary_marketplace_min_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'minttoken_id' | 'owner_id' | 'tokens' | 'tx_hash' | z_secondary_marketplace_min_fieldsKeySpecifier)[];
+export type z_secondary_marketplace_min_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'minttoken_id' | 'owner_id' | 'tokens' | z_secondary_marketplace_min_fieldsKeySpecifier)[];
 export type z_secondary_marketplace_min_fieldsFieldPolicy = {
 	amount?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	minttoken_id?: FieldPolicy<any> | FieldReadFunction<any>,
 	owner_id?: FieldPolicy<any> | FieldReadFunction<any>,
-	tokens?: FieldPolicy<any> | FieldReadFunction<any>,
-	tx_hash?: FieldPolicy<any> | FieldReadFunction<any>
+	tokens?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type z_secondary_marketplace_mutation_responseKeySpecifier = ('affected_rows' | 'returning' | z_secondary_marketplace_mutation_responseKeySpecifier)[];
 export type z_secondary_marketplace_mutation_responseFieldPolicy = {
+	affected_rows?: FieldPolicy<any> | FieldReadFunction<any>,
+	returning?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type z_token_holderKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'updated_at' | 'user_id' | z_token_holderKeySpecifier)[];
+export type z_token_holderFieldPolicy = {
+	amount?: FieldPolicy<any> | FieldReadFunction<any>,
+	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	mint_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	user_id?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type z_token_holder_aggregateKeySpecifier = ('aggregate' | 'nodes' | z_token_holder_aggregateKeySpecifier)[];
+export type z_token_holder_aggregateFieldPolicy = {
+	aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
+	nodes?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type z_token_holder_aggregate_fieldsKeySpecifier = ('count' | 'max' | 'min' | z_token_holder_aggregate_fieldsKeySpecifier)[];
+export type z_token_holder_aggregate_fieldsFieldPolicy = {
+	count?: FieldPolicy<any> | FieldReadFunction<any>,
+	max?: FieldPolicy<any> | FieldReadFunction<any>,
+	min?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type z_token_holder_max_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'updated_at' | 'user_id' | z_token_holder_max_fieldsKeySpecifier)[];
+export type z_token_holder_max_fieldsFieldPolicy = {
+	amount?: FieldPolicy<any> | FieldReadFunction<any>,
+	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	mint_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	user_id?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type z_token_holder_min_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'updated_at' | 'user_id' | z_token_holder_min_fieldsKeySpecifier)[];
+export type z_token_holder_min_fieldsFieldPolicy = {
+	amount?: FieldPolicy<any> | FieldReadFunction<any>,
+	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	mint_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
+	user_id?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type z_token_holder_mutation_responseKeySpecifier = ('affected_rows' | 'returning' | z_token_holder_mutation_responseKeySpecifier)[];
+export type z_token_holder_mutation_responseFieldPolicy = {
 	affected_rows?: FieldPolicy<any> | FieldReadFunction<any>,
 	returning?: FieldPolicy<any> | FieldReadFunction<any>
 };
@@ -325,6 +379,30 @@ export type StrictTypedTypePolicies = {
 	z_secondary_marketplace_mutation_response: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields: false | z_secondary_marketplace_mutation_responseKeySpecifier | (() => undefined | z_secondary_marketplace_mutation_responseKeySpecifier),
 		fields?: z_secondary_marketplace_mutation_responseFieldPolicy,
+	},
+	z_token_holder: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields: false | z_token_holderKeySpecifier | (() => undefined | z_token_holderKeySpecifier),
+		fields?: z_token_holderFieldPolicy,
+	},
+	z_token_holder_aggregate: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields: false | z_token_holder_aggregateKeySpecifier | (() => undefined | z_token_holder_aggregateKeySpecifier),
+		fields?: z_token_holder_aggregateFieldPolicy,
+	},
+	z_token_holder_aggregate_fields: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields: false | z_token_holder_aggregate_fieldsKeySpecifier | (() => undefined | z_token_holder_aggregate_fieldsKeySpecifier),
+		fields?: z_token_holder_aggregate_fieldsFieldPolicy,
+	},
+	z_token_holder_max_fields: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields: false | z_token_holder_max_fieldsKeySpecifier | (() => undefined | z_token_holder_max_fieldsKeySpecifier),
+		fields?: z_token_holder_max_fieldsFieldPolicy,
+	},
+	z_token_holder_min_fields: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields: false | z_token_holder_min_fieldsKeySpecifier | (() => undefined | z_token_holder_min_fieldsKeySpecifier),
+		fields?: z_token_holder_min_fieldsFieldPolicy,
+	},
+	z_token_holder_mutation_response: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields: false | z_token_holder_mutation_responseKeySpecifier | (() => undefined | z_token_holder_mutation_responseKeySpecifier),
+		fields?: z_token_holder_mutation_responseFieldPolicy,
 	},
 	z_transaction_history: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields: false | z_transaction_historyKeySpecifier | (() => undefined | z_transaction_historyKeySpecifier),

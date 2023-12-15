@@ -102,6 +102,7 @@ const Page: NextPageWithLayout = () => {
       var password;
       var user_id;
       var address;
+      var pvtkey
       await getUser({
         variables: {
           username: user?.username,
@@ -111,7 +112,8 @@ const Page: NextPageWithLayout = () => {
         console.log("userdata", data)
         password = data.data?.z_users[0]?.password;
         user_id = data.data?.z_users[0]?.id
-        address=data.data ?.z_users[0]?.address
+        address=data.data ?.z_users[0]?.address;
+        pvtkey=data.data?.z_users[0]?.pvtKey
 
       })
 
@@ -128,6 +130,8 @@ const Page: NextPageWithLayout = () => {
           localStorage.setItem('password', user?.password);
           localStorage.setItem('user_address', address)
           localStorage.setItem('user_id', user_id)
+          localStorage.setItem('pvtkey', pvtkey)
+
 
           Router.push('/dashboard')
         } else {

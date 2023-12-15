@@ -71,7 +71,6 @@ export const SecondaryTransferModal = ({
               amount: formValues.price, // value for 'amount'
               tokens: formValues.token.toString(), // value for 'tokens'
               owner_id: localStorage.getItem('user_id'), // value for 'owner_id'
-              tx_hash: '#000', // value for 'tx_hash'
             },
           })
 

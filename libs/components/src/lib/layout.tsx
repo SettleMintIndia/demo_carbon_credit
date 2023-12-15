@@ -26,6 +26,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   // User Setting data
 
   const admin = localStorage.getItem('user') == 'admin' ? true : false;
+
+  console.log("admin",admin)
   const user =
     localStorage.getItem('user') != `${localStorage.getItem('user')}`
       ? true
@@ -43,6 +45,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         ? 'Secondary MarketPlace'
         : router.pathname === '/mytoken'
         ? 'My Token'
+        : router.pathname === '/profile'
+        ? 'Profile'
         : ''
     );
 
@@ -86,10 +90,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                   <ul className="dashboard-list">
                     <a href="/dashboard" className="link">
                       <li>
-                        <div
-                          className="link-item
-              "
-                        >
+                        <div className="link-item">
                           <img src="dashboard.svg" alt="" />
                           Dashboard
                         </div>
@@ -99,9 +100,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                     <a href="/mytoken" className="link">
                       <li>
                         <div
-                          className="link-item
-              "
-                        >
+                          className="link-item">
                           <img src="mint.svg" alt="" />
                           My Tokens
                         </div>
@@ -110,9 +109,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                     <a href="/minttoken" className="link">
                       <li>
                         <div
-                          className="link-item
-              "
-                        >
+                          className="link-item">
                           <img src="mint.svg" alt="" />
                           Mint Token
                         </div>
@@ -121,32 +118,45 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                     <a href="/transactionslog" className="link">
                       <li>
                         <div
-                          className="link-item
-              "
-                        >
+                          className="link-item">
                           <img src="transaction.svg" alt="" />
                           Transactions
                         </div>
                       </li>
                     </a>
-                    {/* <a href="/tokenmarketplace" className="link"></a> */}
                     <a href="/tokenmarketplace" className="link">
                       <li>
                         <div
-                          className="link-item
-              "
-                        >
+                          className="link-item">
                           <img src="setting.svg" alt="" />
                           Secondary Marketplace
                         </div>
                       </li>
                     </a>
+                    <a href="/profile" className="link">
+                      <li>
+                        <div
+                          className="link-item">
+                          <img src="notification.svg" alt="" />
+                          User Profile
+                        </div>
+                      </li>
+                    </a>
+
+                  {/*  {admin==true && <a href="/users" className="link">
+                      <li>
+                        <div
+                          className="link-item">
+                          <img src="notification.svg" alt="" />
+                          User Management
+                        </div>
+                      </li>
+                    </a>
+} */}
                     <a href="/notifications" className="link">
                       <li>
                         <div
-                          className="link-item
-              "
-                        >
+                          className="link-item">
                           <img src="notification.svg" alt="" />
                           Notifications
                         </div>
@@ -165,7 +175,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                   </div>
                   <div className="nav-right">
                     <div>
-                      <button className="mint-button">Mint Token</button>
+                      <button className="mint-button" onClick={()=>router.push('/minttoken')}>Mint Token</button>
                     </div>
                     <div
                       className="logout-container"

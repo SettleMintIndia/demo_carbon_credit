@@ -66,6 +66,10 @@ export type Mutation_Root = {
   delete_z_secondary_marketplace: Maybe<Z_Secondary_Marketplace_Mutation_Response>;
   /** delete single row from the table: "z_secondary_marketplace" */
   delete_z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
+  /** delete data from the table: "z_token_holder" */
+  delete_z_token_holder: Maybe<Z_Token_Holder_Mutation_Response>;
+  /** delete single row from the table: "z_token_holder" */
+  delete_z_token_holder_by_pk: Maybe<Z_Token_Holder>;
   /** delete data from the table: "z_transaction_history" */
   delete_z_transaction_history: Maybe<Z_Transaction_History_Mutation_Response>;
   /** delete single row from the table: "z_transaction_history" */
@@ -82,6 +86,10 @@ export type Mutation_Root = {
   insert_z_secondary_marketplace: Maybe<Z_Secondary_Marketplace_Mutation_Response>;
   /** insert a single row into the table: "z_secondary_marketplace" */
   insert_z_secondary_marketplace_one: Maybe<Z_Secondary_Marketplace>;
+  /** insert data into the table: "z_token_holder" */
+  insert_z_token_holder: Maybe<Z_Token_Holder_Mutation_Response>;
+  /** insert a single row into the table: "z_token_holder" */
+  insert_z_token_holder_one: Maybe<Z_Token_Holder>;
   /** insert data into the table: "z_transaction_history" */
   insert_z_transaction_history: Maybe<Z_Transaction_History_Mutation_Response>;
   /** insert a single row into the table: "z_transaction_history" */
@@ -102,6 +110,12 @@ export type Mutation_Root = {
   update_z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
   /** update multiples rows of table: "z_secondary_marketplace" */
   update_z_secondary_marketplace_many: Maybe<Array<Maybe<Z_Secondary_Marketplace_Mutation_Response>>>;
+  /** update data of the table: "z_token_holder" */
+  update_z_token_holder: Maybe<Z_Token_Holder_Mutation_Response>;
+  /** update single row of the table: "z_token_holder" */
+  update_z_token_holder_by_pk: Maybe<Z_Token_Holder>;
+  /** update multiples rows of table: "z_token_holder" */
+  update_z_token_holder_many: Maybe<Array<Maybe<Z_Token_Holder_Mutation_Response>>>;
   /** update data of the table: "z_transaction_history" */
   update_z_transaction_history: Maybe<Z_Transaction_History_Mutation_Response>;
   /** update single row of the table: "z_transaction_history" */
@@ -137,6 +151,18 @@ export type Mutation_RootDelete_Z_Secondary_MarketplaceArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Z_Secondary_Marketplace_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_Token_HolderArgs = {
+  where: Z_Token_Holder_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_Token_Holder_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -190,6 +216,20 @@ export type Mutation_RootInsert_Z_Secondary_MarketplaceArgs = {
 export type Mutation_RootInsert_Z_Secondary_Marketplace_OneArgs = {
   object: Z_Secondary_Marketplace_Insert_Input;
   on_conflict: InputMaybe<Z_Secondary_Marketplace_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_Token_HolderArgs = {
+  objects: Array<Z_Token_Holder_Insert_Input>;
+  on_conflict: InputMaybe<Z_Token_Holder_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_Token_Holder_OneArgs = {
+  object: Z_Token_Holder_Insert_Input;
+  on_conflict: InputMaybe<Z_Token_Holder_On_Conflict>;
 };
 
 
@@ -262,6 +302,26 @@ export type Mutation_RootUpdate_Z_Secondary_Marketplace_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Z_Token_HolderArgs = {
+  _set: InputMaybe<Z_Token_Holder_Set_Input>;
+  where: Z_Token_Holder_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Token_Holder_By_PkArgs = {
+  _set: InputMaybe<Z_Token_Holder_Set_Input>;
+  pk_columns: Z_Token_Holder_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Token_Holder_ManyArgs = {
+  updates: Array<Z_Token_Holder_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Z_Transaction_HistoryArgs = {
   _set: InputMaybe<Z_Transaction_History_Set_Input>;
   where: Z_Transaction_History_Bool_Exp;
@@ -330,6 +390,12 @@ export type Query_Root = {
   z_secondary_marketplace_aggregate: Z_Secondary_Marketplace_Aggregate;
   /** fetch data from the table: "z_secondary_marketplace" using primary key columns */
   z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
+  /** fetch data from the table: "z_token_holder" */
+  z_token_holder: Array<Z_Token_Holder>;
+  /** fetch aggregated fields from the table: "z_token_holder" */
+  z_token_holder_aggregate: Z_Token_Holder_Aggregate;
+  /** fetch data from the table: "z_token_holder" using primary key columns */
+  z_token_holder_by_pk: Maybe<Z_Token_Holder>;
   /** fetch data from the table: "z_transaction_history" */
   z_transaction_history: Array<Z_Transaction_History>;
   /** fetch aggregated fields from the table: "z_transaction_history" */
@@ -387,6 +453,29 @@ export type Query_RootZ_Secondary_Marketplace_AggregateArgs = {
 
 
 export type Query_RootZ_Secondary_Marketplace_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootZ_Token_HolderArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Token_Holder_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Token_Holder_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -454,6 +543,14 @@ export type Subscription_Root = {
   z_secondary_marketplace_by_pk: Maybe<Z_Secondary_Marketplace>;
   /** fetch data from the table in a streaming manner: "z_secondary_marketplace" */
   z_secondary_marketplace_stream: Array<Z_Secondary_Marketplace>;
+  /** fetch data from the table: "z_token_holder" */
+  z_token_holder: Array<Z_Token_Holder>;
+  /** fetch aggregated fields from the table: "z_token_holder" */
+  z_token_holder_aggregate: Z_Token_Holder_Aggregate;
+  /** fetch data from the table: "z_token_holder" using primary key columns */
+  z_token_holder_by_pk: Maybe<Z_Token_Holder>;
+  /** fetch data from the table in a streaming manner: "z_token_holder" */
+  z_token_holder_stream: Array<Z_Token_Holder>;
   /** fetch data from the table: "z_transaction_history" */
   z_transaction_history: Array<Z_Transaction_History>;
   /** fetch aggregated fields from the table: "z_transaction_history" */
@@ -530,6 +627,36 @@ export type Subscription_RootZ_Secondary_Marketplace_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Z_Secondary_Marketplace_Stream_Cursor_Input>>;
   where: InputMaybe<Z_Secondary_Marketplace_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Token_HolderArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Token_Holder_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Token_Holder_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootZ_Token_Holder_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Z_Token_Holder_Stream_Cursor_Input>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
 };
 
 
@@ -809,7 +936,6 @@ export type Z_Secondary_Marketplace = {
   minttoken_id: Scalars['uuid'];
   owner_id: Scalars['uuid'];
   tokens: Scalars['String'];
-  tx_hash: Scalars['String'];
   /** An object relationship */
   z_minttoken: Z_Minttokens;
   /** An object relationship */
@@ -849,7 +975,6 @@ export type Z_Secondary_Marketplace_Bool_Exp = {
   minttoken_id: InputMaybe<Uuid_Comparison_Exp>;
   owner_id: InputMaybe<Uuid_Comparison_Exp>;
   tokens: InputMaybe<String_Comparison_Exp>;
-  tx_hash: InputMaybe<String_Comparison_Exp>;
   z_minttoken: InputMaybe<Z_Minttokens_Bool_Exp>;
   z_user: InputMaybe<Z_Users_Bool_Exp>;
 };
@@ -868,7 +993,6 @@ export type Z_Secondary_Marketplace_Insert_Input = {
   minttoken_id: InputMaybe<Scalars['uuid']>;
   owner_id: InputMaybe<Scalars['uuid']>;
   tokens: InputMaybe<Scalars['String']>;
-  tx_hash: InputMaybe<Scalars['String']>;
   z_minttoken: InputMaybe<Z_Minttokens_Obj_Rel_Insert_Input>;
   z_user: InputMaybe<Z_Users_Obj_Rel_Insert_Input>;
 };
@@ -882,7 +1006,6 @@ export type Z_Secondary_Marketplace_Max_Fields = {
   minttoken_id: Maybe<Scalars['uuid']>;
   owner_id: Maybe<Scalars['uuid']>;
   tokens: Maybe<Scalars['String']>;
-  tx_hash: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -894,7 +1017,6 @@ export type Z_Secondary_Marketplace_Min_Fields = {
   minttoken_id: Maybe<Scalars['uuid']>;
   owner_id: Maybe<Scalars['uuid']>;
   tokens: Maybe<Scalars['String']>;
-  tx_hash: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "z_secondary_marketplace" */
@@ -921,7 +1043,6 @@ export type Z_Secondary_Marketplace_Order_By = {
   minttoken_id: InputMaybe<Order_By>;
   owner_id: InputMaybe<Order_By>;
   tokens: InputMaybe<Order_By>;
-  tx_hash: InputMaybe<Order_By>;
   z_minttoken: InputMaybe<Z_Minttokens_Order_By>;
   z_user: InputMaybe<Z_Users_Order_By>;
 };
@@ -944,9 +1065,7 @@ export enum Z_Secondary_Marketplace_Select_Column {
   /** column name */
   OwnerId = 'owner_id',
   /** column name */
-  Tokens = 'tokens',
-  /** column name */
-  TxHash = 'tx_hash'
+  Tokens = 'tokens'
 }
 
 /** input type for updating data in table "z_secondary_marketplace" */
@@ -957,7 +1076,6 @@ export type Z_Secondary_Marketplace_Set_Input = {
   minttoken_id: InputMaybe<Scalars['uuid']>;
   owner_id: InputMaybe<Scalars['uuid']>;
   tokens: InputMaybe<Scalars['String']>;
-  tx_hash: InputMaybe<Scalars['String']>;
 };
 
 /** Streaming cursor of the table "z_secondary_marketplace" */
@@ -976,7 +1094,6 @@ export type Z_Secondary_Marketplace_Stream_Cursor_Value_Input = {
   minttoken_id: InputMaybe<Scalars['uuid']>;
   owner_id: InputMaybe<Scalars['uuid']>;
   tokens: InputMaybe<Scalars['String']>;
-  tx_hash: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "z_secondary_marketplace" */
@@ -992,9 +1109,7 @@ export enum Z_Secondary_Marketplace_Update_Column {
   /** column name */
   OwnerId = 'owner_id',
   /** column name */
-  Tokens = 'tokens',
-  /** column name */
-  TxHash = 'tx_hash'
+  Tokens = 'tokens'
 }
 
 export type Z_Secondary_Marketplace_Updates = {
@@ -1002,6 +1117,188 @@ export type Z_Secondary_Marketplace_Updates = {
   _set: InputMaybe<Z_Secondary_Marketplace_Set_Input>;
   /** filter the rows which have to be updated */
   where: Z_Secondary_Marketplace_Bool_Exp;
+};
+
+/** columns and relationships of "z_token_holder" */
+export type Z_Token_Holder = {
+  __typename: 'z_token_holder';
+  amount: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  mint_id: Scalars['uuid'];
+  updated_at: Scalars['timestamptz'];
+  user_id: Scalars['uuid'];
+};
+
+/** aggregated selection of "z_token_holder" */
+export type Z_Token_Holder_Aggregate = {
+  __typename: 'z_token_holder_aggregate';
+  aggregate: Maybe<Z_Token_Holder_Aggregate_Fields>;
+  nodes: Array<Z_Token_Holder>;
+};
+
+/** aggregate fields of "z_token_holder" */
+export type Z_Token_Holder_Aggregate_Fields = {
+  __typename: 'z_token_holder_aggregate_fields';
+  count: Scalars['Int'];
+  max: Maybe<Z_Token_Holder_Max_Fields>;
+  min: Maybe<Z_Token_Holder_Min_Fields>;
+};
+
+
+/** aggregate fields of "z_token_holder" */
+export type Z_Token_Holder_Aggregate_FieldsCountArgs = {
+  columns: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  distinct: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "z_token_holder". All fields are combined with a logical 'AND'. */
+export type Z_Token_Holder_Bool_Exp = {
+  _and: InputMaybe<Array<Z_Token_Holder_Bool_Exp>>;
+  _not: InputMaybe<Z_Token_Holder_Bool_Exp>;
+  _or: InputMaybe<Array<Z_Token_Holder_Bool_Exp>>;
+  amount: InputMaybe<String_Comparison_Exp>;
+  created_at: InputMaybe<Timestamptz_Comparison_Exp>;
+  id: InputMaybe<Uuid_Comparison_Exp>;
+  mint_id: InputMaybe<Uuid_Comparison_Exp>;
+  updated_at: InputMaybe<Timestamptz_Comparison_Exp>;
+  user_id: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "z_token_holder" */
+export enum Z_Token_Holder_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ZTokenHolderPkey = 'z_token_holder_pkey'
+}
+
+/** input type for inserting data into table "z_token_holder" */
+export type Z_Token_Holder_Insert_Input = {
+  amount: InputMaybe<Scalars['String']>;
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  mint_id: InputMaybe<Scalars['uuid']>;
+  updated_at: InputMaybe<Scalars['timestamptz']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type Z_Token_Holder_Max_Fields = {
+  __typename: 'z_token_holder_max_fields';
+  amount: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  mint_id: Maybe<Scalars['uuid']>;
+  updated_at: Maybe<Scalars['timestamptz']>;
+  user_id: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type Z_Token_Holder_Min_Fields = {
+  __typename: 'z_token_holder_min_fields';
+  amount: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  mint_id: Maybe<Scalars['uuid']>;
+  updated_at: Maybe<Scalars['timestamptz']>;
+  user_id: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "z_token_holder" */
+export type Z_Token_Holder_Mutation_Response = {
+  __typename: 'z_token_holder_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Z_Token_Holder>;
+};
+
+/** on_conflict condition type for table "z_token_holder" */
+export type Z_Token_Holder_On_Conflict = {
+  constraint: Z_Token_Holder_Constraint;
+  update_columns: Array<Z_Token_Holder_Update_Column>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "z_token_holder". */
+export type Z_Token_Holder_Order_By = {
+  amount: InputMaybe<Order_By>;
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  mint_id: InputMaybe<Order_By>;
+  updated_at: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: z_token_holder */
+export type Z_Token_Holder_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "z_token_holder" */
+export enum Z_Token_Holder_Select_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MintId = 'mint_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "z_token_holder" */
+export type Z_Token_Holder_Set_Input = {
+  amount: InputMaybe<Scalars['String']>;
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  mint_id: InputMaybe<Scalars['uuid']>;
+  updated_at: InputMaybe<Scalars['timestamptz']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** Streaming cursor of the table "z_token_holder" */
+export type Z_Token_Holder_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Z_Token_Holder_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Z_Token_Holder_Stream_Cursor_Value_Input = {
+  amount: InputMaybe<Scalars['String']>;
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  mint_id: InputMaybe<Scalars['uuid']>;
+  updated_at: InputMaybe<Scalars['timestamptz']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "z_token_holder" */
+export enum Z_Token_Holder_Update_Column {
+  /** column name */
+  Amount = 'amount',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MintId = 'mint_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Z_Token_Holder_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Z_Token_Holder_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Z_Token_Holder_Bool_Exp;
 };
 
 /** columns and relationships of "z_transaction_history" */

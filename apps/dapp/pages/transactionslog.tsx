@@ -27,7 +27,7 @@ const Page: NextPageWithLayout = () => {
   return (
     <>
       <div className="header-area">
-        <h2>Transaction Log</h2>
+       
       </div>
       <Row>
         <Table className="tablelist" responsive>

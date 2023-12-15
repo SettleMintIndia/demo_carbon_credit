@@ -8,7 +8,6 @@ export type CreateSecondaryMarketPlaceMutationVariables = Types.Exact<{
   amount: Types.InputMaybe<Types.Scalars['String']>;
   tokens: Types.InputMaybe<Types.Scalars['String']>;
   owner_id: Types.InputMaybe<Types.Scalars['uuid']>;
-  tx_hash: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 
@@ -17,7 +16,7 @@ export type CreateSecondaryMarketPlaceMutation = { __typename: 'mutation_root', 
 export type GetSecondayMarketPlaceQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetSecondayMarketPlaceQuery = { __typename: 'query_root', z_secondary_marketplace: Array<{ __typename: 'z_secondary_marketplace', amount: string, created_at: string, id: string, minttoken_id: string, owner_id: string, tokens: string, tx_hash: string, z_minttoken: { __typename: 'z_minttokens', created_at: string, id: string, token: string, tx_hash: string, user_id: string, z_user: { __typename: 'z_users', address: string, id: string, password: string, pvtKey: string, username: string } }, z_user: { __typename: 'z_users', address: string, created_at: string, id: string, password: string, pvtKey: string, username: string } }> };
+export type GetSecondayMarketPlaceQuery = { __typename: 'query_root', z_secondary_marketplace: Array<{ __typename: 'z_secondary_marketplace', amount: string, created_at: string, id: string, minttoken_id: string, owner_id: string, tokens: string, z_minttoken: { __typename: 'z_minttokens', created_at: string, id: string, token: string, tx_hash: string, user_id: string, z_user: { __typename: 'z_users', address: string, id: string, password: string, pvtKey: string, username: string } }, z_user: { __typename: 'z_users', address: string, created_at: string, id: string, password: string, pvtKey: string, username: string } }> };
 
 export type UpdateSecondayMarketPlaceMutationVariables = Types.Exact<{
   tokens?: Types.InputMaybe<Types.Scalars['String']>;
@@ -29,9 +28,9 @@ export type UpdateSecondayMarketPlaceMutation = { __typename: 'mutation_root', u
 
 
 export const CreateSecondaryMarketPlaceDocument = /*#__PURE__*/ gql`
-    mutation createSecondaryMarketPlace($minttoken_id: uuid, $amount: String, $tokens: String, $owner_id: uuid, $tx_hash: String) {
+    mutation createSecondaryMarketPlace($minttoken_id: uuid, $amount: String, $tokens: String, $owner_id: uuid) {
   insert_z_secondary_marketplace(
-    objects: {minttoken_id: $minttoken_id, amount: $amount, tokens: $tokens, owner_id: $owner_id, tx_hash: $tx_hash}
+    objects: {minttoken_id: $minttoken_id, amount: $amount, tokens: $tokens, owner_id: $owner_id}
   ) {
     returning {
       id
@@ -58,7 +57,6 @@ export type CreateSecondaryMarketPlaceMutationFn = Apollo.MutationFunction<Creat
  *      amount: // value for 'amount'
  *      tokens: // value for 'tokens'
  *      owner_id: // value for 'owner_id'
- *      tx_hash: // value for 'tx_hash'
  *   },
  * });
  */
@@ -78,7 +76,6 @@ export const GetSecondayMarketPlaceDocument = /*#__PURE__*/ gql`
     minttoken_id
     owner_id
     tokens
-    tx_hash
     z_minttoken {
       created_at
       id
