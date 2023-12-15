@@ -24,23 +24,15 @@ mutation createSecondaryMarketPlace(
 
 
 query getSecondayMarketPlace {
-  z_secondary_marketplace {
+  z_secondary_marketplace (where: {tokens: {_neq: "0"}}){
     amount
-    buyer_id
     created_at
     id
     minttoken_id
     owner_id
     tokens
     tx_hash
-    z_buyer_user {
-      address
-      password
-      pvtKey
-      id
-      created_at
-      username
-    }
+   
     z_minttoken {
       created_at
       id
@@ -64,7 +56,19 @@ query getSecondayMarketPlace {
       username
     }
   }
+  
 }
+
+mutation updateSecondayMarketPlace($tokens: String = "", $id: uuid = "") {
+  update_z_secondary_marketplace_by_pk(
+    pk_columns: { id: $id }
+    _set: { tokens: $tokens }
+  ) {
+    tokens
+    id
+  }
+}
+
 
 
 

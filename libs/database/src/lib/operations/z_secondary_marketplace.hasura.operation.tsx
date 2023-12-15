@@ -17,7 +17,15 @@ export type CreateSecondaryMarketPlaceMutation = { __typename: 'mutation_root', 
 export type GetSecondayMarketPlaceQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetSecondayMarketPlaceQuery = { __typename: 'query_root', z_secondary_marketplace: Array<{ __typename: 'z_secondary_marketplace', amount: string, buyer_id: string | null, created_at: string, id: string, minttoken_id: string, owner_id: string, tokens: string, tx_hash: string, z_buyer_user: { __typename: 'z_users', address: string, password: string, pvtKey: string, id: string, created_at: string, username: string } | null, z_minttoken: { __typename: 'z_minttokens', created_at: string, id: string, token: string, tx_hash: string, user_id: string, z_user: { __typename: 'z_users', address: string, id: string, password: string, pvtKey: string, username: string } }, z_user: { __typename: 'z_users', address: string, created_at: string, id: string, password: string, pvtKey: string, username: string } }> };
+export type GetSecondayMarketPlaceQuery = { __typename: 'query_root', z_secondary_marketplace: Array<{ __typename: 'z_secondary_marketplace', amount: string, created_at: string, id: string, minttoken_id: string, owner_id: string, tokens: string, tx_hash: string, z_minttoken: { __typename: 'z_minttokens', created_at: string, id: string, token: string, tx_hash: string, user_id: string, z_user: { __typename: 'z_users', address: string, id: string, password: string, pvtKey: string, username: string } }, z_user: { __typename: 'z_users', address: string, created_at: string, id: string, password: string, pvtKey: string, username: string } }> };
+
+export type UpdateSecondayMarketPlaceMutationVariables = Types.Exact<{
+  tokens?: Types.InputMaybe<Types.Scalars['String']>;
+  id?: Types.InputMaybe<Types.Scalars['uuid']>;
+}>;
+
+
+export type UpdateSecondayMarketPlaceMutation = { __typename: 'mutation_root', update_z_secondary_marketplace_by_pk: { __typename: 'z_secondary_marketplace', tokens: string, id: string } | null };
 
 
 export const CreateSecondaryMarketPlaceDocument = /*#__PURE__*/ gql`
@@ -63,23 +71,14 @@ export type CreateSecondaryMarketPlaceMutationResult = Apollo.MutationResult<Cre
 export type CreateSecondaryMarketPlaceMutationOptions = Apollo.BaseMutationOptions<CreateSecondaryMarketPlaceMutation, CreateSecondaryMarketPlaceMutationVariables>;
 export const GetSecondayMarketPlaceDocument = /*#__PURE__*/ gql`
     query getSecondayMarketPlace {
-  z_secondary_marketplace {
+  z_secondary_marketplace(where: {tokens: {_neq: "0"}}) {
     amount
-    buyer_id
     created_at
     id
     minttoken_id
     owner_id
     tokens
     tx_hash
-    z_buyer_user {
-      address
-      password
-      pvtKey
-      id
-      created_at
-      username
-    }
     z_minttoken {
       created_at
       id
@@ -135,3 +134,41 @@ export type GetSecondayMarketPlaceQueryResult = Apollo.QueryResult<GetSecondayMa
 export function refetchGetSecondayMarketPlaceQuery(variables?: GetSecondayMarketPlaceQueryVariables) {
       return { query: GetSecondayMarketPlaceDocument, variables: variables }
     }
+export const UpdateSecondayMarketPlaceDocument = /*#__PURE__*/ gql`
+    mutation updateSecondayMarketPlace($tokens: String = "", $id: uuid = "") {
+  update_z_secondary_marketplace_by_pk(
+    pk_columns: {id: $id}
+    _set: {tokens: $tokens}
+  ) {
+    tokens
+    id
+  }
+}
+    `;
+export type UpdateSecondayMarketPlaceMutationFn = Apollo.MutationFunction<UpdateSecondayMarketPlaceMutation, UpdateSecondayMarketPlaceMutationVariables>;
+
+/**
+ * __useUpdateSecondayMarketPlaceMutation__
+ *
+ * To run a mutation, you first call `useUpdateSecondayMarketPlaceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateSecondayMarketPlaceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateSecondayMarketPlaceMutation, { data, loading, error }] = useUpdateSecondayMarketPlaceMutation({
+ *   variables: {
+ *      tokens: // value for 'tokens'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpdateSecondayMarketPlaceMutation(baseOptions?: Apollo.MutationHookOptions<UpdateSecondayMarketPlaceMutation, UpdateSecondayMarketPlaceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateSecondayMarketPlaceMutation, UpdateSecondayMarketPlaceMutationVariables>(UpdateSecondayMarketPlaceDocument, options);
+      }
+export type UpdateSecondayMarketPlaceMutationHookResult = ReturnType<typeof useUpdateSecondayMarketPlaceMutation>;
+export type UpdateSecondayMarketPlaceMutationResult = Apollo.MutationResult<UpdateSecondayMarketPlaceMutation>;
+export type UpdateSecondayMarketPlaceMutationOptions = Apollo.BaseMutationOptions<UpdateSecondayMarketPlaceMutation, UpdateSecondayMarketPlaceMutationVariables>;

@@ -37,10 +37,12 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         ? 'Dashboard'
         : router.pathname === '/minttoken'
         ? 'Mint Token'
-        : router.pathname === '/transactionlog'
+        : router.pathname === '/transactionslog'
         ? 'Transactions'
         : router.pathname === '/tokenmarketplace'
-        ? 'Token MarketPlace'
+        ? 'Secondary MarketPlace'
+        : router.pathname === '/mytoken'
+        ? 'My Token'
         : ''
     );
 
@@ -135,7 +137,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
               "
                         >
                           <img src="setting.svg" alt="" />
-                          Token Marketplace
+                          Secondary Marketplace
                         </div>
                       </li>
                     </a>

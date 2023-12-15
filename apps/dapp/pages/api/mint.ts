@@ -3,9 +3,11 @@ import { ethers } from "ethers";
 import abi from '../../abi/carbon.json'
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(req,res)
   try {
     const tokenCount = req.body.tokenCount;
     const recipient = req.body.recipient;
+    console.log(tokenCount,tokenCount)
 
     if (!tokenCount || !recipient) {
       res.status(400).send('Invalid Argument')
