@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // console.log(process.env.NEXT_PUBLIC_JSON_RPC);
 
     const provider = new ethers.JsonRpcProvider(
-      `${process.env.NEXT_PUBLIC_JSON_RPC}`
+      `${process.env.NEXT_PUBLIC_JSON_RPC}/${process.env.NEXT_PUBLIC_API_KEY}`
     );
     const signer = new ethers.Wallet(
       `${process.env.NEXT_PUBLIC_PVT_KEY}`,

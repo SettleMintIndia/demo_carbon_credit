@@ -243,7 +243,7 @@ const Page: NextPageWithLayout = () => {
           <img src="/Minted.gif" />
         </div>
       );
-       Router.push('/mytoken');
+      Router.push('/mytoken');
 
     } catch (error: any) {
       toast.error(error.message);

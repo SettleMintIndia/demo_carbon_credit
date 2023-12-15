@@ -10,15 +10,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
    /*  const tokenCount = req.body.tokenCount;
     const recipient = req.body.recipient; */
- 
-     const {tokenCount,recipient} = body; 
+
+     const {tokenCount,recipient} = body;
     console.log("keys",tokenCount,recipient)
 
     if (!tokenCount || !recipient) {
       res.status(400).send('Invalid Argument')
     }
 
-    const provider = new ethers.JsonRpcProvider(`${process.env.NEXT_PUBLIC_JSON_RPC}`);
+    const provider = new ethers.JsonRpcProvider(`${process.env.NEXT_PUBLIC_JSON_RPC}/${process.env.NEXT_PUBLIC_API_KEY}`);
     const signer = new ethers.Wallet(`${process.env.NEXT_PUBLIC_PVT_KEY}`, provider)
     const contract = new ethers.Contract(`${process.env.NEXT_PUBLIC_CONTRACT}`, abi, signer)
 
