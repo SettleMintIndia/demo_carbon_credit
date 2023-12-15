@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const signer = new ethers.Wallet(`${process.env.NEXT_PUBLIC_PVT_KEY}`, provider)
     const contract = new ethers.Contract(`${process.env.NEXT_PUBLIC_CONTRACT}`, abi, signer)
 
-    const mint = await contract.mintBatch(tokenCount, recipient)
+    const mint = await contract.mint(tokenCount, recipient)
 
     res.status(200).json({ txHash: mint.hash })
 
