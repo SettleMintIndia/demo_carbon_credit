@@ -11,7 +11,7 @@ export default createProxyMiddleware({
   headers: {
     'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`,
   },
-  onProxyReq: (proxyReq, req) => {
+  onProxyReq: (proxyReq, req:any) => {
     const cookies = getCookies({ req });
     proxyReq.setHeader('x-hasura-user-id', cookies['x-hasura-user-id'] ?? 'anonymous');
     proxyReq.setHeader('x-hasura-role', cookies['x-hasura-role'] ?? 'user');

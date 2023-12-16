@@ -1,6 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ethers } from 'ethers';
 import abi from '../../abi/carbon.json';
+
+interface Ilog{
+
+  topics: Array<string>,
+  data: string
+}
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const body = JSON.parse(req.body);
@@ -31,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const txReceipt = await provider.getTransactionReceipt(hash);
 
     const eventLogs = await txReceipt?.logs.map((log) => {
-      return contract.interface.parseLog(log);
+      return contract.interface.parseLog(log as any);
     });
 
     const event = eventLogs?.map((v) => {

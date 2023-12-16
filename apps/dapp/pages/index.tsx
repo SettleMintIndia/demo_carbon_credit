@@ -13,17 +13,16 @@ import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons';
 import AppLogo from '../public/SettleMint_log-bk.png';
 
 interface ILogin {
-  username: string;
-  password: string;
+  username: string|undefined;
+  password: string|undefined;
 }
 interface IUser {
-  email: string;
-  username: string;
-  password: string;
+  username: string|undefined;
+  password: string|undefined;
 }
 
 const Page: NextPageWithLayout = () => {
-  const [user, setUser] = useState<ILogin | undefined>(undefined);
+  const [user, setUser] = useState<any>(undefined);
   const [userErr, setUserErr] = useState('');
   const [passwordErr, setpasswordErr] = useState('');
   const [user_actErr, setUser_acountErr] = useState('');
@@ -33,7 +32,7 @@ const Page: NextPageWithLayout = () => {
   // const [createUser] = useInsertUsersMutation();
   const [createUserMutation] = useCreateUserMutation({});
   const [getUser] = useGetLoggedInUserLazyQuery()
-  const [userDetailSignUp, setuserDetailSignUp] = useState<IUser | undefined>(
+  const [userDetailSignUp, setuserDetailSignUp] = useState<any>(
     undefined
   );
 
@@ -42,7 +41,7 @@ const Page: NextPageWithLayout = () => {
   };
 
   const handleSubmitSignUp = async () => {
-    event.preventDefault();
+    event?.preventDefault();
 
     const response = await fetch('/api/createUser').then((response) =>
       response.json()
@@ -51,8 +50,8 @@ const Page: NextPageWithLayout = () => {
       variables: {
         address: await response.walletID,
         pvtKey: await response.walletKey,
-        username: userDetailSignUp.username,
-        password: userDetailSignUp.password,
+        username: userDetailSignUp?.username as string,
+        password: userDetailSignUp?.password as string,
 
       },
     });
@@ -99,13 +98,13 @@ const Page: NextPageWithLayout = () => {
     }
     if (!error) {
 
-      var password;
-      var user_id;
-      var address;
-      var pvtkey
+      let password;
+      let user_id;
+      let address;
+      let pvtkey
       await getUser({
         variables: {
-          username: user?.username,
+          username: user?.username as string,
         },
         fetchPolicy: 'network-only',
       }).then((data) => {
@@ -120,14 +119,14 @@ const Page: NextPageWithLayout = () => {
       console.log(password, user_id);
       if (password === undefined || password === null) {
         console.warn('The demo backend is down!');
-        localStorage.setItem('user', user?.username);
-        localStorage.setItem('password', user?.password);
+        localStorage.setItem('user', user?.username as string);
+        localStorage.setItem('password', user?.password as string);
         alert('Wrong username or password!');
       } else {
         if (password == user?.password) {
           console.log("useraddress",address)
-          localStorage.setItem('user', user?.username);
-          localStorage.setItem('password', user?.password);
+          localStorage.setItem('user', user?.username as string);
+          localStorage.setItem('password', user?.password as string);
           localStorage.setItem('user_address', address)
           localStorage.setItem('user_id', user_id)
           localStorage.setItem('pvtkey', pvtkey)
@@ -139,7 +138,6 @@ const Page: NextPageWithLayout = () => {
         }
       }
     } else {
-      console.log('typo', userDetail);
       console.log('this is user', user);
       console.error('Invalid login details');
       // setUser_acountErr('Invalid Login Detail');
