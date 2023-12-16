@@ -47,7 +47,7 @@ export const SecondaryTransferModal = ({
 
     if (!error) {
 
-      if (Number(totaltoken) > Number(formValues.token)) {
+      if (Number(totaltoken) >= Number(formValues.token)) {
         setErr('')
         // Toast
         await toast(

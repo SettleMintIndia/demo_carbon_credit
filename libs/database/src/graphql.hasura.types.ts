@@ -14,6 +14,19 @@ export type Scalars = {
   uuid: string;
 };
 
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq: InputMaybe<Scalars['Int']>;
+  _gt: InputMaybe<Scalars['Int']>;
+  _gte: InputMaybe<Scalars['Int']>;
+  _in: InputMaybe<Array<Scalars['Int']>>;
+  _is_null: InputMaybe<Scalars['Boolean']>;
+  _lt: InputMaybe<Scalars['Int']>;
+  _lte: InputMaybe<Scalars['Int']>;
+  _neq: InputMaybe<Scalars['Int']>;
+  _nin: InputMaybe<Array<Scalars['Int']>>;
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq: InputMaybe<Scalars['String']>;
@@ -378,9 +391,9 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename: 'query_root';
-  /** fetch data from the table: "z_minttokens" */
+  /** An array relationship */
   z_minttokens: Array<Z_Minttokens>;
-  /** fetch aggregated fields from the table: "z_minttokens" */
+  /** An aggregate relationship */
   z_minttokens_aggregate: Z_Minttokens_Aggregate;
   /** fetch data from the table: "z_minttokens" using primary key columns */
   z_minttokens_by_pk: Maybe<Z_Minttokens>;
@@ -527,9 +540,9 @@ export type Query_RootZ_Users_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename: 'subscription_root';
-  /** fetch data from the table: "z_minttokens" */
+  /** An array relationship */
   z_minttokens: Array<Z_Minttokens>;
-  /** fetch aggregated fields from the table: "z_minttokens" */
+  /** An aggregate relationship */
   z_minttokens_aggregate: Z_Minttokens_Aggregate;
   /** fetch data from the table: "z_minttokens" using primary key columns */
   z_minttokens_by_pk: Maybe<Z_Minttokens>;
@@ -753,8 +766,32 @@ export type Z_Minttokens = {
   token: Scalars['String'];
   tx_hash: Scalars['String'];
   user_id: Scalars['uuid'];
+  /** An array relationship */
+  z_token_holders: Array<Z_Token_Holder>;
+  /** An aggregate relationship */
+  z_token_holders_aggregate: Z_Token_Holder_Aggregate;
   /** An object relationship */
   z_user: Z_Users;
+};
+
+
+/** columns and relationships of "z_minttokens" */
+export type Z_MinttokensZ_Token_HoldersArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+
+/** columns and relationships of "z_minttokens" */
+export type Z_MinttokensZ_Token_Holders_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
 };
 
 /** aggregated selection of "z_minttokens" */
@@ -762,6 +799,17 @@ export type Z_Minttokens_Aggregate = {
   __typename: 'z_minttokens_aggregate';
   aggregate: Maybe<Z_Minttokens_Aggregate_Fields>;
   nodes: Array<Z_Minttokens>;
+};
+
+export type Z_Minttokens_Aggregate_Bool_Exp = {
+  count: InputMaybe<Z_Minttokens_Aggregate_Bool_Exp_Count>;
+};
+
+export type Z_Minttokens_Aggregate_Bool_Exp_Count = {
+  arguments: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  distinct: InputMaybe<Scalars['Boolean']>;
+  filter: InputMaybe<Z_Minttokens_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "z_minttokens" */
@@ -779,6 +827,20 @@ export type Z_Minttokens_Aggregate_FieldsCountArgs = {
   distinct: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "z_minttokens" */
+export type Z_Minttokens_Aggregate_Order_By = {
+  count: InputMaybe<Order_By>;
+  max: InputMaybe<Z_Minttokens_Max_Order_By>;
+  min: InputMaybe<Z_Minttokens_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "z_minttokens" */
+export type Z_Minttokens_Arr_Rel_Insert_Input = {
+  data: Array<Z_Minttokens_Insert_Input>;
+  /** upsert condition */
+  on_conflict: InputMaybe<Z_Minttokens_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "z_minttokens". All fields are combined with a logical 'AND'. */
 export type Z_Minttokens_Bool_Exp = {
   _and: InputMaybe<Array<Z_Minttokens_Bool_Exp>>;
@@ -789,6 +851,8 @@ export type Z_Minttokens_Bool_Exp = {
   token: InputMaybe<String_Comparison_Exp>;
   tx_hash: InputMaybe<String_Comparison_Exp>;
   user_id: InputMaybe<Uuid_Comparison_Exp>;
+  z_token_holders: InputMaybe<Z_Token_Holder_Bool_Exp>;
+  z_token_holders_aggregate: InputMaybe<Z_Token_Holder_Aggregate_Bool_Exp>;
   z_user: InputMaybe<Z_Users_Bool_Exp>;
 };
 
@@ -805,6 +869,7 @@ export type Z_Minttokens_Insert_Input = {
   token: InputMaybe<Scalars['String']>;
   tx_hash: InputMaybe<Scalars['String']>;
   user_id: InputMaybe<Scalars['uuid']>;
+  z_token_holders: InputMaybe<Z_Token_Holder_Arr_Rel_Insert_Input>;
   z_user: InputMaybe<Z_Users_Obj_Rel_Insert_Input>;
 };
 
@@ -818,6 +883,15 @@ export type Z_Minttokens_Max_Fields = {
   user_id: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "z_minttokens" */
+export type Z_Minttokens_Max_Order_By = {
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  token: InputMaybe<Order_By>;
+  tx_hash: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Z_Minttokens_Min_Fields = {
   __typename: 'z_minttokens_min_fields';
@@ -826,6 +900,15 @@ export type Z_Minttokens_Min_Fields = {
   token: Maybe<Scalars['String']>;
   tx_hash: Maybe<Scalars['String']>;
   user_id: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "z_minttokens" */
+export type Z_Minttokens_Min_Order_By = {
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  token: InputMaybe<Order_By>;
+  tx_hash: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "z_minttokens" */
@@ -858,6 +941,7 @@ export type Z_Minttokens_Order_By = {
   token: InputMaybe<Order_By>;
   tx_hash: InputMaybe<Order_By>;
   user_id: InputMaybe<Order_By>;
+  z_token_holders_aggregate: InputMaybe<Z_Token_Holder_Aggregate_Order_By>;
   z_user: InputMaybe<Z_Users_Order_By>;
 };
 
@@ -1126,8 +1210,13 @@ export type Z_Token_Holder = {
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   mint_id: Scalars['uuid'];
+  token: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
   user_id: Scalars['uuid'];
+  /** An object relationship */
+  z_minttoken: Z_Minttokens;
+  /** An object relationship */
+  z_user: Z_Users;
 };
 
 /** aggregated selection of "z_token_holder" */
@@ -1135,6 +1224,17 @@ export type Z_Token_Holder_Aggregate = {
   __typename: 'z_token_holder_aggregate';
   aggregate: Maybe<Z_Token_Holder_Aggregate_Fields>;
   nodes: Array<Z_Token_Holder>;
+};
+
+export type Z_Token_Holder_Aggregate_Bool_Exp = {
+  count: InputMaybe<Z_Token_Holder_Aggregate_Bool_Exp_Count>;
+};
+
+export type Z_Token_Holder_Aggregate_Bool_Exp_Count = {
+  arguments: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  distinct: InputMaybe<Scalars['Boolean']>;
+  filter: InputMaybe<Z_Token_Holder_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "z_token_holder" */
@@ -1152,6 +1252,20 @@ export type Z_Token_Holder_Aggregate_FieldsCountArgs = {
   distinct: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "z_token_holder" */
+export type Z_Token_Holder_Aggregate_Order_By = {
+  count: InputMaybe<Order_By>;
+  max: InputMaybe<Z_Token_Holder_Max_Order_By>;
+  min: InputMaybe<Z_Token_Holder_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "z_token_holder" */
+export type Z_Token_Holder_Arr_Rel_Insert_Input = {
+  data: Array<Z_Token_Holder_Insert_Input>;
+  /** upsert condition */
+  on_conflict: InputMaybe<Z_Token_Holder_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "z_token_holder". All fields are combined with a logical 'AND'. */
 export type Z_Token_Holder_Bool_Exp = {
   _and: InputMaybe<Array<Z_Token_Holder_Bool_Exp>>;
@@ -1161,8 +1275,11 @@ export type Z_Token_Holder_Bool_Exp = {
   created_at: InputMaybe<Timestamptz_Comparison_Exp>;
   id: InputMaybe<Uuid_Comparison_Exp>;
   mint_id: InputMaybe<Uuid_Comparison_Exp>;
+  token: InputMaybe<String_Comparison_Exp>;
   updated_at: InputMaybe<Timestamptz_Comparison_Exp>;
   user_id: InputMaybe<Uuid_Comparison_Exp>;
+  z_minttoken: InputMaybe<Z_Minttokens_Bool_Exp>;
+  z_user: InputMaybe<Z_Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "z_token_holder" */
@@ -1177,8 +1294,11 @@ export type Z_Token_Holder_Insert_Input = {
   created_at: InputMaybe<Scalars['timestamptz']>;
   id: InputMaybe<Scalars['uuid']>;
   mint_id: InputMaybe<Scalars['uuid']>;
+  token: InputMaybe<Scalars['String']>;
   updated_at: InputMaybe<Scalars['timestamptz']>;
   user_id: InputMaybe<Scalars['uuid']>;
+  z_minttoken: InputMaybe<Z_Minttokens_Obj_Rel_Insert_Input>;
+  z_user: InputMaybe<Z_Users_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -1188,8 +1308,20 @@ export type Z_Token_Holder_Max_Fields = {
   created_at: Maybe<Scalars['timestamptz']>;
   id: Maybe<Scalars['uuid']>;
   mint_id: Maybe<Scalars['uuid']>;
+  token: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['timestamptz']>;
   user_id: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "z_token_holder" */
+export type Z_Token_Holder_Max_Order_By = {
+  amount: InputMaybe<Order_By>;
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  mint_id: InputMaybe<Order_By>;
+  token: InputMaybe<Order_By>;
+  updated_at: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -1199,8 +1331,20 @@ export type Z_Token_Holder_Min_Fields = {
   created_at: Maybe<Scalars['timestamptz']>;
   id: Maybe<Scalars['uuid']>;
   mint_id: Maybe<Scalars['uuid']>;
+  token: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['timestamptz']>;
   user_id: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "z_token_holder" */
+export type Z_Token_Holder_Min_Order_By = {
+  amount: InputMaybe<Order_By>;
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  mint_id: InputMaybe<Order_By>;
+  token: InputMaybe<Order_By>;
+  updated_at: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "z_token_holder" */
@@ -1225,8 +1369,11 @@ export type Z_Token_Holder_Order_By = {
   created_at: InputMaybe<Order_By>;
   id: InputMaybe<Order_By>;
   mint_id: InputMaybe<Order_By>;
+  token: InputMaybe<Order_By>;
   updated_at: InputMaybe<Order_By>;
   user_id: InputMaybe<Order_By>;
+  z_minttoken: InputMaybe<Z_Minttokens_Order_By>;
+  z_user: InputMaybe<Z_Users_Order_By>;
 };
 
 /** primary key columns input for table: z_token_holder */
@@ -1245,6 +1392,8 @@ export enum Z_Token_Holder_Select_Column {
   /** column name */
   MintId = 'mint_id',
   /** column name */
+  Token = 'token',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
@@ -1256,6 +1405,7 @@ export type Z_Token_Holder_Set_Input = {
   created_at: InputMaybe<Scalars['timestamptz']>;
   id: InputMaybe<Scalars['uuid']>;
   mint_id: InputMaybe<Scalars['uuid']>;
+  token: InputMaybe<Scalars['String']>;
   updated_at: InputMaybe<Scalars['timestamptz']>;
   user_id: InputMaybe<Scalars['uuid']>;
 };
@@ -1274,6 +1424,7 @@ export type Z_Token_Holder_Stream_Cursor_Value_Input = {
   created_at: InputMaybe<Scalars['timestamptz']>;
   id: InputMaybe<Scalars['uuid']>;
   mint_id: InputMaybe<Scalars['uuid']>;
+  token: InputMaybe<Scalars['String']>;
   updated_at: InputMaybe<Scalars['timestamptz']>;
   user_id: InputMaybe<Scalars['uuid']>;
 };
@@ -1288,6 +1439,8 @@ export enum Z_Token_Holder_Update_Column {
   Id = 'id',
   /** column name */
   MintId = 'mint_id',
+  /** column name */
+  Token = 'token',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -1531,6 +1684,54 @@ export type Z_Users = {
   password: Scalars['String'];
   pvtKey: Scalars['String'];
   username: Scalars['String'];
+  /** An array relationship */
+  z_minttokens: Array<Z_Minttokens>;
+  /** An aggregate relationship */
+  z_minttokens_aggregate: Z_Minttokens_Aggregate;
+  /** An array relationship */
+  z_token_holders: Array<Z_Token_Holder>;
+  /** An aggregate relationship */
+  z_token_holders_aggregate: Z_Token_Holder_Aggregate;
+};
+
+
+/** columns and relationships of "z_users" */
+export type Z_UsersZ_MinttokensArgs = {
+  distinct_on: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Minttokens_Order_By>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+/** columns and relationships of "z_users" */
+export type Z_UsersZ_Minttokens_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Minttokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Minttokens_Order_By>>;
+  where: InputMaybe<Z_Minttokens_Bool_Exp>;
+};
+
+
+/** columns and relationships of "z_users" */
+export type Z_UsersZ_Token_HoldersArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
+};
+
+
+/** columns and relationships of "z_users" */
+export type Z_UsersZ_Token_Holders_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Token_Holder_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Token_Holder_Order_By>>;
+  where: InputMaybe<Z_Token_Holder_Bool_Exp>;
 };
 
 /** aggregated selection of "z_users" */
@@ -1566,6 +1767,10 @@ export type Z_Users_Bool_Exp = {
   password: InputMaybe<String_Comparison_Exp>;
   pvtKey: InputMaybe<String_Comparison_Exp>;
   username: InputMaybe<String_Comparison_Exp>;
+  z_minttokens: InputMaybe<Z_Minttokens_Bool_Exp>;
+  z_minttokens_aggregate: InputMaybe<Z_Minttokens_Aggregate_Bool_Exp>;
+  z_token_holders: InputMaybe<Z_Token_Holder_Bool_Exp>;
+  z_token_holders_aggregate: InputMaybe<Z_Token_Holder_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "z_users" */
@@ -1582,6 +1787,8 @@ export type Z_Users_Insert_Input = {
   password: InputMaybe<Scalars['String']>;
   pvtKey: InputMaybe<Scalars['String']>;
   username: InputMaybe<Scalars['String']>;
+  z_minttokens: InputMaybe<Z_Minttokens_Arr_Rel_Insert_Input>;
+  z_token_holders: InputMaybe<Z_Token_Holder_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -1637,6 +1844,8 @@ export type Z_Users_Order_By = {
   password: InputMaybe<Order_By>;
   pvtKey: InputMaybe<Order_By>;
   username: InputMaybe<Order_By>;
+  z_minttokens_aggregate: InputMaybe<Z_Minttokens_Aggregate_Order_By>;
+  z_token_holders_aggregate: InputMaybe<Z_Token_Holder_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: z_users */

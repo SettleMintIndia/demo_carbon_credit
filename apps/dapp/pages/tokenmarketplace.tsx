@@ -8,7 +8,11 @@ import moment from 'moment';
 import React from 'react';
 import {
   useGetSecondayMarketPlaceQuery, useCreateTransctionHistoryMutation, useCreateTokenMutation,
-  useUpdateSecondayMarketPlaceMutation
+  useUpdateSecondayMarketPlaceMutation,
+  useCheckRecordExistLazyQuery,
+  useCreateTokenHolderMutation,
+  useUpdateTokenHolderMutation,
+
 } from '@demo-carbon-credit/database';
 import toast from 'react-hot-toast';
 
@@ -30,6 +34,33 @@ const Page: NextPageWithLayout = () => {
   const [createTransctionHistoryMutation] = useCreateTransctionHistoryMutation();
   const [createTokenMutation] = useCreateTokenMutation();
   const [updateSecondayMarketPlaceMutation] = useUpdateSecondayMarketPlaceMutation()
+  const [
+    checkRecordExistLazyQuery,
+    {
+      data: tokenHolderData,
+      loading: tokenHolderDataLoading,
+      error: tokenHolderDataError,
+    },
+  ] = useCheckRecordExistLazyQuery();
+
+  const [
+    createTokenHolderMutation,
+    {
+      data: createTokenHolderData,
+      loading: createTokenHolderDataLoading,
+      error: createTokenHolderDataError,
+    },
+  ] = useCreateTokenHolderMutation({});
+
+  const [
+    updateTokenHolderMutation,
+    {
+      data: updateTokenHolderData,
+      loading: updateTokenHolderLoading,
+      error: updateTokenHolderError,
+    },
+  ] = useUpdateTokenHolderMutation({});
+
 
   // Initial call
 
@@ -114,6 +145,40 @@ const Page: NextPageWithLayout = () => {
             user_id: localStorage.getItem('user_id') // value for 'user_id'
           },
         })
+
+          // For User
+          await checkRecordExistLazyQuery({
+            variables: {
+              mint_id: tx.minttoken_id,
+              user_id: tx.owner_id
+            },
+            fetchPolicy: 'network-only',
+          }).then((res) => {
+            if (res?.data?.z_token_holder[0]?.id === undefined) {
+              console.log('user create', res?.data?.z_token_holder);
+              // Create user
+              createTokenHolderMutation({
+                variables: {
+                  amount: tx?.amount,
+                  mint_id: tx?.minttoken_id,
+                  user_id: tx.owner_id,
+                  token:tx?.tokens
+                },
+              });
+            } else {
+              // Update user
+              console.log('user update', res.data.z_token_holder);
+              updateTokenHolderMutation({
+                variables: {
+                  id: res.data?.z_token_holder[0].id,
+                  amount: String(
+                    Number(res.data?.z_token_holder[0].amount) +
+                      Number(tx?.amount)
+                  ),
+                },
+              });
+            }
+          });
 
         updateSecondayMarketPlaceMutation({
           variables: {

@@ -1,0 +1,71 @@
+mutation createTokenHolder(
+  $amount: String 
+  $mint_id: uuid 
+  $user_id: uuid 
+  $token:String
+) {
+  insert_z_token_holder(
+    objects: { amount: $amount, mint_id: $mint_id, user_id: $user_id,token:$token }
+  ) {
+    returning {
+      id
+    }
+  }
+}
+
+
+
+mutation updateTokenHolder($amount: String = "", $id: uuid = "") {
+  update_z_token_holder_by_pk(
+    pk_columns: { id: $id }
+    _set: { amount: $amount }
+  ) {
+    amount
+    id
+  }
+}
+
+query checkRecordExist($mint_id: uuid = "", $user_id: uuid = "") {
+  z_token_holder(
+    where: { mint_id: { _eq: $mint_id }, user_id: { _eq: $user_id } }
+  ) {
+    id
+    user_id
+    mint_id
+    amount
+  }
+}
+
+
+query getAllTokenHolderDetails {
+  z_users {
+     password
+    username
+    pvtKey
+    id
+    address
+    z_minttokens {
+      z_token_holders {
+        mint_id
+        amount
+        token
+      }
+    }
+   
+  }
+}
+
+query getTokenDetailsbyuser($user_id: uuid) {
+  z_token_holder(where: {user_id: {_eq: $user_id}}) {
+    amount
+    mint_id
+    user_id
+    token
+    z_minttoken {
+      id
+      token
+      tx_hash
+      user_id
+    }
+  }
+}

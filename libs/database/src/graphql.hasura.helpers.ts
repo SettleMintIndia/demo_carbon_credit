@@ -3,6 +3,9 @@ export const namedOperations = {
   Query: {
     gettokens: 'gettokens' as const,
     getSecondayMarketPlace: 'getSecondayMarketPlace' as const,
+    checkRecordExist: 'checkRecordExist' as const,
+    getAllTokenHolderDetails: 'getAllTokenHolderDetails' as const,
+    getTokenDetailsbyuser: 'getTokenDetailsbyuser' as const,
     getAllTransactions: 'getAllTransactions' as const,
     getAllUsers: 'getAllUsers' as const,
     getLoggedInUser: 'getLoggedInUser' as const
@@ -12,6 +15,8 @@ export const namedOperations = {
     updateMintTokens: 'updateMintTokens' as const,
     createSecondaryMarketPlace: 'createSecondaryMarketPlace' as const,
     updateSecondayMarketPlace: 'updateSecondayMarketPlace' as const,
+    createTokenHolder: 'createTokenHolder' as const,
+    updateTokenHolder: 'updateTokenHolder' as const,
     createTransctionHistory: 'createTransctionHistory' as const,
     createUser: 'createUser' as const
   }
@@ -95,13 +100,15 @@ export type subscription_rootFieldPolicy = {
 	z_users_by_pk?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_users_stream?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_minttokensKeySpecifier = ('created_at' | 'id' | 'token' | 'tx_hash' | 'user_id' | 'z_user' | z_minttokensKeySpecifier)[];
+export type z_minttokensKeySpecifier = ('created_at' | 'id' | 'token' | 'tx_hash' | 'user_id' | 'z_token_holders' | 'z_token_holders_aggregate' | 'z_user' | z_minttokensKeySpecifier)[];
 export type z_minttokensFieldPolicy = {
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	token?: FieldPolicy<any> | FieldReadFunction<any>,
 	tx_hash?: FieldPolicy<any> | FieldReadFunction<any>,
 	user_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holders?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holders_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
 	z_user?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type z_minttokens_aggregateKeySpecifier = ('aggregate' | 'nodes' | z_minttokens_aggregateKeySpecifier)[];
@@ -181,14 +188,17 @@ export type z_secondary_marketplace_mutation_responseFieldPolicy = {
 	affected_rows?: FieldPolicy<any> | FieldReadFunction<any>,
 	returning?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_token_holderKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'updated_at' | 'user_id' | z_token_holderKeySpecifier)[];
+export type z_token_holderKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'token' | 'updated_at' | 'user_id' | 'z_minttoken' | 'z_user' | z_token_holderKeySpecifier)[];
 export type z_token_holderFieldPolicy = {
 	amount?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	mint_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	token?: FieldPolicy<any> | FieldReadFunction<any>,
 	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
-	user_id?: FieldPolicy<any> | FieldReadFunction<any>
+	user_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_minttoken?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_user?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type z_token_holder_aggregateKeySpecifier = ('aggregate' | 'nodes' | z_token_holder_aggregateKeySpecifier)[];
 export type z_token_holder_aggregateFieldPolicy = {
@@ -201,21 +211,23 @@ export type z_token_holder_aggregate_fieldsFieldPolicy = {
 	max?: FieldPolicy<any> | FieldReadFunction<any>,
 	min?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_token_holder_max_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'updated_at' | 'user_id' | z_token_holder_max_fieldsKeySpecifier)[];
+export type z_token_holder_max_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'token' | 'updated_at' | 'user_id' | z_token_holder_max_fieldsKeySpecifier)[];
 export type z_token_holder_max_fieldsFieldPolicy = {
 	amount?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	mint_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	token?: FieldPolicy<any> | FieldReadFunction<any>,
 	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	user_id?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_token_holder_min_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'updated_at' | 'user_id' | z_token_holder_min_fieldsKeySpecifier)[];
+export type z_token_holder_min_fieldsKeySpecifier = ('amount' | 'created_at' | 'id' | 'mint_id' | 'token' | 'updated_at' | 'user_id' | z_token_holder_min_fieldsKeySpecifier)[];
 export type z_token_holder_min_fieldsFieldPolicy = {
 	amount?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	mint_id?: FieldPolicy<any> | FieldReadFunction<any>,
+	token?: FieldPolicy<any> | FieldReadFunction<any>,
 	updated_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	user_id?: FieldPolicy<any> | FieldReadFunction<any>
 };
@@ -276,14 +288,18 @@ export type z_transaction_history_mutation_responseFieldPolicy = {
 	affected_rows?: FieldPolicy<any> | FieldReadFunction<any>,
 	returning?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type z_usersKeySpecifier = ('address' | 'created_at' | 'id' | 'password' | 'pvtKey' | 'username' | z_usersKeySpecifier)[];
+export type z_usersKeySpecifier = ('address' | 'created_at' | 'id' | 'password' | 'pvtKey' | 'username' | 'z_minttokens' | 'z_minttokens_aggregate' | 'z_token_holders' | 'z_token_holders_aggregate' | z_usersKeySpecifier)[];
 export type z_usersFieldPolicy = {
 	address?: FieldPolicy<any> | FieldReadFunction<any>,
 	created_at?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	password?: FieldPolicy<any> | FieldReadFunction<any>,
 	pvtKey?: FieldPolicy<any> | FieldReadFunction<any>,
-	username?: FieldPolicy<any> | FieldReadFunction<any>
+	username?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_minttokens?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_minttokens_aggregate?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holders?: FieldPolicy<any> | FieldReadFunction<any>,
+	z_token_holders_aggregate?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type z_users_aggregateKeySpecifier = ('aggregate' | 'nodes' | z_users_aggregateKeySpecifier)[];
 export type z_users_aggregateFieldPolicy = {

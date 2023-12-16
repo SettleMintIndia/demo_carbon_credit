@@ -1,14 +1,15 @@
 import {
-  useGetTokenHoldersByUsernameLazyQuery,
+  useGetTokenDetailsbyuserLazyQuery,
 } from '@demo-carbon-credit/database';
 import { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 
 interface IUser {
   username: string;
+  user_id:any;
 }
 
-export const User = function ({ username }: IUser) {
+export const User = function ({ username,user_id }: IUser) {
   const formatter = new Intl.NumberFormat('en-US');
 
   // new api
@@ -20,11 +21,12 @@ export const User = function ({ username }: IUser) {
       loading: tokenHolderDataLoading,
       error: tokenHolderDataError,
     },
-  ] = useGetTokenHoldersByUsernameLazyQuery({
+  ] = useGetTokenDetailsbyuserLazyQuery({
     variables: {
-      username: username,
+      user_id: user_id,
     },
   });
+  console.log("tokenHolderData",tokenHolderData)
 
   // Initial call
   useEffect(() => {
@@ -37,20 +39,17 @@ export const User = function ({ username }: IUser) {
       <Table className="tablelist" responsive>
         <thead>
           <tr className="table_wrap">
-            <th>Fund Name</th>
-            <th>Token Amount</th>
-            <th>Management Fee</th>
-            <th>Currency</th>
+            <th>Tokens</th>
+            <th>Amount</th>
           </tr>
         </thead>
 
         {tokenHolderData &&
           tokenHolderData.z_token_holder.map((v, i) => (
             <tr key={i} className="table_wrap">
-              <td>{v.z_asset.assetName}</td>
-              <td>{formatter.format(Number(v?.amount))}</td>
-              <td>{v.z_asset.managementFee}</td>
-              <td>{v.z_asset.currency}</td>
+              <td>{v ?.token}</td>
+              <td>{v ?.amount}</td>
+
             </tr>
           ))}
       </Table>

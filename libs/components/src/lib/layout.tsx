@@ -143,7 +143,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                       </li>
                     </a>
 
-                  {/*  {admin==true && <a href="/users" className="link">
+                   {admin==true && <a href="/users" className="link">
                       <li>
                         <div
                           className="link-item">
@@ -152,7 +152,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                         </div>
                       </li>
                     </a>
-} */}
+}
                     <a href="/notifications" className="link">
                       <li>
                         <div
