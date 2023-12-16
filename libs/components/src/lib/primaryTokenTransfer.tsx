@@ -1,10 +1,10 @@
 import {
   useCheckRecordExistLazyQuery,
-  useCreateSecondaryMarketplaceTransferMutation,
+  //useCreateSecondaryMarketplaceTransferMutation,
   useCreateTokenHolderMutation,
-  useGetAdminInfoLazyQuery,
+/*   useGetAdminInfoLazyQuery,
   useGetUserByUsernameLazyQuery,
-  useUpdateAdminBalanceMutation,
+  useUpdateAdminBalanceMutation, */
   useUpdateTokenHolderMutation,
 } from '@demo-carbon-credit/database';
 import React, { useEffect, useState } from 'react';
@@ -27,7 +27,7 @@ export const PrimaryTokenTransaction = ({
   // New apis for purchase from secondary marketplace
 
   // Get admin data
-  const [
+ /*  const [
     getAdminInfoLazyQuery,
     { data: adminData, loading: adminDataLoading, error: adminDataError },
   ] = useGetAdminInfoLazyQuery({ fetchPolicy: 'network-only' });
@@ -58,7 +58,7 @@ export const PrimaryTokenTransaction = ({
     },
   ] = useUpdateAdminBalanceMutation({});
 
-  const [
+  */ const [
     checkRecordExistLazyQuery,
     {
       data: tokenHolderData,
@@ -87,12 +87,12 @@ export const PrimaryTokenTransaction = ({
 
   // Initial Call
   useEffect(() => {
-    getAdminInfoLazyQuery();
+   /*  getAdminInfoLazyQuery();
     getUserByUsernameLazyQuery({
       variables: {
         username: localStorage.getItem('user'),
       },
-    });
+    }); */
   }, []);
 
   const [token, setToken] = useState('0');
@@ -124,7 +124,7 @@ export const PrimaryTokenTransaction = ({
     // first transaction the update in hasura
 
     // Transfer function
-    let tokenInfo = {
+   /*  let tokenInfo = {
       amount: Number(token),
       pvtkey: adminData?.z_users[0].pvtKey,
       assetId: Number(assetId),
@@ -134,7 +134,7 @@ export const PrimaryTokenTransaction = ({
     if (Number(availableToken) - Number(token) < 0) {
       toast.error('Please enter a valid amount');
       return;
-    }
+    } */
     // Toast
     toast(
       <div className="loading_image">
@@ -145,7 +145,7 @@ export const PrimaryTokenTransaction = ({
       }
     );
 
-    setTimeout(async () => {
+   /*  setTimeout(async () => {
       const tx = await fetch('/api/transfer/transfer', {
         method: 'POST',
         body: JSON.stringify(tokenInfo),
@@ -176,12 +176,7 @@ export const PrimaryTokenTransaction = ({
             },
           });
 
-          // Add logic  for token holder
-          /*
-            Here we are going to update admin (-ve the amount). and create user or update user if it is present.
-          */
-
-          // For admin
+         
           await checkRecordExistLazyQuery({
             variables: {
               assetId: assetUUID,
@@ -263,7 +258,7 @@ export const PrimaryTokenTransaction = ({
         .catch((error) => {
           throw error;
         });
-    }, 4100);
+    }, 4100); */
   };
   return (
     <div>
@@ -303,13 +298,13 @@ export const PrimaryTokenTransaction = ({
                     <label className="step_input_label">
                       How many tokens to purchase?
                     </label>
-                    <input
+                   {/*  <input
                       value={token}
                       className="form-control"
                       type="number"
                       placeholder="Enter value"
-                      onChange={(e) => setToken(e.target.value)}
-                    />
+                      onChange={(e) => setToken(e.target.value)} 
+                    />*/}
                   </div>
                 </div>
               )}

@@ -1,14 +1,14 @@
 import {
-  useUpdateTotalMintedMutation,
+ /*  useUpdateTotalMintedMutation,
   useGetAdminInfoLazyQuery,
   useGetAdminInfoQuery,
-  useMintAssetMutation,
+  useMintAssetMutation, */
   useCheckRecordExistLazyQuery,
   useCreateTokenHolderMutation,
   useUpdateTokenHolderMutation,
 } from '@demo-carbon-credit/database';
 import { useModalContext } from '@demo-carbon-credit/providers';
-import { InputMaybe } from 'libs/database/src/graphql.graph.types';
+//import { InputMaybe } from 'libs/database/src/graphql.graph.types';
 import { ChangeEvent, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
@@ -68,7 +68,7 @@ export const Mint = function ({
     },
   ] = useUpdateTokenHolderMutation({});
 
-  const [
+  /* const [
     updateTotalMintedMutation,
     {
       data: updateTotalMintedData,
@@ -82,20 +82,20 @@ export const Mint = function ({
   const [
     mintAssetMutation,
     { data: mintAsset, loading: mintAssetLoading, error: mintAssetError },
-  ] = useMintAssetMutation({});
+  ] = useMintAssetMutation({}); */
 
-  const [getAdminInformation, { data: adminData, loading, error }] =
+  /* const [getAdminInformation, { data: adminData, loading, error }] =
     useGetAdminInfoLazyQuery({
       variables: {},
-    });
+    }); */
 
   // Initial call for admin data
 
   useEffect(() => {
-    getAdminInformation();
+   // getAdminInformation();
   }, []);
 
-  useEffect(() => {
+ /*  useEffect(() => {
     if (adminData?.z_users[0].pvtKey) {
       setToken({
         ...token,
@@ -111,13 +111,13 @@ export const Mint = function ({
         },
       });
     }
-  }, [adminData?.z_users]);
+  }, [adminData?.z_users]); */
 
   const handleChange = (name: keyof IToken, value: IToken[keyof IToken]) => {
     setToken({
       ...token,
       [name]: value,
-      pvtkey: adminData?.z_users[0].pvtKey,
+     // pvtkey: adminData?.z_users[0].pvtKey,
       assetId: assetId,
     });
   };
@@ -156,14 +156,14 @@ export const Mint = function ({
 
         // Mint asset
 
-        mintAssetMutation({
+      /*   mintAssetMutation({
           variables: {
             id: id,
             totalMinted: String(Number(oldMinted) + Number(token.amount)),
             adminBalance: String(Number(adminBalance) + Number(token.amount)),
           },
         });
-
+ */
         // Create the token holder (update if already exist)
 
         if (tokenHolderData?.z_token_holder[0]?.id) {
@@ -181,13 +181,13 @@ export const Mint = function ({
         } else {
           console.log('Creating...');
           // Create  the token holder
-          createTokenHolderMutation({
+         /*  createTokenHolderMutation({
             variables: {
               amount: token?.amount,
               assetId: id,
               userId: adminData?.z_users[0]?.id,
             },
-          });
+          }); */
         }
 
         setModal(undefined);
@@ -206,7 +206,7 @@ export const Mint = function ({
   console.log('tkh', tokenHolderData);
 
   // Console
-  console.log('token holder', id, adminData?.z_users, token?.amount);
+  //console.log('token holder', id, adminData?.z_users, token?.amount);
 
   return (
     <div className="pop-info-base">
@@ -251,9 +251,9 @@ export const Mint = function ({
                 <option value={admin_address}>admin({admin_address})</option>
               )}
             </> */}
-            <option value={adminData?.z_users[0].address}>
+          {/*   <option value={adminData?.z_users[0].address}>
               admin({adminData?.z_users[0].address})
-            </option>
+            </option> */}
           </select>
           <div id="commands" className="mt-2">
             <span>Tokens to be minted</span>

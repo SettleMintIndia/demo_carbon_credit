@@ -1,13 +1,13 @@
 import { create } from 'ipfs-http-client';
 import { NextPageWithLayout } from './_app';
 import { AppLayout } from '@demo-carbon-credit/components';
-import { FileUpload } from 'react-ipfs-uploader';
-import { DropZoneElement } from '@demo-carbon-credit/components';
+/* import { FileUpload } from 'react-ipfs-uploader';
+import { DropZoneElement } from '@demo-carbon-credit/components'; */
 import React, { ReactElement, useState } from 'react'
 import { uploadToipfs } from '@demo-carbon-credit/components';
 import { toast } from 'react-hot-toast';
 import classes from './settings.module.css';
-import { useUpdateSettingsMutation } from '@demo-carbon-credit/database';
+//import { useUpdateSettingsMutation } from '@demo-carbon-credit/database';
 // import { update_user_setting } from ;
 
 
@@ -22,9 +22,9 @@ const Page: NextPageWithLayout = () => {
 
   const [cidHome, setCidHome] = useState(null)
   const [cidHeader, setCidHeader] = useState(null)
-  const [file, setFile] = useState<File>(undefined)
+  /* const [file, setFile] = useState<File>('') */
   async function handleFileUpload(event, filename) {
-    if(file == undefined)
+   /*  if(file == undefined)
     toast.loading('Uploading...',{
       duration:500,
     })
@@ -37,12 +37,12 @@ const Page: NextPageWithLayout = () => {
     console.log(cid)
     toast.success(`File uploaded to IPFS `,{
       duration:2000,
-    });
-    if (filename === 'home') {
+    }); */
+  /*   if (filename === 'home') {
       setCidHome(cid)
     } else {
       setCidHeader(cid)
-    }
+    } */
   }
 
   const [companyName,setCompanyName] = useState('');
@@ -50,10 +50,10 @@ const Page: NextPageWithLayout = () => {
     setCompanyName(event.target.value);
   }
 
-  const [updateSettingsMutation, { data, loading, error }] = useUpdateSettingsMutation({
+  /* const [updateSettingsMutation, { data, loading, error }] = useUpdateSettingsMutation({
     
-  });
-  const onSubmit = ()=>{
+  }); */
+ /*  const onSubmit = ()=>{
     console.log("cid home", cidHome)
     console.log("cid header", cidHeader)
     updateSettingsMutation({
@@ -77,7 +77,7 @@ const Page: NextPageWithLayout = () => {
       setCidHeader("");
       setCompanyName('');
     })
-  }
+  } */
   return (
     <>
       <div className="">
@@ -106,7 +106,7 @@ const Page: NextPageWithLayout = () => {
           </div>
          
           {cidHome && <p>File uploaded to IPFS with CID {cidHome}</p>}<br></br>
-          <button name="upload" className="mt-2" onClick={onSubmit}>Upload</button>
+       {/*    <button name="upload" className="mt-2" onClick={onSubmit}>Upload</button> */}
         </div>
       </div>
     </>

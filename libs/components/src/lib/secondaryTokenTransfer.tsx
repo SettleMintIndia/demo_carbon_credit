@@ -1,10 +1,10 @@
 import {
   useCheckRecordExistLazyQuery,
-  useCreateSecondaryMarketplaceTransferMutation,
+ // useCreateSecondaryMarketplaceTransferMutation,
   useCreateTokenHolderMutation,
-  useGetUserByUsernameLazyQuery,
+/*   useGetUserByUsernameLazyQuery,
   useUpdateLastTreadedPriceMutation,
-  useUpdateSecondaryMarketPlaceMutation,
+  useUpdateSecondaryMarketPlaceMutation, */
   useUpdateTokenHolderMutation,
 } from '@demo-carbon-credit/database';
 import React, { useEffect, useState } from 'react';
@@ -35,7 +35,7 @@ export const SecondaryTokenTransaction = ({
 
   //APIs
   // api for secondary market transfer
-  const [
+  /* const [
     createSecondaryMarketplaceTransferMutation,
     {
       data: secondaryMarketplaceTransferData,
@@ -61,7 +61,7 @@ export const SecondaryTokenTransaction = ({
       loading: updateSecondaryMarketPlaceLoading,
       error: updateSecondaryMarketPlaceError,
     },
-  ] = useUpdateSecondaryMarketPlaceMutation({});
+  ] = useUpdateSecondaryMarketPlaceMutation({}); */
 
   const [
     checkRecordExistLazyQuery,
@@ -91,7 +91,7 @@ export const SecondaryTokenTransaction = ({
   ] = useUpdateTokenHolderMutation({});
 
   // Update the last treaded price
-  const [
+ /*  const [
     updateLastTreadedPriceMutation,
     {
       data: updateLastTreadedPriceData,
@@ -99,19 +99,19 @@ export const SecondaryTokenTransaction = ({
       error: updateLastTreadedPriceDataError,
     },
   ] = useUpdateLastTreadedPriceMutation({});
-
+ */
   // Transaction history
   //  const [createSecondaryMarketplaceTransferMutation, { data, loading, error }] = useCreateSecondaryMarketplaceTransferMutation({
 
   //  });
   // Initial call (fetch user by username)
-  useEffect(() => {
+ /*  useEffect(() => {
     getUserByUsernameLazyQuery({
       variables: {
         username: localStorage.getItem('user'),
       },
     });
-  }, []);
+  }, []); */
 
   const [token, setToken] = useState('0');
 
@@ -147,7 +147,7 @@ export const SecondaryTokenTransaction = ({
       pvtkey: pvtKey,
       assetId: Number(assetId),
       sender: sender,
-      reciever: receiverData?.z_users[0].address,
+      //reciever: receiverData?.z_users[0].address,
     };
 
     console.log('token', {
@@ -155,7 +155,7 @@ export const SecondaryTokenTransaction = ({
       pvtkey: pvtKey,
       assetId: Number(assetId),
       sender: sender,
-      reciever: receiverData?.z_users[0].address,
+      //reciever: receiverData?.z_users[0].address,
       remaining: String(Number(availableToken) - Number(token)),
     });
     if (Number(availableToken) - Number(token) < 0) {
@@ -182,15 +182,15 @@ export const SecondaryTokenTransaction = ({
           const res = await response.json();
           const settlement_date = Date.now().toString();
           toast.dismiss();
-          updateLastTreadedPriceMutation({
+         /*  updateLastTreadedPriceMutation({
             variables: {
               id: assetUUID,
               last_traded_price: price,
             },
-          });
+          }); */
 
           // Create transaction history
-          await createSecondaryMarketplaceTransferMutation({
+        /*   await createSecondaryMarketplaceTransferMutation({
             variables: {
               amount: token,
               assetId: assetUUID,
@@ -201,7 +201,7 @@ export const SecondaryTokenTransaction = ({
               blockNumber: String(res.blockNumber),
               txHash: res.hash,
             },
-          });
+          }); */
 
           // Update the data in token holder
 
@@ -212,8 +212,8 @@ export const SecondaryTokenTransaction = ({
           // For publisher
           await checkRecordExistLazyQuery({
             variables: {
-              assetId: assetUUID,
-              userId: senderId,
+              mint_id: assetUUID,
+              user_id: senderId,
             },
             fetchPolicy: 'network-only',
           }).then((res) => {
@@ -223,8 +223,9 @@ export const SecondaryTokenTransaction = ({
               createTokenHolderMutation({
                 variables: {
                   amount: token,
-                  assetId: assetUUID,
-                  userId: senderId,
+                  mint_id: assetUUID,
+                  user_id: senderId,
+                  token:'1'
                 },
               });
             } else {
@@ -242,11 +243,11 @@ export const SecondaryTokenTransaction = ({
           });
 
           // For receiver
-          console.log('receiver data bro', receiverData?.z_users);
+        //  console.log('receiver data bro', receiverData?.z_users);
           await checkRecordExistLazyQuery({
             variables: {
-              assetId: assetUUID,
-              userId: receiverData?.z_users[0].id,
+              mint_id: assetUUID,
+              user_id: '1'
             },
             fetchPolicy: 'network-only',
           }).then((res) => {
@@ -256,8 +257,9 @@ export const SecondaryTokenTransaction = ({
               createTokenHolderMutation({
                 variables: {
                   amount: token,
-                  assetId: assetUUID,
-                  userId: receiverData?.z_users[0].id,
+                  mint_id: assetUUID,
+                  user_id: '1',
+                  token:'1'
                 },
               });
             } else {
@@ -274,7 +276,7 @@ export const SecondaryTokenTransaction = ({
             }
           });
 
-          await updateSecondaryMarketPlaceMutation({
+       /*    await updateSecondaryMarketPlaceMutation({
             variables: {
               amount: String(Number(availableToken) - Number(token)),
               id: id,
@@ -301,11 +303,11 @@ export const SecondaryTokenTransaction = ({
               }, 3000);
 
               return res.data;
-            })
+            }) 
             .catch((error) => {
               toast.error(`Error, please try again later.${error}`);
               return error;
-            });
+            });*/
         })
         .catch((error) => {
           console.log(error);

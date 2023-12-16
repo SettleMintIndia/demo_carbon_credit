@@ -1,8 +1,8 @@
-import {
+/* import {
   useAddPollMutation,
   useCreatePollOptionMutation,
   useGetUserByUsernameLazyQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import { type } from 'os';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -304,11 +304,11 @@ const contractAbi = [
   },
 ];
 
-const provider = new ethers.providers.JsonRpcProvider(
+/* const provider = new ethers.providers.JsonRpcProvider(
   `https://node-1-4d3b.gke-europe.settlemint.com/bpaas-593499Ee5d10f1EEad81348775fa4c182D310008`
-);
+); */
 
-const adminWallet = new ethers.Wallet(
+/* const adminWallet = new ethers.Wallet(
   '0x908e18cc8f9024d5a41e707e88d9a2fc51a1fe612a80130cbbfc10a7b49a299e',
   provider
 );
@@ -316,9 +316,9 @@ const contract = new ethers.Contract(
   '0x24F6e042c8E7548FA3dA2464B6D2195968402AEE',
   contractAbi,
   provider
-);
+); */
 
-const contractWithAdminWallet = contract.connect(adminWallet);
+//const contractWithAdminWallet = contract.connect(adminWallet);
 type Props = {
   id: string;
   username: string;
@@ -343,7 +343,7 @@ const createPollModal = ({ id, username }: Props) => {
   });
 
   // Create poll
-  const [
+ /*  const [
     addPollMutation,
     { data: addPollData, loading: addPollDataLoading, error: addPollDataError },
   ] = useAddPollMutation({});
@@ -364,7 +364,7 @@ const createPollModal = ({ id, username }: Props) => {
 
   // Initial Call
 
-  useEffect(() => {
+ */ /*  useEffect(() => {
     getUserByUsernameLazyQuery({
       variables: {
         username: username,
@@ -384,7 +384,7 @@ const createPollModal = ({ id, username }: Props) => {
       });
     }
   }, [userData?.z_users]);
-
+ */
   const onChangeInputFields = (
     event:
       | React.ChangeEvent<HTMLInputElement>
@@ -436,7 +436,7 @@ const createPollModal = ({ id, username }: Props) => {
         // });
         // const txResponse = await hash.json();
         // Direct contract call
-        const gasLimit = await contractWithAdminWallet.estimateGas.createPoll(
+       /*  const gasLimit = await contractWithAdminWallet.estimateGas.createPoll(
           '',
           pollInputs.assetId,
           pollInputs.created_by,
@@ -474,7 +474,7 @@ const createPollModal = ({ id, username }: Props) => {
         }
         setBlockChainTransaction(true);
         toast.success('Poll Added Successfully');
-        setModal(undefined);
+        setModal(undefined); */
       } catch (error) {
         toast.error(`${error}`);
       }
@@ -565,13 +565,13 @@ const createPollModal = ({ id, username }: Props) => {
         </div>
       </div>
       <div className="text-right">
-        <button onClick={onSubmit}>
+        {/* <button onClick={onSubmit}>
           {addPollDataLoading ||
           createPollOptionDataLoading ||
           blockChainTransaction
             ? `Submitting`
             : 'Create'}
-        </button>
+        </button> */}
       </div>
     </div>
   );

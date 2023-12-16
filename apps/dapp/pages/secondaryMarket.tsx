@@ -1,7 +1,7 @@
-import {
+/* import {
   useGetAllSecondaryMarketPlaceLazyQuery,
   useGetUserByUsernameLazyQuery,
-} from '@demo-carbon-credit/database';
+}  from '@demo-carbon-credit/database';*/
 import React, { useEffect, useState } from 'react';
 import { useModalContext } from '@demo-carbon-credit/providers';
 import { Container, Row, Col, Table } from 'react-bootstrap';
@@ -34,7 +34,7 @@ const SecondaryMarket = () => {
 
   // New apis
   // Fetch require data for secondary market place data
-  const [
+  /* const [
     getAllSecondaryMarketPlaceQuery,
     {
       data: secondaryMarketPlaceData,
@@ -46,12 +46,12 @@ const SecondaryMarket = () => {
   const [
     getUserByUsernameLazyQuery,
     { data: userDetail, loading: userDetailLoading, error: userDetailError },
-  ] = useGetUserByUsernameLazyQuery({ fetchPolicy: 'network-only' });
+  ] = useGetUserByUsernameLazyQuery({ fetchPolicy: 'network-only' }); */
 
   // API for purchase now
 
   // Initial call
-  useEffect(() => {
+  /* useEffect(() => {
     // Get user data by username
     getUserByUsernameLazyQuery({
       variables: {
@@ -65,7 +65,7 @@ const SecondaryMarket = () => {
       getAllSecondaryMarketPlaceQuery();
     }
   }, [userDetail?.z_users]);
-
+ */
   const handlerowsperPage = (e) => {
     const showperpage = e.currentTarget.value;
     setPerPage(parseInt(showperpage));
@@ -112,7 +112,7 @@ const SecondaryMarket = () => {
 
   // Set data in the table
 
-  useEffect(() => {
+ /*  useEffect(() => {
     // getAllSecondaryMarketListing()
     //   .then((res) => {
     setTableData(secondaryMarketPlaceData?.z_secondary_marketplace);
@@ -125,7 +125,7 @@ const SecondaryMarket = () => {
 
   console.log('tabledata', tableData);
 
-  if (secondaryMarketPlaceDataLoading) return 'Loading...';
+  if (secondaryMarketPlaceDataLoading) return 'Loading...'; */
   return (
     <div>
       {/* Table + Pagination */}
@@ -149,7 +149,7 @@ const SecondaryMarket = () => {
             </thead>
 
             <tbody>
-              {tableData?.map((v, i) => (
+           {/*    {tableData?.map((v, i) => (
                 <tr key={i} className="table_wrap">
                   <td>{v.z_asset.assetName}</td>
                   <td>{v.z_user_publisher.username}</td>
@@ -221,7 +221,7 @@ const SecondaryMarket = () => {
                       </button>)}
                   </td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </Table>
 

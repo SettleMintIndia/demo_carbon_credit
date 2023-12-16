@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import {
+/* import {
   useFractionalizeAssetMutation,
   useGetUserByUsernameQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import toast from 'react-hot-toast';
 import { useModalContext } from '@demo-carbon-credit/providers';
 interface IToken {
@@ -35,7 +35,7 @@ export const CreateToken = ({
     setBuyPrice(String(Math.round(totalAsset / Number(token?.totalSupply))));
   }, [token?.totalSupply]);
 
-  const [
+  /* const [
     fractionalizeAssetMutation,
     {
       data: fractionalizeAsset,
@@ -44,27 +44,27 @@ export const CreateToken = ({
     },
   ] = useFractionalizeAssetMutation({
     fetchPolicy: 'network-only',
-  });
+  }); */
 
   // Buy and Sell
   const [buyPrice, setBuyPrice] = useState<string>();
   const [sellPrice, setSellPrice] = useState<string>();
 
-  const { data, loading, error } = useGetUserByUsernameQuery({
+  /* const { data, loading, error } = useGetUserByUsernameQuery({
     variables: { username: localStorage.getItem('user') },
     fetchPolicy: 'network-only',
-  });
+  }); */
 
-  if (error) return <p>{error.message}</p>
+/*   if (error) return <p>{error.message}</p>
   if (loading) return <p>Loading...</p>;
 
-  const userDetail = data?.z_users[0].pvtKey;
+  const userDetail = data?.z_users[0].pvtKey; */
 
   const handleChange = (name: keyof IToken, value: IToken[keyof IToken]) => {
     setToken({
       ...token,
       [name]: value,
-      pvtkey: userDetail,
+      //pvtkey: userDetail,
       assetId: String(Math.floor(Math.random() * (9999 - 100 + 1) + 100)),
       maturityStamp: 64065557711,
       faceValue: String(Math.round(totalAsset / Number(value))),
@@ -96,7 +96,7 @@ export const CreateToken = ({
       if (tx === 200) {
         // Update on hasura database
 
-        fractionalizeAssetMutation({
+        /* fractionalizeAssetMutation({
           variables: {
             assetId: String(token?.assetId),
             buyPrice: String(buyPrice),
@@ -105,7 +105,7 @@ export const CreateToken = ({
             last_traded_price: sellPrice as string,
             totalSupply: String(token?.totalSupply),
           },
-        });
+        }); */
 
         setModal(undefined);
         // Loading success

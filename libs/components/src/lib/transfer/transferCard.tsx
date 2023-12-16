@@ -1,7 +1,7 @@
-import {
+/* import {
   useGetTransactionHistoryByReceiverLazyQuery,
   useGetTransactionHistoryBySenderLazyQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useModalContext } from '@demo-carbon-credit/providers';
 import { IMint } from '../mint/tokencard';
@@ -92,7 +92,7 @@ export const TransferCard = () => {
   };
 
   // Get transaction history by sender using username
-  const [
+  /* const [
     getTransactionHistoryByReceiverQuery,
     {
       data: transactionHistoryByReceiverData,
@@ -101,7 +101,7 @@ export const TransferCard = () => {
     },
   ] = useGetTransactionHistoryByReceiverLazyQuery({
     fetchPolicy: 'network-only',
-  });
+  }); */
 
   // const [
   //   useGetTransactionHistoryByRecieverQuery,
@@ -117,7 +117,7 @@ export const TransferCard = () => {
   
 
   // Get transaction history by receiver using username
-  const [
+/*   const [
     getTransactionHistoryBySenderLazyQuery,
     {
       data: getTransactionHistoryBySenderData,
@@ -140,7 +140,7 @@ export const TransferCard = () => {
         username: localStorage.getItem('user'),
       },
     });
-  }, []);
+  }, []); */
 
   // Calculate the asset amount of a user (using useEffect)
 
@@ -160,11 +160,11 @@ export const TransferCard = () => {
       const assetId = item.z_asset.assetId;
       const amount = parseInt(item.amount);
 
-      if (assetAmounts.hasOwnProperty(assetId)) {
+     /*  if (assetAmounts.hasOwnProperty(assetId)) {
         assetAmounts[assetId] += amount;
       } else {
         assetAmounts[assetId] = amount;
-      }
+      } */
     }
 
     return assetAmounts;
@@ -179,14 +179,14 @@ export const TransferCard = () => {
       const perAvgTokenCost = parseInt(item.amount) * parseInt(item.price);
       let totalAmount = 0;
       // console.log('avg avg item', item);
-      if (avgTokenCost.hasOwnProperty(assetId)) {
+    /*   if (avgTokenCost.hasOwnProperty(assetId)) {
         avgTokenCost[assetId] += perAvgTokenCost;
         totalAmount += parseInt(item.amount);
       } else {
         avgTokenCost[assetId] = perAvgTokenCost;
         totalAmount = parseInt(item.amount);
       }
-      avgTokenCost[assetId] = avgTokenCost[assetId] / totalAmount;
+      avgTokenCost[assetId] = avgTokenCost[assetId] / totalAmount; */
     }
     return avgTokenCost;
   };
@@ -199,16 +199,16 @@ export const TransferCard = () => {
       const perCurrentMarketValue =
         parseInt(item.amount) * parseInt(item.z_asset.last_traded_price);
 
-      if (totalMarketValue.hasOwnProperty(assetId)) {
+    /*   if (totalMarketValue.hasOwnProperty(assetId)) {
         totalMarketValue[assetId] += perCurrentMarketValue;
       } else {
         totalMarketValue[assetId] = perCurrentMarketValue;
-      }
+      } */
     }
     return totalMarketValue;
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     // Generate appropriate table
 
     if (
@@ -295,7 +295,7 @@ export const TransferCard = () => {
     'avg avg tx history',
     transactionHistoryByReceiverData?.z_transaction_history
   );
-
+ */
   // Calculate total investment
   useEffect(() => {
     // if (stateAverageTokenCostArray) {
@@ -313,10 +313,10 @@ export const TransferCard = () => {
     // stateAverageTokenCostArray[v?.z_asset.assetId]
     if (stateAverageTokenCostArray && tableData) {
       let avgTemp = 0;
-      tableData.forEach((token) => {
+    /*   tableData.forEach((token) => {
         avgTemp +=
           token.amount * stateAverageTokenCostArray[token?.z_asset?.assetId];
-      });
+      }); */
       console.log('avg', avgTemp);
       setStateTotalInvestment(avgTemp);
     }
@@ -326,12 +326,12 @@ export const TransferCard = () => {
   useEffect(() => {
     if (stateTotalMarketValueArray) {
       let tempTotalMarketValue = 0;
-      for (const key in stateTotalMarketValueArray) {
+     /*  for (const key in stateTotalMarketValueArray) {
         // if (data.hasOwnProperty(key)) {
         const value = stateTotalMarketValueArray[key];
         console.log('vvv', key, value);
         tempTotalMarketValue += parseInt(value);
-      }
+      } */
       setStateTotalMarketValue(tempTotalMarketValue);
     }
 
@@ -414,7 +414,7 @@ export const TransferCard = () => {
   });
 
   console.log('table data', tableData);
-  if (
+  /* if (
     transactionHistoryByReceiverDataLoading ||
     getTransactionHistoryBySenderDataLoading
   )
@@ -422,7 +422,7 @@ export const TransferCard = () => {
     transactionHistoryByReceiverData?.z_transaction_history.map(item => {
       console.log("item here", item)
       return item;
-    });
+    }); */
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -596,11 +596,15 @@ export const TransferCard = () => {
                                 //       balance={v.balance}
                                 //     />
                                 //   ) : (
-                                <SecondaryTransferModal
+                                 <SecondaryTransferModal
                                   balance={v?.amount}
                                   assetId={v?.z_asset.id}
                                   price={v?.price}
-                                />
+                                  totaltoken={v.token}
+
+                                /> 
+
+                              
                                 //   )}
                                 // </>
                               ),

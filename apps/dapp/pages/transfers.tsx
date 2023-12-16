@@ -6,7 +6,7 @@ import ReactPaginate from 'react-paginate';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useModalContext } from '@demo-carbon-credit/providers';
-import {
+/* import {
   useApproveDirectTransferMutation,
   useCheckRecordExistLazyQuery,
   useCreateTokenHolderMutation,
@@ -14,12 +14,12 @@ import {
   useGetDirectTransactionByIsApprovedLazyQuery,
   useUpdateAdminBalanceMutation,
   useUpdateTokenHolderMutation,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import { toast } from 'react-hot-toast';
 const Page: NextPageWithLayout = () => {
   // Get approved transactions
 
-  const [
+ /*  const [
     getDisApprovedDirectTransaction,
     {
       data: disApprovedDirectTransaction,
@@ -32,9 +32,9 @@ const Page: NextPageWithLayout = () => {
     },
     fetchPolicy: 'network-only',
   });
-
+ */
   // Get unapproved transactions
-  const [
+/*   const [
     getApprovedDirectTransaction,
     {
       data: approvedDirectTransactionData,
@@ -46,19 +46,19 @@ const Page: NextPageWithLayout = () => {
       is_approved: true,
     },
     fetchPolicy: 'network-only',
-  });
+  }); */
   // Approve the transaction
-  const [
+ /*  const [
     approveDirectTransferMutation,
     {
       data: approveTransactionData,
       loading: approveTransactionDataLoading,
       error: approveTransactionDataError,
     },
-  ] = useApproveDirectTransferMutation({});
+  ] = useApproveDirectTransferMutation({}); */
 
   // Reject transaction
-  const [
+ /*  const [
     deleteDirectTransactionMutation,
     {
       data: deleteDirectTransactionData,
@@ -67,7 +67,6 @@ const Page: NextPageWithLayout = () => {
     },
   ] = useDeleteDirectTransactionMutation({});
 
-  // Update admin balance after transaction
   const [
     updateAdminBalanceMutation,
     {
@@ -76,10 +75,10 @@ const Page: NextPageWithLayout = () => {
       error: updateAdminBalanceError,
     },
   ] = useUpdateAdminBalanceMutation({});
-
+ */
   // Token holder API query
 
-  const [
+ /*  const [
     checkRecordExistLazyQuery,
     {
       data: tokenHolderData,
@@ -125,7 +124,7 @@ const Page: NextPageWithLayout = () => {
     disApprovedDirectTransaction?.z_transaction_history,
     approvedDirectTransactionData?.z_transaction_history,
   ]);
-
+ */
   const { setModal } = useModalContext();
 
   const [searchData, setSearchData] = useState([]);
@@ -257,7 +256,7 @@ const Page: NextPageWithLayout = () => {
       }
     );
 
-    const timeout = setTimeout(async () => {
+   /*  const timeout = setTimeout(async () => {
       const tx = await fetch('/api/transfer/transfer', {
         method: 'POST',
         body: JSON.stringify(token),
@@ -275,14 +274,7 @@ const Page: NextPageWithLayout = () => {
             },
           })
             .then(async (res) => {
-              // Apply the logic of token holder
-
-              /*
-                First we have to check if the same data is exist (2 times ).
-
-              */
-
-              // For admin
+            
               await checkRecordExistLazyQuery({
                 variables: {
                   assetId: transferData?.z_asset.id,
@@ -384,12 +376,12 @@ const Page: NextPageWithLayout = () => {
         .catch((err) => {
           throw err;
         });
-    }, 4100);
+    }, 4100); */
   };
 
   // Reject transfer
 
-  const rejectTransfer = async (id: string) => {
+ /*  const rejectTransfer = async (id: string) => {
     deleteDirectTransactionMutation({
       variables: {
         id: id,
@@ -406,7 +398,7 @@ const Page: NextPageWithLayout = () => {
   };
 
   if (disApprovedDirectTransactionLoading && approvedDirectTransactionLoading)
-    return <p>Loading...</p>;
+    return <p>Loading...</p>; */
 
   return (
     <>
@@ -433,7 +425,7 @@ const Page: NextPageWithLayout = () => {
               <tbody>
                 {tableData?.map((v, i) => (
                   <tr key={i} className="table_wrap">
-                    <td>{v.z_asset.assetName}</td>
+                  {/*   <td>{v.z_asset.assetName}</td>
                     <td>{v.amount}</td>
                     <td>{moment(String(v.created_at)).format('DD-MMM-YY')}</td>
 
@@ -474,7 +466,7 @@ const Page: NextPageWithLayout = () => {
                         Reject
                       </button>
                     </td>
-                  </tr>
+                   */}</tr>
                 ))}
               </tbody>
             </Table>
@@ -559,7 +551,8 @@ const Page: NextPageWithLayout = () => {
                 </tr>
               </thead>
               {tableData2?.map((v, i) => (
-                <tr key={i} className="table_wrap">
+                <tr></tr>
+              /*   <tr key={i} className="table_wrap">
                   <td>{v.z_asset.assetName}</td>
                   <td>{v.amount}</td>
                   <td>
@@ -583,7 +576,7 @@ const Page: NextPageWithLayout = () => {
                       </a>
                     </div>
                   </td>
-                </tr>
+                </tr> */
               ))}
             </Table>
 

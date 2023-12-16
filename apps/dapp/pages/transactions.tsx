@@ -1,5 +1,5 @@
-import { useGetAllTransactionLazyQuery } from '@demo-carbon-credit/database';
-import { NextPageWithLayout } from './_app';
+/* import { useGetAllTransactionLazyQuery } from '@demo-carbon-credit/database';
+ */import { NextPageWithLayout } from './_app';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Row, Table } from 'react-bootstrap';
@@ -30,7 +30,7 @@ const Page: NextPageWithLayout = () => {
   const [searchKeyTable, setSearchKeyTable] = useState('');
 
   // Get all transactions
-  const [getAllTransactionLazyQuery, { data, loading, error }] =
+  /* const [getAllTransactionLazyQuery, { data, loading, error }] =
     useGetAllTransactionLazyQuery({
       variables: {},
       fetchPolicy: 'network-only',
@@ -64,11 +64,7 @@ const Page: NextPageWithLayout = () => {
     setPerPage(parseInt(showperpage));
     setCurrentPage(0);
     if (searchKey == 'y') {
-      /*  const slice = searchKeyTable.slice(0, 0 + e.currentTarget.value);
-       setPageCount(Math.ceil(searchKeyTable.length / e.currentTarget.value))
-       setTableData(slice);
-       setOffSet(0);
-       setSearchData(searchKeyTable); */
+     
     } else {
       const slice = orgtableData.slice(0, 0 + e.currentTarget.value);
       setPageCount(Math.ceil(orgtableData.length / e.currentTarget.value));
@@ -88,11 +84,7 @@ const Page: NextPageWithLayout = () => {
   const loadMoreData = (offsetdata) => {
     const data = orgtableData;
     if (searchKey == 'y') {
-      /*  const slice_det = searchKeyTable.slice(offsetdata, offsetdata + perPage);
-       setPageCount(Math.ceil(searchKeyTable.length / perPage))
-       setTableData(slice_det);
-       setOffSet(offsetdata);
-       setSearchData(searchKeyTable); */
+      
     } else {
       const slice = data.slice(offsetdata, offsetdata + perPage);
       setPageCount(Math.ceil(data.length / perPage));
@@ -102,8 +94,8 @@ const Page: NextPageWithLayout = () => {
     }
   };
 
-  console.log('transaction log', tableData);
-  if (loading) return <p>Loading...</p>;
+  console.log('transaction log', tableData); */
+  //if (loading) return <p>Loading...</p>;
   return (
     <>
       <div className="header-area">
@@ -122,7 +114,7 @@ const Page: NextPageWithLayout = () => {
               <th>Time</th>
             </tr>
           </thead>
-          {tableData?.filter((item) =>  (localStorage.getItem('user') === item.z_user_by_receiver
+         {/*  {tableData?.filter((item) =>  (localStorage.getItem('user') === item.z_user_by_receiver
 .username || localStorage.getItem('user') === item.z_user_by_sender
 .username) || localStorage.getItem('user') === 'admin').map((v, i) => (
             <tr key={v.id} className="table_wrap">
@@ -173,10 +165,10 @@ const Page: NextPageWithLayout = () => {
                   : moment(String(v.created_at)).format('DD-MM-YY')}
               </td>
             </tr>
-          ))}
+          ))} */}
         </Table>
 
-        {tableData.length != 0 && (
+     {/*    {tableData.length != 0 && (
           <div className="pagging-area pagging-trans">
             <div className="pagination_row_div">
               <p className="pagination_title">Showing items per page:</p>
@@ -226,13 +218,12 @@ const Page: NextPageWithLayout = () => {
                 pageRangeDisplayed={5}
                 onPageChange={handlePageClick}
                 containerClassName={'pagination'}
-                /* subContainerClassName={"pages pagination"} */
                 activeClassName={'active'}
                 forcePage={currentPage}
               />
             </div>
           </div>
-        )}
+        )} */}
       </Row>
     </>
   );

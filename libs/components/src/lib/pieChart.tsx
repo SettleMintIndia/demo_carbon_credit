@@ -44,7 +44,7 @@ const pieChart = ({ data }: IData) => {
     return 'rgb(' + darkerColor.join(', ') + ')';
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     data?.map((value: any) => {
       setLabels((prev) => [...prev, value?.z_user?.username]);
       setValues((prev) => [...prev, Number(value?.amount)]);
@@ -55,7 +55,7 @@ const pieChart = ({ data }: IData) => {
       ]);
       setBorderColor((prev) => [...prev, generateDarkerShade(baseColor, 20)]);
     });
-  }, []);
+  }, []); */
 
   useEffect(() => {
     if (labels !== null) {
@@ -71,7 +71,7 @@ const pieChart = ({ data }: IData) => {
           },
         ],
       };
-      setPeiData(data1);
+      //setPeiData(data1);
     }
   }, [labels, values, backgroundColor, borderColor]);
 

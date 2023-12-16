@@ -1,4 +1,4 @@
-import { useGetPollByAssetUuidLazyQuery } from '@demo-carbon-credit/database';
+//import { useGetPollByAssetUuidLazyQuery } from '@demo-carbon-credit/database';
 import React, { useEffect } from 'react';
 import { useModalContext } from '@demo-carbon-credit/providers';
 import { Table } from 'react-bootstrap';
@@ -12,7 +12,7 @@ const viewPollsModal = ({ id }: Props) => {
   const { setModal } = useModalContext();
 
   // Get poll data by uuid
-  const [
+ /*  const [
     getPollByAssetUuidLazyQuery,
     { data: pollData, loading: pollDataLoading, error: pollDataError },
   ] = useGetPollByAssetUuidLazyQuery({ fetchPolicy: 'network-only' });
@@ -26,7 +26,7 @@ const viewPollsModal = ({ id }: Props) => {
   }, []);
 
   console.log('poll data ', pollData?.z_poll);
-
+ */
   // Get today date
   const compareTimeWithCurrent = (timeString: any) => {
     const givenTime = new Date(timeString);
@@ -57,7 +57,7 @@ const viewPollsModal = ({ id }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {pollData?.z_poll.map((v) => (
+            {/* {pollData?.z_poll.map((v) => (
               <tr key={v?.id}>
                 <td>{v.poll_title}</td>
                 <td> {moment(String(v?.poll_end_date)).format('DD-MMM-YY')}</td>
@@ -105,7 +105,7 @@ const viewPollsModal = ({ id }: Props) => {
                   View History
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </Table>
       </div>

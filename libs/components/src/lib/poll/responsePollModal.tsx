@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useModalContext } from '@demo-carbon-credit/providers';
-import {
+/* import {
   useCreatePollResponseMutation,
   useGetUserByUsernameLazyQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import toast from 'react-hot-toast';
 type Props = {
   pollTitle: string;
@@ -19,7 +19,7 @@ const responsePollModal = ({ pollTitle, options, pollId }: Props) => {
   //   useCreateResponseMutation({});
 
   // Get user by username
-  const [getUserByUsernameLazyQuery, { data: userData, loading, error }] =
+  /* const [getUserByUsernameLazyQuery, { data: userData, loading, error }] =
     useGetUserByUsernameLazyQuery({ fetchPolicy: 'network-only' });
   // Add response to the poll
 
@@ -31,10 +31,10 @@ const responsePollModal = ({ pollTitle, options, pollId }: Props) => {
       error: createPollResponseDataError,
     },
   ] = useCreatePollResponseMutation({});
-
+ */
   //  Initial call
 
-  useEffect(() => {
+  /* useEffect(() => {
     getUserByUsernameLazyQuery({
       variables: {
         username: localStorage.getItem('user'),
@@ -46,19 +46,19 @@ const responsePollModal = ({ pollTitle, options, pollId }: Props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, []); */
 
   const onSubmit = async () => {
     console.log(value, pollId, userId);
 
     try {
-      const responseId = await createPollResponseMutation({
+     /*  const responseId = await createPollResponseMutation({
         variables: {
           pollId: pollId,
           response_by: userId,
           value: value,
         },
-      });
+      }); */
       toast.success('Poll response Added Successfully');
       setModal(undefined);
     } catch (error) {
@@ -92,9 +92,9 @@ const responsePollModal = ({ pollTitle, options, pollId }: Props) => {
         </div>
 
         <div className="text-right">
-          <button onClick={onSubmit}>
+         {/*  <button onClick={onSubmit}>
             {createPollResponseDataLoading ? 'Submitting' : 'Submit'}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

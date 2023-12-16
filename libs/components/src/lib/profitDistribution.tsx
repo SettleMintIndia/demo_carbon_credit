@@ -1,6 +1,6 @@
-import {
+/* import {
   useGetProfitByAssetIdLazyQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import { Table } from 'react-bootstrap';
 import React, { useEffect } from 'react';
 import { useModalContext } from '@demo-carbon-credit/providers';
@@ -16,7 +16,7 @@ const profitDistribution = ({ assetId }: Props) => {
 
   // New Query
 
-  const [
+ /*  const [
     getProfitByAssetIdQuery,
     {
       data: profitDistributionData,
@@ -25,10 +25,10 @@ const profitDistribution = ({ assetId }: Props) => {
     },
   ] = useGetProfitByAssetIdLazyQuery({
     fetchPolicy: 'network-only',
-  });
+  }); */
 
   // use effect
-  useEffect(() => {
+  /* useEffect(() => {
     getProfitByAssetIdQuery({
       variables: {
         assetId: assetId,
@@ -38,7 +38,7 @@ const profitDistribution = ({ assetId }: Props) => {
 
   console.log('Profit distribution', profitDistributionData);
 
-  if (profitDistributionDataLoading) return <p> Loading...</p>;
+  if (profitDistributionDataLoading) return <p> Loading...</p>; */
   return (
     <div className="pop-info-base">
       <div>
@@ -57,10 +57,9 @@ const profitDistribution = ({ assetId }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {profitDistributionData?.z_profit.map((v) => (
+           {/*  {profitDistributionData?.z_profit.map((v) => (
               <tr>
                 <td>{moment(String(v.created_at)).format('DD-MMM-YY')}</td>
-                {/* <td>{v.totalProfit}</td> */}
                 <td>{v.totalHolders}</td>
                 <td>
                   <div className="token-address">
@@ -87,7 +86,7 @@ const profitDistribution = ({ assetId }: Props) => {
                   View
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </Table>
       </div>

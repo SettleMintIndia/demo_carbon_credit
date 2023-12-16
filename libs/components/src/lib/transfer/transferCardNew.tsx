@@ -1,6 +1,6 @@
-import {
+/* import {
   useGetTransactionHistoryByReceiverQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import { Table } from 'react-bootstrap';
 import ProfitDistribution from '../profitDistribution';
 import { useModalContext } from '@demo-carbon-credit/providers';
@@ -9,12 +9,12 @@ import ViewPollsModal from 'libs/components/src/lib/poll/viewPollsModal';
 
 export const TransferCardNew = () => {
   const { setModal } = useModalContext();
-  const {data, loading, error} = useGetTransactionHistoryByReceiverQuery({
+/*   const {data, loading, error} = useGetTransactionHistoryByReceiverQuery({
     fetchPolicy: 'network-only',
     variables: {
       username: localStorage.getItem('user')
-    }
-  });
+    } 
+  });*/
   const formatter = new Intl.NumberFormat('en-US', {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -24,7 +24,7 @@ export const TransferCardNew = () => {
   });
   
 
-  if (loading) <p>Loading...</p>;
+ /*  if (loading) <p>Loading...</p>;
   console.log("data",data?.z_transaction_history);
   const mergedTransactions = {};
 
@@ -49,17 +49,20 @@ export const TransferCardNew = () => {
         };
     }
 });
-
+ */
 // Calculate the average price for each asset
-for (let assetId in mergedTransactions) {
+/* for (let assetId in mergedTransactions) {
     mergedTransactions[assetId].averagePrice = mergedTransactions[assetId].totalPrice / mergedTransactions[assetId].totalQuantity;
 }
 
 console.log(Object.values(mergedTransactions));
 
-  console.log(mergedTransactions);
+  console.log(mergedTransactions); */
+  return(
+    <div></div>
+  )
 
-  return Object.values(mergedTransactions).length > 0 ? (
+  /* return Object.values(mergedTransactions).length > 0 ? (
     <>
     <div className="mb-4">
       <h2>My Tokens</h2>
@@ -96,7 +99,8 @@ console.log(Object.values(mergedTransactions));
                       balance={tx.totalQuantity}
                       assetId={tx.assetId}
                       price={String(tx.initialPrice)}
-                    />
+                      totaltoken={tx.token}
+                      />
                   ),
                 });
               }}
@@ -137,5 +141,5 @@ console.log(Object.values(mergedTransactions));
           </div>
           <div>No Token Found</div>
         </>
-      )
+      ) */
 }

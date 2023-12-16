@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useModalContext } from '@demo-carbon-credit/providers';
 import { Table } from 'react-bootstrap';
-import { useGetResponseOfTokenHolderLazyQuery } from '@demo-carbon-credit/database';
+//import { useGetResponseOfTokenHolderLazyQuery } from '@demo-carbon-credit/database';
 type Props = {
   pollResponse: any;
   pollId: string;
@@ -10,7 +10,7 @@ type Props = {
 const pollHistory = ({ pollResponse, pollId, pollOptions }: Props) => {
   // Get all token history
 
-  const [
+  /* const [
     getResponseOfTokenHolderQuery,
     {
       data: allTokenHolders,
@@ -20,7 +20,7 @@ const pollHistory = ({ pollResponse, pollId, pollOptions }: Props) => {
   ] = useGetResponseOfTokenHolderLazyQuery({
     variables: {},
     fetchPolicy: 'network-only',
-  });
+  }); */
 
   const [countedOptionData, setCountedOptionData] = useState();
 
@@ -32,16 +32,16 @@ const pollHistory = ({ pollResponse, pollId, pollOptions }: Props) => {
 
       const counter = 1;
 
-      if (optionCountedData.hasOwnProperty(optionValue)) {
+    /*   if (optionCountedData.hasOwnProperty(optionValue)) {
         optionCountedData[optionValue] += counter;
       } else {
         optionCountedData[optionValue] = counter;
-      }
+      } */
     }
     return optionCountedData;
   };
 
-  useEffect(() => {
+ /*  useEffect(() => {
     // count each response count
     getResponseOfTokenHolderQuery();
     // @ts-ignore
@@ -50,7 +50,7 @@ const pollHistory = ({ pollResponse, pollId, pollOptions }: Props) => {
 
   console.log('counted option data', countedOptionData);
   console.log('all token holders', allTokenHolders);
-
+ */
   return (
     <div className="pop-info-base">
       <div>

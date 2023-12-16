@@ -1,6 +1,4 @@
-import {
-    useGetAllAssetsLazyQuery,
-  } from '@demo-carbon-credit/database';
+
   import { NextPageWithLayout } from './_app';
   import { useEffect, useState } from 'react';
   import { useModalContext } from '@demo-carbon-credit/providers';

@@ -1,8 +1,8 @@
 import {
-  useCreateProfitDistributionMutation,
+ /*  useCreateProfitDistributionMutation,
   useCreateProfitMutation,
   useGetTokenBalanceQuery,
-  useGetTokenHolderDetailsLazyQuery,
+  useGetTokenHolderDetailsLazyQuery, */
 } from '@demo-carbon-credit/database';
 import { Table } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
@@ -234,7 +234,7 @@ const contractAbi = [
     type: 'function',
   },
 ];
-const provider = new ethers.providers.JsonRpcProvider(
+/* const provider = new ethers.providers.JsonRpcProvider(
   `https://node-1-4d3b.gke-europe.settlemint.com/bpaas-593499Ee5d10f1EEad81348775fa4c182D310008`
 );
 
@@ -250,7 +250,7 @@ const contract = new ethers.Contract(
 
 const contractWithAdminWallet = contract.connect(adminWallet);
 
-import toast from 'react-hot-toast';
+ */import toast from 'react-hot-toast';
 type Props = {
   asset: any;
 };
@@ -305,7 +305,7 @@ const profit = ({ asset }: Props) => {
 
   // Get all token_holder by token uuid
 
-  const [
+ /*  const [
     getTokenHolderDetailsQuery,
     {
       data: tokenHolderData,
@@ -358,13 +358,14 @@ const profit = ({ asset }: Props) => {
     }
   }, [tokenHolderData?.z_token_holder]);
 
-  console.log('token holders', tokenHolderData);
+  */ 
+ //console.log('token holders', tokenHolderData);
   console.log('asset details', asset);
 
   const submitProfitDistribution = async () => {
     let profit_distributions: any = [];
 
-    tokenHolderData?.z_token_holder?.map((v) => {
+   /*  tokenHolderData?.z_token_holder?.map((v) => {
       profit_distributions.push({
         name: v.z_asset.assetName,
         tokenHeld: v.amount,
@@ -373,7 +374,7 @@ const profit = ({ asset }: Props) => {
         ),
         userId: v.userId,
       });
-    });
+    }); */
 
     let profitObj = {
       assetId: asset.id,
@@ -412,7 +413,7 @@ const profit = ({ asset }: Props) => {
 
       // Direct call
 
-      const gasLimit = await contractWithAdminWallet.estimateGas.createProfit(
+     /*  const gasLimit = await contractWithAdminWallet.estimateGas.createProfit(
         String(totalValue),
         totalHolders,
         asset.assetId,
@@ -444,7 +445,7 @@ const profit = ({ asset }: Props) => {
             profitId: profitId.data?.insert_z_profit?.returning[0].id,
           },
         });
-      });
+      }); */
 
       toast.success('Distribution  successful');
       setBlockChainTransaction(false);
@@ -454,7 +455,7 @@ const profit = ({ asset }: Props) => {
     }
   };
 
-  if (tokenHolderDataLoading) return <p>Loading...</p>;
+  //if (tokenHolderDataLoading) return <p>Loading...</p>;
 
   return (
     <div className="pop-info-base">
@@ -488,13 +489,12 @@ const profit = ({ asset }: Props) => {
               <th>Share in Profit</th>
             </tr>
           </thead>
-          {tokenHolderData &&
+         {/*  {tokenHolderData &&
             tokenHolderData?.z_token_holder &&
             tokenHolderData?.z_token_holder?.map((v, i) => (
               <tr key={i} className="table_wrap">
                 <td>{v.z_user.username}</td>
                 <td>{formatter.format(Number(v?.amount))}</td>
-                {/* Dynamically calculated  value*/}
                 <td>
                   {formatter.format(
                     Math.round(
@@ -503,12 +503,12 @@ const profit = ({ asset }: Props) => {
                   )}
                 </td>
               </tr>
-            ))}
+            ))} */}
         </Table>
       </div>
 
       <div className="text-right">
-        <button
+      {/*   <button
           onClick={submitProfitDistribution}
           disabled={
             createProfitDataLoading ||
@@ -523,7 +523,7 @@ const profit = ({ asset }: Props) => {
           blockChainTransaction
             ? `Distributing`
             : `Distribute`}
-        </button>
+        </button> */}
       </div>
     </div>
   );

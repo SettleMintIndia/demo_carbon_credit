@@ -1,6 +1,6 @@
-import {
+/* import {
   useGetTokenHolderDetailsLazyQuery,
-} from '@demo-carbon-credit/database';
+} from '@demo-carbon-credit/database'; */
 import { Table } from 'react-bootstrap';
 import PieChart from './pieChart';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ export const Token = function ({ assetUUID }: IToken) {
   //   fetchPolicy: 'network-only',
   // });
 
-  const [
+  /* const [
     getTokenHolderDetailsLazyQuery,
     {
       data: tokenHolderData,
@@ -36,7 +36,7 @@ export const Token = function ({ assetUUID }: IToken) {
       },
     });
   }, []);
-
+ */
   // const tokenData = data?.accounts.map((v) => {
   //   return {
   //     balance: v?.ERC1155balances.find((v) => v.token.identifier === assetUUID)
@@ -48,8 +48,8 @@ export const Token = function ({ assetUUID }: IToken) {
   //   };
   // });
   // const showData = tokenData?.filter((v) => v.balance !== undefined);
-  console.log('token holder data', tokenHolderData, assetUUID);
-  if (tokenHolderDataLoading) return <p>Loading...</p>;
+  /* console.log('token holder data', tokenHolderData, assetUUID);
+  if (tokenHolderDataLoading) return <p>Loading...</p>; */
   return (
     <div className="row">
       <div>
@@ -65,9 +65,9 @@ export const Token = function ({ assetUUID }: IToken) {
               className="dummy_payment_image"
             /> */}
             {/* <div className="pie-chart-container"> */}
-            {tokenHolderData && tokenHolderData.z_token_holder && (
+           {/*  {tokenHolderData && tokenHolderData.z_token_holder && (
               <PieChart data={tokenHolderData?.z_token_holder!} />
-            )}
+            )} */}
             {/* </div> */}
           </div>
         </div>
@@ -80,7 +80,7 @@ export const Token = function ({ assetUUID }: IToken) {
                 <th>Tokens</th>
               </tr>
             </thead>
-            {tokenHolderData?.z_token_holder?.map((v, i) => (
+           {/*  {tokenHolderData?.z_token_holder?.map((v, i) => (
               <tr key={i} className="table_wrap">
                 <td>{v.z_user.username}</td>
                 <td>
@@ -88,7 +88,7 @@ export const Token = function ({ assetUUID }: IToken) {
                 </td>
                 <td>{v?.amount}</td>
               </tr>
-            ))}
+            ))} */}
           </Table>
           {/* {showData && (
             <div className="pie-chart-container">
