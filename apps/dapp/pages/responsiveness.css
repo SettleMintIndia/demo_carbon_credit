@@ -13,6 +13,20 @@
     font-size: 16px;
   }
 }
+@media screen and (max-width: 1280px) {
+  .modal.show .modal-dialog {
+    margin-left: 18%;
+    max-width: 700px;
+  }
+}
+@media screen and (max-width: 1180px) {
+  .mint-token .form-group {
+    width: 100%;
+  }
+  .mint-token .btn-wrap {
+    margin-right: 0;
+  }
+}
 @media screen and (max-width: 1080px) {
   .dashboard-contain .card-info .title {
     font-size: 18px;
@@ -31,6 +45,35 @@
   }
   .right-side {
     padding-left: 300px;
+  }
+
+  .cleaner-production .modal-header,
+  .cleaner-production .modal-body,
+  .energy-efficiency .modal-header,
+  .energy-efficiency .modal-body,
+  .carbon-capture .modal-header,
+  .carbon-capture .modal-body {
+    padding: 30px !important;
+  }
+  .modal.show .modal-dialog {
+    max-width: 600px;
+  }
+  .cleaner-production .modal-title,
+  .energy-efficiency .modal-title,
+  .carbon-capture .modal-title {
+    font-size: 26px !important;
+  }
+  .cleaner-production .modal-body,
+  .energy-efficiency .modal-body,
+  .carbon-capture .modal-body {
+    font-size: 18px;
+  }
+  .cleaner-production .modal-button .btn,
+  .energy-efficiency .modal-button .btn,
+  .carbon-capture .modal-button .btn {
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
   }
 }
 @media screen and (max-width: 980px) {
@@ -58,10 +101,43 @@
   .right-side {
     padding-left: 290px;
   }
+  .mint-token .form-group label {
+    width: 40%;
+  }
+  .input-container,
+  .input-container1,
+  .input-container2,
+  .input-container3 {
+    width: 300px;
+  }
+
+  .react-tabs__tab {
+    width: 170px !important;
+    padding: 0 !important;
+  }
+  .react-tabs__tab-list {
+    font-size: 16px !important;
+  }
+  .react-tabs__tab-list {
+    gap: 20px !important;
+  }
+  .mint-token .form-group input {
+    height: 55px;
+  }
+  .mint-token .form-group label {
+    font-size: 18px;
+  }
+  .mint-token .btn-wrap button {
+    font-size: 18px;
+  }
+  .mint-token .btn-wrap .calculate {
+    height: auto;
+    width: 250px;
+  }
 }
 @media screen and (max-width: 880px) {
   .dashboard-contain .card-info h1 {
-    font-size: 24px;
+    font-size: 34px;
   }
   .navbar-contain .mint-button {
     padding: 0 18px;
@@ -73,5 +149,336 @@
   }
   .logout-container p {
     font-size: 12px;
+  }
+  .dashboard-contain .card-container {
+    display: grid;
+    width: 500px;
+  }
+  .dashboard-contain .card {
+    padding: 30px 150px 30px 30px;
+    width: 100% !important;
+    height: 190px;
+  }
+  .dashboard-contain .card-info .title {
+    font-size: 22px;
+  }
+  .dashboard-contain .card-info p {
+    font-size: 16px;
+  }
+  .react-tabs__tab-list {
+    gap: 10px !important;
+    padding: auto;
+  }
+  .react-tabs__tab--selected {
+    width: 170px !important;
+    padding: auto;
+  }
+  .left-side {
+    width: 220px;
+    padding: 20px 10px;
+  }
+  .right-side {
+    padding-left: 260px;
+  }
+
+  .cleaner-production .modal-title,
+  .energy-efficiency .modal-title,
+  .carbon-capture .modal-title {
+    font-size: 26px !important;
+  }
+  .cleaner-production .modal-body,
+  .energy-efficiency .modal-body,
+  .carbon-capture .modal-body {
+    font-size: 20px;
+  }
+  .cleaner-production .modal-button .btn,
+  .energy-efficiency .modal-button .btn,
+  .carbon-capture .modal-button .btn {
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+  }
+  .modal.show .modal-dialog {
+    margin-left: 20%;
+    max-width: 500px;
+  }
+}
+@media screen and (max-width: 770px) {
+  .dashboard-contain .card-info h1 {
+    font-size: 32px;
+  }
+  .dashboard-contain .card-info .title {
+    font-size: 20px;
+  }
+  .dashboard-contain .card-info p {
+    font-size: 14px;
+  }
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+  .dashboard-contain .card-container {
+    width: 400px;
+  }
+  .navbar-contain .title-container h3 {
+    width: 150px;
+  }
+  .react-tabs__tab--selected {
+    width: 200px !important;
+  }
+  .react-tabs__tab {
+    width: 200px !important;
+  }
+  .modal.show .modal-dialog {
+    margin-left: 12%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .dashboard-contain .card-info .title {
+    font-size: 18px;
+  }
+  .dashboard-contain .card-info h1 {
+    font-size: 30px;
+  }
+  .logout-container p {
+    display: none;
+  }
+  .navbar-contain .mint-button {
+    padding: 0 10px;
+    height: 35px;
+    font-size: 12px;
+  }
+  .left-side {
+    width: 200px;
+  }
+  .logo-name {
+    font-size: 28px;
+    padding: 16px;
+  }
+  .left-side .link-container li {
+    height: 50px;
+    padding: 15px;
+  }
+
+  .left-side .link-container .link-item {
+    font-size: 18px;
+    gap: 5px;
+  }
+  .right-side {
+    padding-left: 240px;
+  }
+  .react-tabs__tab-list {
+    display: grid;
+  }
+  .react-tabs__tab {
+    height: 50px;
+    width: 80% !important;
+  }
+  .modal.show .modal-dialog {
+    margin-left: 14%;
+    max-width: 450px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .modal.show .modal-dialog {
+    margin-top: 200px;
+  }
+}
+@media screen and (max-width: 660px) {
+  .dashboard-contain .card-container {
+    width: 350px;
+  }
+  .dashboard-contain .card {
+    padding: 30px 120px 30px 30px;
+  }
+  .input-container,
+  .input-container1,
+  .input-container2,
+  .input-container3 {
+    width: 250px;
+  }
+
+  .mint-token .form-group label {
+    font-size: 16px;
+  }
+  .input-container::after,
+  .input-container1::after,
+  .input-container2::after,
+  .input-container3::after {
+    font-size: 12px;
+  }
+
+  .mint-token .btn-wrap button {
+    font-size: 16px;
+  }
+  .mint-token .btn-wrap .calculate {
+    width: 220px;
+  }
+  .mint-token .btn-wrap {
+    margin-top: 20px;
+  }
+  .mint-token .form-group input {
+    height: 50px;
+  }
+  .modal.show .modal-dialog {
+    margin-left: 14%;
+    max-width: 400px;
+    margin-top: 200px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .dashboard-contain .card-container {
+    width: 320px;
+  }
+  .dashboard-contain .card {
+    padding: 30px 80px 30px 30px;
+  }
+}
+@media screen and (max-width: 580px) {
+  .left-side {
+    display: flex;
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 20px;
+  }
+  .left-side .link-container ul {
+    display: flex;
+    margin-bottom: 0;
+    flex-direction: column;
+    padding-left: 20px;
+  }
+
+  .right-side {
+    padding-left: 50px;
+  }
+  .left-side .link-container .link-item {
+    font-size: 18px;
+    gap: 10px;
+  }
+  .left-side .link-container li {
+    height: 30px;
+    padding: 20px 10px;
+  }
+  .dashboard-contain .card-container {
+    width: 400px;
+  }
+  .dashboard-contain .card {
+    padding: 30px 140px 30px 30px;
+  }
+  .modal.show .modal-dialog {
+    margin-left: 12%;
+    margin-top: 300px;
+  }
+  .modal-content {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  .cleaner-production .modal-header,
+  .cleaner-production .modal-body,
+  .energy-efficiency .modal-header,
+  .energy-efficiency .modal-body,
+  .carbon-capture .modal-header,
+  .carbon-capture .modal-body {
+    padding: 20px !important;
+  }
+  .modal.show .modal-dialog {
+    margin-left: 8%;
+  }
+  .cleaner-production .modal-title,
+  .carbon-capture .modal-title,
+  .energy-efficiency .modal-title {
+    font-size: 24px !important;
+  }
+  .modal-body {
+    padding: 20px !important;
+  }
+  .cleaner-production .modal-button .btn,
+  .energy-efficiency .modal-button .btn,
+  .carbon-capture .modal-button .btn {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 460px) {
+  .dashboard-contain .card {
+    padding: 30px 80px 30px 30px;
+  }
+  .left-side {
+    padding: 20px 10px;
+  }
+  .right-side {
+    padding-left: 30px;
+  }
+  .mint-token .form-group label {
+    width: 45%;
+  }
+}
+@media screen and (max-width: 360px) {
+  .dashboard-contain .card-container {
+    width: 310px;
+  }
+  .dashboard-contain .card {
+    padding: 30px 90px 30px 20px;
+    height: 160px;
+  }
+  .dashboard-contain .card-info .title {
+    font-size: 16px;
+  }
+  .dashboard-contain .card-info h1 {
+    font-size: 28px;
+  }
+  .dashboard-contain .card-info p {
+    font-size: 12px;
+  }
+  .left-side .link-container .link-item {
+    font-size: 16px;
+  }
+  .right-side {
+    padding: 40px 30px;
+  }
+  .input-container,
+  .input-container1 {
+    width: 220px;
+  }
+  .modal-content {
+    width: 90% !important;
+  }
+  .cleaner-production .modal-header,
+  .cleaner-production .modal-body,
+  .energy-efficiency .modal-header,
+  .energy-efficiency .modal-body,
+  .carbon-capture .modal-header,
+  .carbon-capture .modal-body {
+    padding: 10px 20px !important;
+  }
+  .cleaner-production .modal-title,
+  .energy-efficiency .modal-title,
+  .carbon-capture .modal-title {
+    font-size: 20px !important;
+  }
+  .cleaner-production .modal-body,
+  .energy-efficiency .modal-body,
+  .carbon-capture .modal-body {
+    font-size: 16px;
+  }
+  .cleaner-production .modal-button .btn,
+  .energy-efficiency .modal-button .btn,
+  .carbon-capture.modal-button .btn {
+    width: 70px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 340px) {
+  .dashboard-contain .card {
+    padding: 30px 70px 30px 20px;
+  }
+  .dashboard-contain .card-container {
+    width: 270px;
+  }
+  .navbar-contain .title-container h3 {
+    width: 130px;
   }
 }

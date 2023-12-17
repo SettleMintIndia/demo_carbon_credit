@@ -43,6 +43,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         ? 'Secondary MarketPlace'
         : router.pathname === '/mytoken'
         ? 'My Token'
+        : router.pathname === '/notifications'
+        ? 'Notifications'
         : ''
     );
 
@@ -172,7 +174,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                       onClick={() => handleLogout()}
                     >
                       <div>
-                        <img src="logout.svg" alt="" />
+                        <img src="logout.svg" alt="" title="LOGOUT" />
                       </div>
                       <div>
                         <p>LOGOUT</p>
