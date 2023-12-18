@@ -21,12 +21,15 @@ export const User = function ({ username,user_id }: IUser) {
       loading: tokenHolderDataLoading,
       error: tokenHolderDataError,
     },
+    
   ] = useGetTokenDetailsbyuserLazyQuery({
     variables: {
       user_id: user_id,
     },
+    fetchPolicy: 'network-only',
+
   });
-  console.log("tokenHolderData",tokenHolderData)
+  console.log("tokenHolderData",tokenHolderData,user_id)
 
   // Initial call
   useEffect(() => {

@@ -7,19 +7,11 @@
   const Page: NextPageWithLayout = () => {
     // Fetch assets data
 
-  
-   
-  
-    // Initial call
-    return (
-      <>
-        <div className="header-area">
-          <h2>Notifications</h2>
-          
-        </div>
-       
-      </>
-    );
-  };
-  export default Page;
-  
+  // Initial call
+  return (
+    <>
+      <div className="header-area"></div>
+    </>
+  );
+};
+export default Page;

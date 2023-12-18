@@ -633,6 +633,7 @@ ul.profile-info label {
   padding-left: 11%;
   margin-left: 15%;
   max-width: 900px;
+  margin-top: 200px;
 }
 input[type='text'],
 select {
@@ -1977,6 +1978,7 @@ ul.dashboard-notes li:nth-child(3) {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  text-align: center;
 }
 .react-tabs__tab-list {
   border-bottom: none !important;
@@ -1991,11 +1993,13 @@ ul.dashboard-notes li:nth-child(3) {
   align-items: center !important;
   justify-content: center !important;
   width: 200px;
+  text-align: center;
 }
 .mint-token .form-group {
   display: flex;
   width: 80%;
   align-items: center;
+  margin-bottom: 8px;
 }
 .mint-token .form-group label {
   width: 30%;

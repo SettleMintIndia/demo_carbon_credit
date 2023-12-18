@@ -47,6 +47,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         ? 'My Token'
         : router.pathname === '/profile'
         ? 'Profile'
+        : router.pathname === '/notifications'
+        ? 'Notifications'
         : ''
     );
 
@@ -182,7 +184,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                       onClick={() => handleLogout()}
                     >
                       <div>
-                        <img src="logout.svg" alt="" />
+                        <img src="logout.svg" alt="" title="LOGOUT" />
                       </div>
                       <div>
                         <p>LOGOUT</p>
