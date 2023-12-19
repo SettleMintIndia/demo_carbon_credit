@@ -75,6 +75,9 @@
     height: 40px;
     font-size: 16px;
   }
+  .left-side .link-container li {
+    height: 60px;
+  }
 }
 @media screen and (max-width: 980px) {
   .dashboard-contain .card-container {
@@ -336,18 +339,40 @@
   }
 }
 @media screen and (max-width: 580px) {
+  .link-container .desktop-menu {
+    display: none;
+  }
+  .logo-name {
+    border-bottom: none;
+    padding: 0;
+  }
+  .link-container .mobile-menu {
+    display: block;
+  }
   .left-side {
-    display: flex;
+    /* display: flex; */
     width: 100%;
     height: auto;
     position: static;
     padding: 20px;
   }
+  .link-container .logo-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
   .left-side .link-container ul {
     display: flex;
     margin-bottom: 0;
     flex-direction: column;
-    padding-left: 20px;
+    position: absolute;
+    width: 250px;
+    right: 20px;
+    background: #000044;
+    padding: 20px;
+    z-index: 999;
+    top: 100px;
   }
 
   .right-side {
@@ -359,7 +384,7 @@
   }
   .left-side .link-container li {
     height: 30px;
-    padding: 20px 10px;
+    padding: 20px 0;
   }
   .dashboard-contain .card-container {
     width: 400px;
@@ -413,6 +438,9 @@
   }
   .mint-token .form-group label {
     width: 45%;
+  }
+  .left-side .link-container ul {
+    width: 230px;
   }
 }
 @media screen and (max-width: 360px) {

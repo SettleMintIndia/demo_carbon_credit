@@ -30,7 +30,6 @@ const Page: NextPageWithLayout = () => {
   }, []);
   return (
     <>
-      <hr />
       <Table className="tablelist" responsive>
         <thead>
           <tr className="table_wrap">
@@ -65,10 +64,16 @@ const Page: NextPageWithLayout = () => {
               </tr>
             );
           })}
-          {totaltokens?.length ==0 && <tr>
-            <td colSpan={12}><p style={{textAlign:'center',fontWeight:'bold'}}> No Data Found</p></td>
+          {totaltokens?.length == 0 && (
+            <tr>
+              <td colSpan={12}>
+                <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                  {' '}
+                  No Data Found
+                </p>
+              </td>
             </tr>
-            }
+          )}
         </tbody>
       </Table>
     </>

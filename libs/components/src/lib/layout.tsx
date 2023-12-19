@@ -24,10 +24,15 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   // const [ipfsPath, setIpfsPath] = useState<string>('');
 
   // User Setting data
+  const [menuVisible, setMenuVisible] = useState(false);
 
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
   const admin = localStorage.getItem('user') == 'admin' ? true : false;
 
-  console.log("admin",admin)
+  console.log('admin', admin);
+  console.log(menuVisible);
   const user =
     localStorage.getItem('user') != `${localStorage.getItem('user')}`
       ? true
@@ -46,9 +51,11 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         : router.pathname === '/mytoken'
         ? 'My Token'
         : router.pathname === '/profile'
-        ? 'Profile'
+        ? 'User Profile'
         : router.pathname === '/notifications'
         ? 'Notifications'
+        : router.pathname === '/users'
+        ? 'User Management'
         : ''
     );
 
@@ -88,83 +95,160 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
               {/* Left sidebar */}
               <div className="left-side">
                 <div className="link-container">
-                  <div className="logo-name">Carbon Credit</div>
-                  <ul className="dashboard-list">
-                    <a href="/dashboard" className="link">
-                      <li>
-                        <div className="link-item">
-                          <img src="dashboard.svg" alt="" />
-                          Dashboard
-                        </div>
-                      </li>
-                    </a>
+                  <div className="logo-head">
+                    <div className="logo-name">
+                      <a href="/dashboard"> Carbon Credit</a>
+                    </div>
+                    <div className="mobile-menu">
+                      <div className="menubar" onClick={toggleMenu}>
+                        <img src="/menubar.svg" alt="" />
+                      </div>
+                      {menuVisible && (
+                        <ul className="dashboard-list">
+                          <a href="/dashboard" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="dashboard.svg" alt="" />
+                                Dashboard
+                              </div>
+                            </li>
+                          </a>
 
-                    <a href="/mytoken" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="mint.svg" alt="" />
-                          My Tokens
-                        </div>
-                      </li>
-                    </a>
-                    <a href="/minttoken" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="mint.svg" alt="" />
-                          Mint Token
-                        </div>
-                      </li>
-                    </a>
-                    <a href="/transactionslog" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="transaction.svg" alt="" />
-                          Transactions
-                        </div>
-                      </li>
-                    </a>
-                    <a href="/tokenmarketplace" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="setting.svg" alt="" />
-                          Secondary Marketplace
-                        </div>
-                      </li>
-                    </a>
-                    <a href="/profile" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="notification.svg" alt="" />
-                          User Profile
-                        </div>
-                      </li>
-                    </a>
+                          <a href="/mytoken" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="my-token.svg" alt="" />
+                                My Tokens
+                              </div>
+                            </li>
+                          </a>
+                          <a href="/minttoken" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="mint.svg" alt="" />
+                                Mint Token
+                              </div>
+                            </li>
+                          </a>
+                          <a href="/transactionslog" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="transaction.svg" alt="" />
+                                Transactions
+                              </div>
+                            </li>
+                          </a>
+                          <a href="/tokenmarketplace" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="setting.svg" alt="" />
+                                Secondary Marketplace
+                              </div>
+                            </li>
+                          </a>
+                          <a href="/profile" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="user-profile.svg" alt="" />
+                                User Profile
+                              </div>
+                            </li>
+                          </a>
 
-                   {admin==true && <a href="/users" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="notification.svg" alt="" />
-                          User Management
-                        </div>
-                      </li>
-                    </a>
-}
-                    <a href="/notifications" className="link">
-                      <li>
-                        <div
-                          className="link-item">
-                          <img src="notification.svg" alt="" />
-                          Notifications
-                        </div>
-                      </li>
-                    </a>
-                  </ul>
+                          {admin == true && (
+                            <a href="/users" className="link">
+                              <li>
+                                <div className="link-item">
+                                  <img src="user-management.svg" alt="" />
+                                  User Management
+                                </div>
+                              </li>
+                            </a>
+                          )}
+                          <a href="/notifications" className="link">
+                            <li>
+                              <div className="link-item">
+                                <img src="notification.svg" alt="" />
+                                Notifications
+                              </div>
+                            </li>
+                          </a>
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                  <div className="desktop-menu">
+                    <ul className="dashboard-list">
+                      <a href="/dashboard" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="dashboard.svg" alt="" />
+                            Dashboard
+                          </div>
+                        </li>
+                      </a>
+
+                      <a href="/mytoken" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="my-token.svg" alt="" />
+                            My Tokens
+                          </div>
+                        </li>
+                      </a>
+                      <a href="/minttoken" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="mint.svg" alt="" />
+                            Mint Token
+                          </div>
+                        </li>
+                      </a>
+                      <a href="/transactionslog" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="transaction.svg" alt="" />
+                            Transactions
+                          </div>
+                        </li>
+                      </a>
+                      <a href="/tokenmarketplace" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="setting.svg" alt="" />
+                            Secondary Marketplace
+                          </div>
+                        </li>
+                      </a>
+                      <a href="/profile" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="user-profile.svg" alt="" />
+                            User Profile
+                          </div>
+                        </li>
+                      </a>
+
+                      {admin == true && (
+                        <a href="/users" className="link">
+                          <li>
+                            <div className="link-item">
+                              <img src="user-management.svg" alt="" />
+                              User Management
+                            </div>
+                          </li>
+                        </a>
+                      )}
+                      <a href="/notifications" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="notification.svg" alt="" />
+                            Notifications
+                          </div>
+                        </li>
+                      </a>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -177,7 +261,12 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                   </div>
                   <div className="nav-right">
                     <div>
-                      <button className="mint-button" onClick={()=>router.push('/minttoken')}>Mint Token</button>
+                      <button
+                        className="mint-button"
+                        onClick={() => router.push('/minttoken')}
+                      >
+                        Mint Token
+                      </button>
                     </div>
                     <div
                       className="logout-container"
