@@ -8,7 +8,8 @@ export const namedOperations = {
     getTokenDetailsbyuser: 'getTokenDetailsbyuser' as const,
     getAllTransactions: 'getAllTransactions' as const,
     getAllUsers: 'getAllUsers' as const,
-    getLoggedInUser: 'getLoggedInUser' as const
+    getLoggedInUser: 'getLoggedInUser' as const,
+    UsersCount: 'UsersCount' as const
   },
   Mutation: {
     createToken: 'createToken' as const,

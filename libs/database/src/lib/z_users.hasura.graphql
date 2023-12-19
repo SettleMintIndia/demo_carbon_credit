@@ -44,5 +44,12 @@ query getLoggedInUser($username: String) {
 }
 
 
+query UsersCount {
+  z_users_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
 
 

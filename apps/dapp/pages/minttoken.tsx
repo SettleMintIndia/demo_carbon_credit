@@ -47,7 +47,7 @@ const Page: NextPageWithLayout = () => {
   const [ccshow, setccShow] = useState(false);
 
 
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState<any>('')
 
   const handleClose = () => setShow(false);
   const handleeeClose = () => seteeShow(false)
@@ -94,7 +94,8 @@ const Page: NextPageWithLayout = () => {
 
       console.log(tokens);
       setShow(true)
-      setToken(tokens);
+      let x=Math.round(tokens)
+      setToken(x);
 
       //handleMint(tokens);
 
@@ -143,7 +144,9 @@ const Page: NextPageWithLayout = () => {
 
       console.log(tokens);
       seteeShow(true)
-      setToken(tokens);
+      let x=Math.round(tokens)
+      setToken(x);
+     // setToken(tokens);
 
 
       //handleMint(tokens);
@@ -183,7 +186,9 @@ const Page: NextPageWithLayout = () => {
       let tokens: any = Number(co2_amount) * Number(ccus_factor) * Number(cci_timeperiod)
 
       console.log(tokens);
-      setToken(tokens);
+      //setToken(tokens);
+      let x=Math.round(tokens)
+      setToken(x);
       setccShow(true);
       // handleMint();
 
