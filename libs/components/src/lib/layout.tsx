@@ -188,14 +188,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                         </li>
                       </a>
 
-                      <a href="/mytoken" className="link">
-                        <li>
-                          <div className="link-item">
-                            <img src="my-token.svg" alt="" />
-                            My Tokens
-                          </div>
-                        </li>
-                      </a>
+                     
                       <a href="/minttoken" className="link">
                         <li>
                           <div className="link-item">
@@ -204,11 +197,20 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                           </div>
                         </li>
                       </a>
+                      
                       <a href="/transactionslog" className="link">
                         <li>
                           <div className="link-item">
                             <img src="transaction.svg" alt="" />
                             Transactions
+                          </div>
+                        </li>
+                      </a>
+                      <a href="/mytoken" className="link">
+                        <li>
+                          <div className="link-item">
+                            <img src="my-token.svg" alt="" />
+                            My Tokens
                           </div>
                         </li>
                       </a>
