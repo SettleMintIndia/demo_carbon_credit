@@ -32,7 +32,7 @@ const Page: NextPageWithLayout = () => {
 
   const [totalamount, setTotalAmount] = useState(0);
   const [totalminttokens, setTotalminttokens] = useState(0);
-  const [monthlyvalues, setMonthlyValues] = useState([])
+  const [monthlyvalues, setMonthlyValues] = useState<any>([])
   const { data, loading, error } = useUsersCountQuery({
     fetchPolicy: 'network-only',
   })

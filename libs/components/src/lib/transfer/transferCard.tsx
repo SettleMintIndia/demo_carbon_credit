@@ -601,6 +601,7 @@ export const TransferCard = () => {
                                   assetId={v?.z_asset.id}
                                   price={v?.price}
                                   totaltoken={v.token}
+                                  remainingtoken={v.remaining_token}
 
                                 /> 
 
