@@ -209,7 +209,7 @@ const Page: NextPageWithLayout = () => {
         <img src="/Minting.gif" />
       </div>,
       {
-        duration: 4000, // Delay of 2000 milliseconds (2 seconds)
+        duration: 3000, // Delay of 2000 milliseconds (2 seconds)
       }
     );
 
@@ -232,7 +232,8 @@ const Page: NextPageWithLayout = () => {
           variables: {
             token: tokens_str, // value for 'token'
             tx_hash: data?.txHash, // value for 'tx_hash'
-            user_id: user_id // value for 'user_id'
+            user_id: user_id,
+            remaining_token:tokens_str // value for 'user_id'
           },
         })
 

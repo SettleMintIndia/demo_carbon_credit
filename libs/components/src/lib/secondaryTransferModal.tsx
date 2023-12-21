@@ -8,12 +8,14 @@ type Props = {
   price: string;
   balance: string;
   totaltoken: String;
+  remainingtoken:String
 };
 export const SecondaryTransferModal = ({
   assetId,
   price,
   balance,
   totaltoken,
+  remainingtoken
 }: Props) => {
   const { setModal } = useModalContext();
   const [formValues, setFormValues] = useState({
@@ -47,7 +49,7 @@ export const SecondaryTransferModal = ({
 
     if (!error) {
 
-      if (Number(totaltoken) >= Number(formValues.token)) {
+      if (Number(remainingtoken) >= Number(formValues.token)) {
         setErr('')
         // Toast
         await toast(
@@ -61,7 +63,7 @@ export const SecondaryTransferModal = ({
         console.log(formValues);
 
         setTimeout(async () => {
-          let remaining_tokens=Number(totaltoken)-Number(formValues.token)
+          let remaining_tokens=Number(remainingtoken)-Number(formValues.token)
 
           
 
@@ -76,8 +78,9 @@ export const SecondaryTransferModal = ({
 
           updateMintTokensMutation({
             variables: {
-              token:remaining_tokens.toString(),
-              id:assetId // value for 'tx_hash'
+              remaining_token:remaining_tokens.toString(),
+              id:assetId, // value for 'tx_hash'
+              token:totaltoken.toString()
             },
           }).then((res) => {
               toast(
@@ -114,7 +117,7 @@ export const SecondaryTransferModal = ({
         <ul className="token_data_box">
           <li>
             <h5>No of Tokens :</h5>
-            <p>{totaltoken}</p>
+            <p>{remainingtoken}</p>
           </li>
         </ul>
 

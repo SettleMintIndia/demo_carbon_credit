@@ -16,7 +16,7 @@ export type CreateSecondaryMarketPlaceMutation = { __typename: 'mutation_root', 
 export type GetSecondayMarketPlaceQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetSecondayMarketPlaceQuery = { __typename: 'query_root', z_secondary_marketplace: Array<{ __typename: 'z_secondary_marketplace', amount: string, created_at: string, id: string, minttoken_id: string, owner_id: string, tokens: string, z_minttoken: { __typename: 'z_minttokens', created_at: string, id: string, token: string, tx_hash: string, user_id: string, z_user: { __typename: 'z_users', address: string, id: string, password: string, pvtKey: string, username: string } }, z_user: { __typename: 'z_users', address: string, created_at: string, id: string, password: string, pvtKey: string, username: string } }> };
+export type GetSecondayMarketPlaceQuery = { __typename: 'query_root', z_secondary_marketplace: Array<{ __typename: 'z_secondary_marketplace', amount: string, created_at: string, id: string, minttoken_id: string | null, owner_id: string, tokens: string, z_minttoken: { __typename: 'z_minttokens', created_at: string, id: string, token: string, tx_hash: string, user_id: string, z_user: { __typename: 'z_users', address: string, id: string, password: string, pvtKey: string, username: string } } | null, z_user: { __typename: 'z_users', address: string, created_at: string, id: string, password: string, pvtKey: string, username: string } }> };
 
 export type UpdateSecondayMarketPlaceMutationVariables = Types.Exact<{
   tokens?: Types.InputMaybe<Types.Scalars['String']>;

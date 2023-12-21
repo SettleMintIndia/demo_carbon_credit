@@ -83,6 +83,10 @@ export type Mutation_Root = {
   delete_z_token_holder: Maybe<Z_Token_Holder_Mutation_Response>;
   /** delete single row from the table: "z_token_holder" */
   delete_z_token_holder_by_pk: Maybe<Z_Token_Holder>;
+  /** delete data from the table: "z_totaltokens" */
+  delete_z_totaltokens: Maybe<Z_Totaltokens_Mutation_Response>;
+  /** delete single row from the table: "z_totaltokens" */
+  delete_z_totaltokens_by_pk: Maybe<Z_Totaltokens>;
   /** delete data from the table: "z_transaction_history" */
   delete_z_transaction_history: Maybe<Z_Transaction_History_Mutation_Response>;
   /** delete single row from the table: "z_transaction_history" */
@@ -103,6 +107,10 @@ export type Mutation_Root = {
   insert_z_token_holder: Maybe<Z_Token_Holder_Mutation_Response>;
   /** insert a single row into the table: "z_token_holder" */
   insert_z_token_holder_one: Maybe<Z_Token_Holder>;
+  /** insert data into the table: "z_totaltokens" */
+  insert_z_totaltokens: Maybe<Z_Totaltokens_Mutation_Response>;
+  /** insert a single row into the table: "z_totaltokens" */
+  insert_z_totaltokens_one: Maybe<Z_Totaltokens>;
   /** insert data into the table: "z_transaction_history" */
   insert_z_transaction_history: Maybe<Z_Transaction_History_Mutation_Response>;
   /** insert a single row into the table: "z_transaction_history" */
@@ -129,6 +137,12 @@ export type Mutation_Root = {
   update_z_token_holder_by_pk: Maybe<Z_Token_Holder>;
   /** update multiples rows of table: "z_token_holder" */
   update_z_token_holder_many: Maybe<Array<Maybe<Z_Token_Holder_Mutation_Response>>>;
+  /** update data of the table: "z_totaltokens" */
+  update_z_totaltokens: Maybe<Z_Totaltokens_Mutation_Response>;
+  /** update single row of the table: "z_totaltokens" */
+  update_z_totaltokens_by_pk: Maybe<Z_Totaltokens>;
+  /** update multiples rows of table: "z_totaltokens" */
+  update_z_totaltokens_many: Maybe<Array<Maybe<Z_Totaltokens_Mutation_Response>>>;
   /** update data of the table: "z_transaction_history" */
   update_z_transaction_history: Maybe<Z_Transaction_History_Mutation_Response>;
   /** update single row of the table: "z_transaction_history" */
@@ -176,6 +190,18 @@ export type Mutation_RootDelete_Z_Token_HolderArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Z_Token_Holder_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_TotaltokensArgs = {
+  where: Z_Totaltokens_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Z_Totaltokens_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -243,6 +269,20 @@ export type Mutation_RootInsert_Z_Token_HolderArgs = {
 export type Mutation_RootInsert_Z_Token_Holder_OneArgs = {
   object: Z_Token_Holder_Insert_Input;
   on_conflict: InputMaybe<Z_Token_Holder_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_TotaltokensArgs = {
+  objects: Array<Z_Totaltokens_Insert_Input>;
+  on_conflict: InputMaybe<Z_Totaltokens_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Z_Totaltokens_OneArgs = {
+  object: Z_Totaltokens_Insert_Input;
+  on_conflict: InputMaybe<Z_Totaltokens_On_Conflict>;
 };
 
 
@@ -335,6 +375,26 @@ export type Mutation_RootUpdate_Z_Token_Holder_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Z_TotaltokensArgs = {
+  _set: InputMaybe<Z_Totaltokens_Set_Input>;
+  where: Z_Totaltokens_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Totaltokens_By_PkArgs = {
+  _set: InputMaybe<Z_Totaltokens_Set_Input>;
+  pk_columns: Z_Totaltokens_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Z_Totaltokens_ManyArgs = {
+  updates: Array<Z_Totaltokens_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Z_Transaction_HistoryArgs = {
   _set: InputMaybe<Z_Transaction_History_Set_Input>;
   where: Z_Transaction_History_Bool_Exp;
@@ -409,6 +469,12 @@ export type Query_Root = {
   z_token_holder_aggregate: Z_Token_Holder_Aggregate;
   /** fetch data from the table: "z_token_holder" using primary key columns */
   z_token_holder_by_pk: Maybe<Z_Token_Holder>;
+  /** fetch data from the table: "z_totaltokens" */
+  z_totaltokens: Array<Z_Totaltokens>;
+  /** fetch aggregated fields from the table: "z_totaltokens" */
+  z_totaltokens_aggregate: Z_Totaltokens_Aggregate;
+  /** fetch data from the table: "z_totaltokens" using primary key columns */
+  z_totaltokens_by_pk: Maybe<Z_Totaltokens>;
   /** fetch data from the table: "z_transaction_history" */
   z_transaction_history: Array<Z_Transaction_History>;
   /** fetch aggregated fields from the table: "z_transaction_history" */
@@ -493,6 +559,29 @@ export type Query_RootZ_Token_Holder_By_PkArgs = {
 };
 
 
+export type Query_RootZ_TotaltokensArgs = {
+  distinct_on: InputMaybe<Array<Z_Totaltokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Totaltokens_Order_By>>;
+  where: InputMaybe<Z_Totaltokens_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Totaltokens_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Totaltokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Totaltokens_Order_By>>;
+  where: InputMaybe<Z_Totaltokens_Bool_Exp>;
+};
+
+
+export type Query_RootZ_Totaltokens_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Query_RootZ_Transaction_HistoryArgs = {
   distinct_on: InputMaybe<Array<Z_Transaction_History_Select_Column>>;
   limit: InputMaybe<Scalars['Int']>;
@@ -564,6 +653,14 @@ export type Subscription_Root = {
   z_token_holder_by_pk: Maybe<Z_Token_Holder>;
   /** fetch data from the table in a streaming manner: "z_token_holder" */
   z_token_holder_stream: Array<Z_Token_Holder>;
+  /** fetch data from the table: "z_totaltokens" */
+  z_totaltokens: Array<Z_Totaltokens>;
+  /** fetch aggregated fields from the table: "z_totaltokens" */
+  z_totaltokens_aggregate: Z_Totaltokens_Aggregate;
+  /** fetch data from the table: "z_totaltokens" using primary key columns */
+  z_totaltokens_by_pk: Maybe<Z_Totaltokens>;
+  /** fetch data from the table in a streaming manner: "z_totaltokens" */
+  z_totaltokens_stream: Array<Z_Totaltokens>;
   /** fetch data from the table: "z_transaction_history" */
   z_transaction_history: Array<Z_Transaction_History>;
   /** fetch aggregated fields from the table: "z_transaction_history" */
@@ -673,6 +770,36 @@ export type Subscription_RootZ_Token_Holder_StreamArgs = {
 };
 
 
+export type Subscription_RootZ_TotaltokensArgs = {
+  distinct_on: InputMaybe<Array<Z_Totaltokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Totaltokens_Order_By>>;
+  where: InputMaybe<Z_Totaltokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Totaltokens_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Z_Totaltokens_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  order_by: InputMaybe<Array<Z_Totaltokens_Order_By>>;
+  where: InputMaybe<Z_Totaltokens_Bool_Exp>;
+};
+
+
+export type Subscription_RootZ_Totaltokens_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootZ_Totaltokens_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Z_Totaltokens_Stream_Cursor_Input>>;
+  where: InputMaybe<Z_Totaltokens_Bool_Exp>;
+};
+
+
 export type Subscription_RootZ_Transaction_HistoryArgs = {
   distinct_on: InputMaybe<Array<Z_Transaction_History_Select_Column>>;
   limit: InputMaybe<Scalars['Int']>;
@@ -763,6 +890,7 @@ export type Z_Minttokens = {
   __typename: 'z_minttokens';
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
+  remaining_token: Maybe<Scalars['String']>;
   token: Scalars['String'];
   tx_hash: Scalars['String'];
   user_id: Scalars['uuid'];
@@ -848,6 +976,7 @@ export type Z_Minttokens_Bool_Exp = {
   _or: InputMaybe<Array<Z_Minttokens_Bool_Exp>>;
   created_at: InputMaybe<Timestamptz_Comparison_Exp>;
   id: InputMaybe<Uuid_Comparison_Exp>;
+  remaining_token: InputMaybe<String_Comparison_Exp>;
   token: InputMaybe<String_Comparison_Exp>;
   tx_hash: InputMaybe<String_Comparison_Exp>;
   user_id: InputMaybe<Uuid_Comparison_Exp>;
@@ -866,6 +995,7 @@ export enum Z_Minttokens_Constraint {
 export type Z_Minttokens_Insert_Input = {
   created_at: InputMaybe<Scalars['timestamptz']>;
   id: InputMaybe<Scalars['uuid']>;
+  remaining_token: InputMaybe<Scalars['String']>;
   token: InputMaybe<Scalars['String']>;
   tx_hash: InputMaybe<Scalars['String']>;
   user_id: InputMaybe<Scalars['uuid']>;
@@ -878,6 +1008,7 @@ export type Z_Minttokens_Max_Fields = {
   __typename: 'z_minttokens_max_fields';
   created_at: Maybe<Scalars['timestamptz']>;
   id: Maybe<Scalars['uuid']>;
+  remaining_token: Maybe<Scalars['String']>;
   token: Maybe<Scalars['String']>;
   tx_hash: Maybe<Scalars['String']>;
   user_id: Maybe<Scalars['uuid']>;
@@ -887,6 +1018,7 @@ export type Z_Minttokens_Max_Fields = {
 export type Z_Minttokens_Max_Order_By = {
   created_at: InputMaybe<Order_By>;
   id: InputMaybe<Order_By>;
+  remaining_token: InputMaybe<Order_By>;
   token: InputMaybe<Order_By>;
   tx_hash: InputMaybe<Order_By>;
   user_id: InputMaybe<Order_By>;
@@ -897,6 +1029,7 @@ export type Z_Minttokens_Min_Fields = {
   __typename: 'z_minttokens_min_fields';
   created_at: Maybe<Scalars['timestamptz']>;
   id: Maybe<Scalars['uuid']>;
+  remaining_token: Maybe<Scalars['String']>;
   token: Maybe<Scalars['String']>;
   tx_hash: Maybe<Scalars['String']>;
   user_id: Maybe<Scalars['uuid']>;
@@ -906,6 +1039,7 @@ export type Z_Minttokens_Min_Fields = {
 export type Z_Minttokens_Min_Order_By = {
   created_at: InputMaybe<Order_By>;
   id: InputMaybe<Order_By>;
+  remaining_token: InputMaybe<Order_By>;
   token: InputMaybe<Order_By>;
   tx_hash: InputMaybe<Order_By>;
   user_id: InputMaybe<Order_By>;
@@ -938,6 +1072,7 @@ export type Z_Minttokens_On_Conflict = {
 export type Z_Minttokens_Order_By = {
   created_at: InputMaybe<Order_By>;
   id: InputMaybe<Order_By>;
+  remaining_token: InputMaybe<Order_By>;
   token: InputMaybe<Order_By>;
   tx_hash: InputMaybe<Order_By>;
   user_id: InputMaybe<Order_By>;
@@ -957,6 +1092,8 @@ export enum Z_Minttokens_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  RemainingToken = 'remaining_token',
+  /** column name */
   Token = 'token',
   /** column name */
   TxHash = 'tx_hash',
@@ -968,6 +1105,7 @@ export enum Z_Minttokens_Select_Column {
 export type Z_Minttokens_Set_Input = {
   created_at: InputMaybe<Scalars['timestamptz']>;
   id: InputMaybe<Scalars['uuid']>;
+  remaining_token: InputMaybe<Scalars['String']>;
   token: InputMaybe<Scalars['String']>;
   tx_hash: InputMaybe<Scalars['String']>;
   user_id: InputMaybe<Scalars['uuid']>;
@@ -985,6 +1123,7 @@ export type Z_Minttokens_Stream_Cursor_Input = {
 export type Z_Minttokens_Stream_Cursor_Value_Input = {
   created_at: InputMaybe<Scalars['timestamptz']>;
   id: InputMaybe<Scalars['uuid']>;
+  remaining_token: InputMaybe<Scalars['String']>;
   token: InputMaybe<Scalars['String']>;
   tx_hash: InputMaybe<Scalars['String']>;
   user_id: InputMaybe<Scalars['uuid']>;
@@ -996,6 +1135,8 @@ export enum Z_Minttokens_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  RemainingToken = 'remaining_token',
   /** column name */
   Token = 'token',
   /** column name */
@@ -1017,11 +1158,11 @@ export type Z_Secondary_Marketplace = {
   amount: Scalars['String'];
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
-  minttoken_id: Scalars['uuid'];
+  minttoken_id: Maybe<Scalars['uuid']>;
   owner_id: Scalars['uuid'];
   tokens: Scalars['String'];
   /** An object relationship */
-  z_minttoken: Z_Minttokens;
+  z_minttoken: Maybe<Z_Minttokens>;
   /** An object relationship */
   z_user: Z_Users;
 };
@@ -1452,6 +1593,200 @@ export type Z_Token_Holder_Updates = {
   _set: InputMaybe<Z_Token_Holder_Set_Input>;
   /** filter the rows which have to be updated */
   where: Z_Token_Holder_Bool_Exp;
+};
+
+/** columns and relationships of "z_totaltokens" */
+export type Z_Totaltokens = {
+  __typename: 'z_totaltokens';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  mint_id: Maybe<Scalars['uuid']>;
+  remaining_tokens: Scalars['String'];
+  total_tokens: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  user_id: Scalars['uuid'];
+};
+
+/** aggregated selection of "z_totaltokens" */
+export type Z_Totaltokens_Aggregate = {
+  __typename: 'z_totaltokens_aggregate';
+  aggregate: Maybe<Z_Totaltokens_Aggregate_Fields>;
+  nodes: Array<Z_Totaltokens>;
+};
+
+/** aggregate fields of "z_totaltokens" */
+export type Z_Totaltokens_Aggregate_Fields = {
+  __typename: 'z_totaltokens_aggregate_fields';
+  count: Scalars['Int'];
+  max: Maybe<Z_Totaltokens_Max_Fields>;
+  min: Maybe<Z_Totaltokens_Min_Fields>;
+};
+
+
+/** aggregate fields of "z_totaltokens" */
+export type Z_Totaltokens_Aggregate_FieldsCountArgs = {
+  columns: InputMaybe<Array<Z_Totaltokens_Select_Column>>;
+  distinct: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "z_totaltokens". All fields are combined with a logical 'AND'. */
+export type Z_Totaltokens_Bool_Exp = {
+  _and: InputMaybe<Array<Z_Totaltokens_Bool_Exp>>;
+  _not: InputMaybe<Z_Totaltokens_Bool_Exp>;
+  _or: InputMaybe<Array<Z_Totaltokens_Bool_Exp>>;
+  created_at: InputMaybe<Timestamptz_Comparison_Exp>;
+  id: InputMaybe<Uuid_Comparison_Exp>;
+  mint_id: InputMaybe<Uuid_Comparison_Exp>;
+  remaining_tokens: InputMaybe<String_Comparison_Exp>;
+  total_tokens: InputMaybe<String_Comparison_Exp>;
+  updated_at: InputMaybe<Timestamptz_Comparison_Exp>;
+  user_id: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "z_totaltokens" */
+export enum Z_Totaltokens_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ZTotaltokensPkey = 'z_totaltokens_pkey'
+}
+
+/** input type for inserting data into table "z_totaltokens" */
+export type Z_Totaltokens_Insert_Input = {
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  mint_id: InputMaybe<Scalars['uuid']>;
+  remaining_tokens: InputMaybe<Scalars['String']>;
+  total_tokens: InputMaybe<Scalars['String']>;
+  updated_at: InputMaybe<Scalars['timestamptz']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type Z_Totaltokens_Max_Fields = {
+  __typename: 'z_totaltokens_max_fields';
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  mint_id: Maybe<Scalars['uuid']>;
+  remaining_tokens: Maybe<Scalars['String']>;
+  total_tokens: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['timestamptz']>;
+  user_id: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type Z_Totaltokens_Min_Fields = {
+  __typename: 'z_totaltokens_min_fields';
+  created_at: Maybe<Scalars['timestamptz']>;
+  id: Maybe<Scalars['uuid']>;
+  mint_id: Maybe<Scalars['uuid']>;
+  remaining_tokens: Maybe<Scalars['String']>;
+  total_tokens: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['timestamptz']>;
+  user_id: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "z_totaltokens" */
+export type Z_Totaltokens_Mutation_Response = {
+  __typename: 'z_totaltokens_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Z_Totaltokens>;
+};
+
+/** on_conflict condition type for table "z_totaltokens" */
+export type Z_Totaltokens_On_Conflict = {
+  constraint: Z_Totaltokens_Constraint;
+  update_columns: Array<Z_Totaltokens_Update_Column>;
+  where: InputMaybe<Z_Totaltokens_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "z_totaltokens". */
+export type Z_Totaltokens_Order_By = {
+  created_at: InputMaybe<Order_By>;
+  id: InputMaybe<Order_By>;
+  mint_id: InputMaybe<Order_By>;
+  remaining_tokens: InputMaybe<Order_By>;
+  total_tokens: InputMaybe<Order_By>;
+  updated_at: InputMaybe<Order_By>;
+  user_id: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: z_totaltokens */
+export type Z_Totaltokens_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "z_totaltokens" */
+export enum Z_Totaltokens_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MintId = 'mint_id',
+  /** column name */
+  RemainingTokens = 'remaining_tokens',
+  /** column name */
+  TotalTokens = 'total_tokens',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "z_totaltokens" */
+export type Z_Totaltokens_Set_Input = {
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  mint_id: InputMaybe<Scalars['uuid']>;
+  remaining_tokens: InputMaybe<Scalars['String']>;
+  total_tokens: InputMaybe<Scalars['String']>;
+  updated_at: InputMaybe<Scalars['timestamptz']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** Streaming cursor of the table "z_totaltokens" */
+export type Z_Totaltokens_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Z_Totaltokens_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Z_Totaltokens_Stream_Cursor_Value_Input = {
+  created_at: InputMaybe<Scalars['timestamptz']>;
+  id: InputMaybe<Scalars['uuid']>;
+  mint_id: InputMaybe<Scalars['uuid']>;
+  remaining_tokens: InputMaybe<Scalars['String']>;
+  total_tokens: InputMaybe<Scalars['String']>;
+  updated_at: InputMaybe<Scalars['timestamptz']>;
+  user_id: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "z_totaltokens" */
+export enum Z_Totaltokens_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MintId = 'mint_id',
+  /** column name */
+  RemainingTokens = 'remaining_tokens',
+  /** column name */
+  TotalTokens = 'total_tokens',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Z_Totaltokens_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Z_Totaltokens_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Z_Totaltokens_Bool_Exp;
 };
 
 /** columns and relationships of "z_transaction_history" */

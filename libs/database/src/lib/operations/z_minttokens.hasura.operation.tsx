@@ -7,6 +7,7 @@ export type CreateTokenMutationVariables = Types.Exact<{
   token: Types.InputMaybe<Types.Scalars['String']>;
   tx_hash: Types.InputMaybe<Types.Scalars['String']>;
   user_id: Types.InputMaybe<Types.Scalars['uuid']>;
+  remaining_token: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 
@@ -17,21 +18,22 @@ export type GettokensQueryVariables = Types.Exact<{
 }>;
 
 
-export type GettokensQuery = { __typename: 'query_root', z_minttokens: Array<{ __typename: 'z_minttokens', id: string, token: string, tx_hash: string, created_at: string, z_user: { __typename: 'z_users', password: string, pvtKey: string, address: string, username: string, id: string } }> };
+export type GettokensQuery = { __typename: 'query_root', z_minttokens: Array<{ __typename: 'z_minttokens', id: string, token: string, tx_hash: string, created_at: string, remaining_token: string | null, z_user: { __typename: 'z_users', password: string, pvtKey: string, address: string, username: string, id: string } }> };
 
 export type UpdateMintTokensMutationVariables = Types.Exact<{
-  token?: Types.InputMaybe<Types.Scalars['String']>;
+  remaining_token?: Types.InputMaybe<Types.Scalars['String']>;
   id?: Types.InputMaybe<Types.Scalars['uuid']>;
+  token: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 
-export type UpdateMintTokensMutation = { __typename: 'mutation_root', update_z_minttokens_by_pk: { __typename: 'z_minttokens', token: string, id: string } | null };
+export type UpdateMintTokensMutation = { __typename: 'mutation_root', update_z_minttokens_by_pk: { __typename: 'z_minttokens', token: string, remaining_token: string | null, id: string } | null };
 
 
 export const CreateTokenDocument = /*#__PURE__*/ gql`
-    mutation createToken($token: String, $tx_hash: String, $user_id: uuid) {
+    mutation createToken($token: String, $tx_hash: String, $user_id: uuid, $remaining_token: String) {
   insert_z_minttokens(
-    objects: {token: $token, tx_hash: $tx_hash, user_id: $user_id}
+    objects: {token: $token, tx_hash: $tx_hash, user_id: $user_id, remaining_token: $remaining_token}
   ) {
     returning {
       id
@@ -57,6 +59,7 @@ export type CreateTokenMutationFn = Apollo.MutationFunction<CreateTokenMutation,
  *      token: // value for 'token'
  *      tx_hash: // value for 'tx_hash'
  *      user_id: // value for 'user_id'
+ *      remaining_token: // value for 'remaining_token'
  *   },
  * });
  */
@@ -74,6 +77,7 @@ export const GettokensDocument = /*#__PURE__*/ gql`
     token
     tx_hash
     created_at
+    remaining_token
     z_user {
       password
       pvtKey
@@ -116,9 +120,13 @@ export function refetchGettokensQuery(variables?: GettokensQueryVariables) {
       return { query: GettokensDocument, variables: variables }
     }
 export const UpdateMintTokensDocument = /*#__PURE__*/ gql`
-    mutation updateMintTokens($token: String = "", $id: uuid = "") {
-  update_z_minttokens_by_pk(pk_columns: {id: $id}, _set: {token: $token}) {
+    mutation updateMintTokens($remaining_token: String = "", $id: uuid = "", $token: String) {
+  update_z_minttokens_by_pk(
+    pk_columns: {id: $id}
+    _set: {remaining_token: $remaining_token, token: $token}
+  ) {
     token
+    remaining_token
     id
   }
 }
@@ -138,8 +146,9 @@ export type UpdateMintTokensMutationFn = Apollo.MutationFunction<UpdateMintToken
  * @example
  * const [updateMintTokensMutation, { data, loading, error }] = useUpdateMintTokensMutation({
  *   variables: {
- *      token: // value for 'token'
+ *      remaining_token: // value for 'remaining_token'
  *      id: // value for 'id'
+ *      token: // value for 'token'
  *   },
  * });
  */

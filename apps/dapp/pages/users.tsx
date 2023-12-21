@@ -89,6 +89,8 @@ const Page: NextPageWithLayout = () => {
     }
   };
   
+  if (loading) return <div className="spinner"></div>
+
   return (
     <>
      <div>

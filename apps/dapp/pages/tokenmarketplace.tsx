@@ -204,7 +204,8 @@ const Page: NextPageWithLayout = () => {
           variables: {
             token: tx.tokens, // value for 'token'
             tx_hash: token_data?.txHash, // value for 'tx_hash'
-            user_id: localStorage.getItem('user_id') // value for 'user_id'
+            user_id: localStorage.getItem('user_id'),
+            remaining_token:tx.tokens // value for 'user_id'
           },
         })
 
@@ -278,6 +279,8 @@ const Page: NextPageWithLayout = () => {
 
 
   }
+  if (loading) return <div className="spinner"></div>
+
   return (
     <>
       <Table className="tablelist" responsive>
@@ -300,7 +303,7 @@ const Page: NextPageWithLayout = () => {
                 <td>{moment(String(tx.created_at)).format('DD-MMM-YY')}</td>
                 <td>
                   {tx?.z_user.id == localStorage.getItem('user_id') ? (
-                    <p></p>
+                    <p>Your Listing</p>
                   ) : (
                     <button onClick={() => handlePurchase(tx)}>Purchase Now</button>
                   )}

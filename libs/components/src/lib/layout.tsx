@@ -165,14 +165,14 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                               </li>
                             </a>
                           )}
-                          <a href="/notifications" className="link">
+                       {/*    <a href="/notifications" className="link">
                             <li>
                               <div className="link-item">
                                 <img src="notification.svg" alt="" />
                                 Notifications
                               </div>
                             </li>
-                          </a>
+                          </a> */}
                         </ul>
                       )}
                     </div>
@@ -241,14 +241,14 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                           </li>
                         </a>
                       )}
-                      <a href="/notifications" className="link">
+                     {/*  <a href="/notifications" className="link">
                         <li>
                           <div className="link-item">
                             <img src="notification.svg" alt="" />
                             Notifications
                           </div>
                         </li>
-                      </a>
+                      </a> */}
                     </ul>
                   </div>
                 </div>

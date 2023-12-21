@@ -2,6 +2,8 @@ mutation createToken(
   $token: String
   $tx_hash: String
   $user_id: uuid
+  $remaining_token:String
+
  
 ) {
   insert_z_minttokens(
@@ -9,6 +11,7 @@ mutation createToken(
       token: $token
       tx_hash: $tx_hash
       user_id: $user_id
+      remaining_token:$remaining_token
 
     }
   ) {
@@ -27,6 +30,7 @@ query gettokens($user_id: uuid) {
     token
     tx_hash
     created_at
+    remaining_token
     z_user {
       password
       pvtKey
@@ -37,12 +41,13 @@ query gettokens($user_id: uuid) {
   }
 }
 
-mutation updateMintTokens($token: String = "", $id: uuid = "") {
+mutation updateMintTokens($remaining_token: String = "", $id: uuid = "",$token:String) {
   update_z_minttokens_by_pk(
     pk_columns: { id: $id }
-    _set: { token: $token }
+    _set: { remaining_token: $remaining_token ,token:$token}
   ) {
     token
+    remaining_token
     id
   }
 }

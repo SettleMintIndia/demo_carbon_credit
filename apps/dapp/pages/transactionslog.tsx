@@ -84,6 +84,8 @@ const Page: NextPageWithLayout = () => {
       setSearchData(data);
     }
   };
+  if (loading) return <div className="spinner"></div>
+
   return (
     <>
       <div className="header-area">

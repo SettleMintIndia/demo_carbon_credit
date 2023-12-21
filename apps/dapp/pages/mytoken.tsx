@@ -82,12 +82,15 @@ const Page: NextPageWithLayout = () => {
       setSearchData(data);
     }
   };
+  if (loading) return <div className="spinner"></div>
+
   return (
     <>
       <Table className="tablelist" responsive>
         <thead>
           <tr className="table_wrap">
-            <th>Tokens</th>
+            <th>Total Tokens</th>
+            <th>Remaining Tokens</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -96,6 +99,7 @@ const Page: NextPageWithLayout = () => {
             return (
               <tr>
                 <td>{tx.token}</td>
+                <td>{tx.remaining_token}</td>
                 <td>
                   <button
                     className="btn btn-selltoken table-btn"
@@ -107,6 +111,8 @@ const Page: NextPageWithLayout = () => {
                             assetId={tx.id}
                             price={String(tx.initialPrice)}
                             totaltoken={tx.token}
+                            remainingtoken={tx.remaining_token}
+
                           />
                         ),
                       });
